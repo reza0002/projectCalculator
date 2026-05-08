@@ -3,36 +3,36 @@ package com.example.projectcalculator.controller;
 import org.springframework.web.bind.annotation.*;
 
 @org.springframework.stereotype.Controller
-@RequestMapping("/attractions")
+@RequestMapping("/projects")
 public class ProjectController {
 
-    @GetMapping()
-    public String name() {
-        return "";
+    @GetMapping("/")
+    public String homepage() {
+        return "homePage";
     }
 
-    @GetMapping()
-    public String name() {
-        return "";
+    @GetMapping("/login")
+    public String loginPage() {
+        return "loginPage";
     }
 
-    @GetMapping()
-    public String name() {
-        return "";
+    @GetMapping("/create")
+    public String createProjectPage() {
+        return "projectsPage";
     }
 
-    @GetMapping()
-    public String name() {
-        return "";
+    @GetMapping("/{project-name}/subproject")
+    public String subProjectPage() {
+        return "subProjectsPage";
     }
 
-    @GetMapping()
-    public String name() {
-        return "";
+    @GetMapping("/{project-name}/")
+    public String taskPage() {
+        return "tasksPage";
     }
 
-    @GetMapping()
-    public String name() {
-        return "";
+    @GetMapping("/{project-name}/{sub-project-name}/addtask")
+    public String addTaskPage() {
+        return "addTasks";
     }
 }
