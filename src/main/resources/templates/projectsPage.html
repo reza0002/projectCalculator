@@ -2,9 +2,136 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create New Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 40px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        header button {
+            background-color: #e0e0e0;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+        }
+
+        .form-section, .members-section {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        textarea {
+            resize: none;
+            height: 60px;
+        }
+
+        .add-colleagues-list, .colleagues-added {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f8f8f8;
+            padding: 8px;
+            height: 140px;
+            overflow-y: auto;
+        }
+
+        .add-colleagues-list div, .colleagues-added div {
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .add-button, .remove-button, .create-btn {
+            background-color: #0078d7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .create-btn {
+            display: block;
+            margin: 25px auto 0;
+            padding: 10px 25px;
+            font-size: 16px;
+        }
+
+    </style>
 </head>
 <body>
+
+<header>
+    <button>Home</button>
+    <button>Log out</button>
+</header>
+
+<h1>Create New Project</h1>
+
+<div class="container">
+    <section class="form-section">
+        <label for="projectName">Project name</label>
+        <input type="text" id="projectName" placeholder="Enter project name">
+
+        <label for="projectLeader">Project leader</label>
+        <input type="text" id="projectLeader" placeholder="Enter leader name">
+
+        <label for="description">Description</label>
+        <textarea id="description" placeholder="Write a short project description..."></textarea>
+
+        <label>Project members</label>
+        <button class="add-button">Add colleagues ▼</button>
+
+        <div class="add-colleagues-list">
+
+        </div>
+    </section>
+
+    <section class="members-section">
+        <h3>Colleagues added</h3>
+        <div class="colleagues-added">
+
+        </div>
+
+        <button class="create-btn">Create</button>
+    </section>
+</div>
 
 </body>
 </html>
