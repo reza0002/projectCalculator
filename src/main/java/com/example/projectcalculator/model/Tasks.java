@@ -3,12 +3,12 @@ package com.example.projectcalculator.model;
 public class Tasks {
     private String name;
     private double PricePerHour;
-    private double time;
+    private int hours;
 
-    public Tasks(String name, double pricePerHour, double time) {
+    public Tasks(String name, double pricePerHour, int hours) {
         this.name = name;
         PricePerHour = pricePerHour;
-        this.time = time;
+        this.hours = hours;
     }
     public String getName() {
         return name;
@@ -26,12 +26,12 @@ public class Tasks {
         PricePerHour = pricePerHour;
     }
 
-    public double getTime() {
-        return time;
+    public double getHours() {
+        return hours;
     }
 
-    public void setTime(double time) {
-        this.time = time;
+    public void setHours(int hours) {
+        this.hours = hours;
 
     }
 }

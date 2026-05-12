@@ -1,0 +1,85 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+header button {
+    padding: 6px 14px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+h1 {
+    text-align: center;
+    padding: 20px;
+    font-size: 22px;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin: 20px;
+}
+
+.form-section {
+    flex: 1;
+    padding: 16px;
+    border: 1px solid #ccc;
+}
+
+.form-section h2 {
+    font-size: 14px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.form-section label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.form-section input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.hours-section {
+    padding: 16px;
+    border: 1px solid #ccc;
+}
+
+.hours-section h3 {
+    font-size: 14px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.hours-section select {
+    display: block;
+    padding: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+.add-btn {
+    padding: 6px 14px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+}

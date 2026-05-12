@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add Task</title>
+    <link rel="stylesheet" href="/addTasks.css"/>
 </head>
 <body>
 
+<header>
+    <button>Home</button>
+    <button>Log out</button>
+</header>
+
+<h1>Add new task</h1>
+
+<form th:action="@{/tasks/add}" method="post" th:object="${task}">
+
+    <div class="container">
+
+        <section class="form-section">
+            <h2> Description </h2>
+            <label for="name">Task name</label>
+            <input type="text" id="name" name="name" placeholder="Enter task name/description">
+        </section>
+
+        <section class="hours-section">
+            <h3>Add Est. Hours</h3>
+
+            <select id="hours" name="hours">
+                <option value="">--Choose hours + --</option>
+                <option value="1">1H</option>
+                <option value="2">2H</option>
+                <option value="3">3H</option>
+                <option value="4">4H</option>
+                <option value="5">5H</option>
+                <option value="6">6H</option>
+                <option value="7">7H</option>
+                <option value="8">8H</option>
+                <option value="9">9H</option>
+                <option value="10">10H</option>
+            </select>
+
+            <button class="add-btn" type="submit">add</button>
+        </section>
+    </div>
+</form>
 </body>
 </html>
