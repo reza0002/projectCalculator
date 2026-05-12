@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="/navbar.css">
     <link rel="stylesheet" href="/login-page.css">
 </head>
 <body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
 <form>
     <div class="login-title">
         <h1>Alpha Solutions</h1>
@@ -14,11 +18,14 @@
         <input placeholder="Brugernavn"/>
         <input placeholder="Adgangskode"/>
         <div class="login-buttons">
-            <button type="submit">Login</button>
+            <button type="submit">
+                <a href="home">Login</a>
+            </button>
             <button type="button">Opret bruger</button>
         </div>
         <button type="button">Glemt adgangskode</button>
     </div>
 </form>
+
 </body>
 </html>

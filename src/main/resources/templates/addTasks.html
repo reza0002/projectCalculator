@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <title>Add Task</title>
     <link rel="stylesheet" href="/addTasks.css"/>
+    <link rel="stylesheet" href="/navbar.css"/>
 </head>
 <body>
 
-<header>
-    <button>Home</button>
-    <button>Log out</button>
-</header>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <h1>Add new task</h1>
 
@@ -19,16 +17,16 @@
     <div class="container">
 
         <section class="form-section">
-            <h2> Description </h2>
+            <h2> New task </h2>
             <label for="name">Task name</label>
-            <input type="text" id="name" name="name" placeholder="Enter task name/description">
+            <input type="text" id="name" name="name" placeholder="Enter task name">
         </section>
 
         <section class="hours-section">
             <h3>Add Est. Hours</h3>
 
             <select id="hours" name="hours">
-                <option value="">--Choose hours + --</option>
+                <option value="">Choose hours</option>
                 <option value="1">1H</option>
                 <option value="2">2H</option>
                 <option value="3">3H</option>
