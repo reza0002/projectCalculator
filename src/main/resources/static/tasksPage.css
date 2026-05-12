@@ -11,7 +11,8 @@
 .add-tasks {
     display: inline-block;
     padding: 8px 14px;
-    border: 1px solid #ccc;
+    border: 1px solid #FF325A;
+    background-color: #FF325A;
     text-decoration: none;
     color: black;
 }

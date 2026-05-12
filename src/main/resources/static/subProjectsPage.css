@@ -46,8 +46,8 @@ h1 {
 
 .column h3 {
     text-align: center;
-    background-color: #0078d7;
-    color: white;
+    background-color: #FF325A;
+    color: black;
     border-radius: 5px;
     padding: 8px;
     margin-top: 0;
@@ -68,7 +68,7 @@ h1 {
 
 .add-box a {
     text-decoration: none;
-    color: #0078d7;
+    color: #FF325A;
     font-weight: bold;
     display: block;
 }

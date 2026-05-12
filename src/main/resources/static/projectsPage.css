@@ -10,7 +10,7 @@ header {
 }
 
 header button {
-    background-color: #e0e0e0;
+    background-color: #FF325A;
     border: none;
     padding: 8px 16px;
     border-radius: 6px;
@@ -72,7 +72,7 @@ textarea {
 }
 
 .add-button, .remove-button, .create-btn {
-    background-color: #0078d7;
+    background-color: #FF325A;
     color: white;
     border: none;
     border-radius: 5px;
