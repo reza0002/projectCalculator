@@ -1,7 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    padding-top: 65px;
+    font-family: Montserrat, Verdana, sans-serif;
+}
+
 nav .title {
     position: absolute;
     top: 0;
     left: 50%;
+    transform: translateX(-50%);
     border: 1px solid lightgray;
     border-top: none;
     padding: 10px 20px;
@@ -32,8 +44,6 @@ nav a {
     color: black;
     background-color: white;
 }
-
-
 
 nav a:hover {
     background-color: lightgray;
