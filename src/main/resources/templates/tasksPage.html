@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/tasksPage.css" />
+    <link rel="stylesheet" href="/tasksPage.css"/>
+    <link rel="stylesheet" href="/navbar.css"/>
 </head>
 <body>
 
-<header class="topbar">
-    <a href="/homePage" class="home">Home</a>
-    <a href="/logout" class="logout">Log Out</a>
-</header>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <main class="SpalteAdd">
     <div class="sidebar">
-        <a href="/addTasks" class="add-tasks"> Add Tasks + </a>
+        <a href="/prototype/project-name/subproject/addtask" class="add-tasks"> Add Tasks + </a>
     </div>
 
     <div class="tasks-board">

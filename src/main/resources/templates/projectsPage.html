@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <title>Create New Project</title>
     <link rel="stylesheet" href="/projectsPage.css">
+    <link rel="stylesheet" href="/navbar.css">
 </head>
 <body>
 
-<header>
-    <button>Home</button>
-    <button>Log out</button>
-</header>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <h1>Create New Project</h1>
 
@@ -39,7 +37,9 @@
 
         </div>
 
-        <button class="create-btn">Create</button>
+        <button class="create-btn">
+        <a href="/prototype/project-name/subproject">Create</a>
+        </button>
     </section>
 </div>
 

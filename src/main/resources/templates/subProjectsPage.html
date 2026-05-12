@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <title>Projects Page</title>
     <link rel="stylesheet" href="/subProjectsPage.css">
+    <link rel="stylesheet" href="/navbar.css">
 </head>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <body>
 
-<header>
-    <button>Home</button>
-    <button class="logout-btn">Log out</button>
-</header>
 
 <h1>Projects Overview</h1>
 
@@ -20,7 +18,7 @@
     <div class="column">
         <h3>Add</h3>
         <div class="add-box">
-            <a href="taskpage.html">
+            <a href="/prototype/project-name">
                 <span>＋</span>
                 <p>Create new</p>
             </a>

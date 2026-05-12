@@ -1,3 +1,13 @@
+nav .title {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    border: 1px solid lightgray;
+    border-top: none;
+    padding: 10px 20px;
+    white-space: nowrap;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -22,6 +32,8 @@ nav a {
     color: black;
     background-color: white;
 }
+
+
 
 nav a:hover {
     background-color: lightgray;
