@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+    margin: 40px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+header button {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+header button:hover {
+    background-color: #d6d6d6;
+}
+
+/* Gør log out knappen mindre */
+.logout-btn {
+    padding: 4px 10px;
+    font-size: 13px;
+    border-radius: 5px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.column {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    width: 300px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.column h3 {
+    text-align: center;
+    background-color: #0078d7;
+    color: white;
+    border-radius: 5px;
+    padding: 8px;
+    margin-top: 0;
+}
+
+.add-box {
+    text-align: center;
+    border: 2px dashed #888;
+    border-radius: 8px;
+    padding: 40px 0;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.add-box:hover {
+    background-color: #f0f8ff;
+}
+
+.add-box a {
+    text-decoration: none;
+    color: #0078d7;
+    font-weight: bold;
+    display: block;
+}
+
+.add-box span {
+    display: block;
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.task {
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 60px;
+    margin-top: 10px;
+}
+
+footer {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    color: #444;
+    font-size: 15px;
+}
