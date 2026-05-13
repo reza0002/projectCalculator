@@ -1,5 +1,9 @@
 package com.example.projectcalculator.controller;
 
+
+import com.example.projectcalculator.model.Project;
+import com.example.projectcalculator.model.User;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @org.springframework.stereotype.Controller
@@ -17,8 +21,9 @@ public class ProjectController {
     }
 
     @GetMapping("/create")
-    public String createProjectPage() {
-        return "projectsPage";
+    public String createProjectPage(Model model) {
+        model.addAttribute("project", new Project());
+        return "projects-page";
     }
 
     @GetMapping("/{project-name}/subproject")

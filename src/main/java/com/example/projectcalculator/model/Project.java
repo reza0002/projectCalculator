@@ -4,19 +4,23 @@ public class Project {
     private int id;
     private String name;
     private User projectLeader;
-    public Project (int id, String name, User projectLeader){
+    private String description;
+
+    public Project (int id, String name, User projectLeader, String description){
         this.id = id;
         this.name = name;
         this.projectLeader = projectLeader;
+        this.description = description;
     }
     public Project(int id, String name){
         this.id = id;
         this.name = name;
     }
 
-    public Project(String name, User projectLeader) {
+    public Project(String name, User projectLeader, String description) {
         this.name = name;
         this.projectLeader = projectLeader;
+        this.description = description;
     }
 
     public Project() {
@@ -40,4 +44,11 @@ public class Project {
         this.projectLeader = projectLeader;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

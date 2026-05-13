@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Create New Project</title>
@@ -13,15 +13,19 @@
 <h1>Create New Project</h1>
 
 <div class="container">
-    <section class="form-section">
-        <label for="projectName">Project name</label>
-        <input type="text" id="projectName" placeholder="Enter project name">
+    <form th:action="@{/create/project}" method="post" th:object="${project}">
 
-        <label for="projectLeader">Project leader</label>
-        <input type="text" id="projectLeader" placeholder="Enter leader name">
+
+        <label for="name"> Project name</label>
+        <input type="text" th:field="*{name}" id="name" placeholder="Enter project name">
+
+
+        <label for="projectLeader"> Project leader</label>
+        <input type="text" th:field="*{projectLeader}" id="projectLeader" placeholder="Enter leader name">
 
         <label for="description">Description</label>
-        <textarea id="description" placeholder="Write a short project description..."></textarea>
+        <textarea type="text" th:field="*{description}" id="description" placeholder="Write a short project description...">
+        </textarea>
 
         <label>Project members</label>
         <button class="add-button">Add colleagues ▼</button>
@@ -29,19 +33,17 @@
         <div class="add-colleagues-list">
 
         </div>
-    </section>
+        <section class="members-section">
+            <h3>Colleagues added</h3>
+            <div class="colleagues-added">
 
-    <section class="members-section">
-        <h3>Colleagues added</h3>
-        <div class="colleagues-added">
+            </div>
 
-        </div>
-
-        <button class="create-btn">
-        <a href="/prototype/project-name/subproject">Create</a>
-        </button>
-    </section>
+            <button class="create-btn" type="submit">
+                <a href="/prototype/project-name/subproject">Create</a>
+            </button>
+        </section>
+    </form>
 </div>
-
 </body>
 </html>
