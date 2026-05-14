@@ -40,8 +40,9 @@ CREATE TABLE sub_project
 CREATE TABLE task
 (
     id             INT AUTO_INCREMENT PRIMARY KEY,
-    hours          INT NOT NULL,
-    price_per_hour INT NOT NULL,
-    sub_project_id INT NOT NULL,
+    name           VARCHAR(250) NOT NULL,
+    hours          INT          NOT NULL,
+    price_per_hour INT          NOT NULL,
+    sub_project_id INT          NOT NULL,
     FOREIGN KEY (sub_project_id) REFERENCES sub_project (id)
 );
