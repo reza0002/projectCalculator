@@ -2,10 +2,7 @@ package com.example.projectcalculator.controller;
 
 
 import com.example.projectcalculator.model.Project;
-import com.example.projectcalculator.model.SubProject;
-import com.example.projectcalculator.model.Task;
 import com.example.projectcalculator.model.User;
-import com.example.projectcalculator.service.ProjectService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,8 +34,8 @@ public class ProjectController {
 
     @PostMapping("/create")
     public String createProject(@ModelAttribute Project project) {
-        projectService.createProject(project);
-        return "redirect:/projects/";
+        var projects = projectService.createProject(project);
+        return "redirect:/" + project.getName();
     }
 
     @GetMapping("/{project-name}/subproject")
