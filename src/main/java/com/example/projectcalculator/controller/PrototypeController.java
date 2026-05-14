@@ -34,6 +34,18 @@ public class PrototypeController {
         return "subProjectsPage";
     }
 
+    @PostMapping("/project/{projectId}/subproject/create")
+    public String createSubProject(
+            @PathVariable int projectId,
+            @ModelAttribute SubProject subProject) {
+
+        subProject.setProjectId(projectId);
+
+        service.createSubProject(subProject);
+
+        return "redirect:/prototype/project/" + projectId + "/subproject";
+    }
+
     @GetMapping("/project-name")
     public String taskPage() {
         return "tasksPage";
