@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
-<!DOCTYPE html>
 <html lang="da">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Homepage</title>
     <link rel="stylesheet" href="/homepage.css">
     <link rel="stylesheet" href="/navbar.css">
 </head>
@@ -17,13 +16,12 @@
 <div class="section">
 
     <div class="section-title">
-        <a href="create">Create new project</a>
-
+        Create new project
     </div>
 
-    <div class="create-box">
+    <a class="create-box" href="/prototype/create">
         <div class="plus">+</div>
-    </div>
+    </a>
 
 </div>
 
@@ -35,32 +33,16 @@
 
     <div class="projects">
 
-        <div class="project">
-            <div class="line large"></div>
-            <div class="line medium"></div>
-            <div class="line small"></div>
-        </div>
-
-        <div class="project">
-            <div class="line medium"></div>
-            <div class="line large"></div>
-            <div class="line medium"></div>
-        </div>
-
-        <div class="project">
-            <div class="line small"></div>
-            <div class="line medium"></div>
-            <div class="line large"></div>
+        <div class="project" th:each="project : ${projects}">
+            <div th:text="${project.id}"></div>
+            <div th:text="${project.name}"></div>
+            <div th:text="${project.projectLeader.name}"></div>
+            <a th:href="@{/prototype/{project_id}(project_id=${project.id})}">
+                Go to project
+            </a>
         </div>
 
     </div>
-
 </div>
-
-</body>
-</html>
-<title>Title</title>
-<body>
-
 </body>
 </html>
