@@ -5,6 +5,7 @@ import com.example.projectcalculator.model.SubProject;
 import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.rowmapper.ProjectRowMapper;
 import com.example.projectcalculator.model.*;
+import com.example.projectcalculator.rowmapper.ProjectRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
