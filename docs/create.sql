@@ -7,7 +7,8 @@ CREATE TABLE user
 (
     id       INT AUTO_INCREMENT PRIMARY KEY,
     name     VARCHAR(250) NOT NULL,
-    password VARCHAR(200)
+    email    VARCHAR(250) NOT NULL,
+    password VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE project
@@ -31,7 +32,7 @@ CREATE TABLE sub_project
 (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     description TEXT NOT NULL,
-    time        INT  NOT NULL,
+    hours       INT  NOT NULL,
     project_id  INT  NOT NULL,
     FOREIGN KEY (project_id) REFERENCES project (id)
 );
@@ -39,7 +40,7 @@ CREATE TABLE sub_project
 CREATE TABLE task
 (
     id             INT AUTO_INCREMENT PRIMARY KEY,
-    time           INT NOT NULL,
+    hours          INT NOT NULL,
     price_per_hour INT NOT NULL,
     sub_project_id INT NOT NULL,
     FOREIGN KEY (sub_project_id) REFERENCES sub_project (id)
