@@ -29,6 +29,27 @@ public class ProjectRepository {
     }
 
     @Transactional
+    public SubProject createSubProject(SubProject subProject) {
+
+        String sql = """
+        INSERT INTO sub_project
+        (name, description, hours, price_per_hour, project_id)
+        VALUES (?, ?, ?, ?, ?)
+        """;
+
+        template.update(
+                sql,
+                subProject.getName(),
+                subProject.getDescription(),
+                subProject.getHours(),
+                subProject.getPricePerHour(),
+                subProject.getProjectId()
+        );
+
+        return subProject;
+    }
+
+    @Transactional
     public Project saveProject(Project project) {
 
     }

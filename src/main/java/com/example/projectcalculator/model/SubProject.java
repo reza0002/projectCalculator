@@ -1,15 +1,32 @@
 package com.example.projectcalculator.model;
 
 public class SubProject {
+    private int id;
     private String name;
-    private double estPricePerHour;
-    private double estTime;
+    private String description;
+    private int hours;
+    private int pricePerHour;
+    private int projectId;
 
-    public SubProject(String name, double estpricePerHour, double estTime) {
-        this.name = name;
-        estPricePerHour = estpricePerHour;
-        this.estTime = estTime;
+    public SubProject() {
     }
+
+    public SubProject(String name, String description, int hours, int pricePerHour, int projectId) {
+        this.name = name;
+        this.description = description;
+        this.hours = hours;
+        this.pricePerHour = pricePerHour;
+        this.projectId = projectId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -18,21 +35,35 @@ public class SubProject {
         this.name = name;
     }
 
-    public double getestPricePerHour() {
-        return estPricePerHour;
+    public String getDescription() {
+        return description;
     }
 
-    public void setPricePerHour(double pricePerHour) {
-        estPricePerHour = pricePerHour;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public double getEstTime() {
-        return estTime;
+    public int getHours() {
+        return hours;
     }
 
-    public void setEstTime(double estTime) {
-        this.estTime = estTime;
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
+
+    public int getPricePerHour() {
+        return pricePerHour;
+    }
+
+    public void setPricePerHour(int pricePerHour) {
+        this.pricePerHour = pricePerHour;
+    }
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 }
-
-

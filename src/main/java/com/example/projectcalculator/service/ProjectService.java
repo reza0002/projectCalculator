@@ -79,4 +79,8 @@ public class ProjectService {
 
     }
 
+    public SubProject createSubProject(SubProject subProject){
+        return repository.createSubProject(subProject);
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.example.projectcalculator.controller;
 
+import com.example.projectcalculator.model.SubProject;
 import com.example.projectcalculator.service.ProjectService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,18 @@ public class PrototypeController {
     @GetMapping("/project-name/subproject")
     public String subProjectPage() {
         return "subProjectsPage";
+    }
+
+    @PostMapping("/project/{projectId}/subproject/create")
+    public String createSubProject(
+            @PathVariable int projectId,
+            @ModelAttribute SubProject subProject) {
+
+        subProject.setProjectId(projectId);
+
+        service.createSubProject(subProject);
+
+        return "redirect:/prototype/project/" + projectId + "/subproject";
     }
 
     @GetMapping("/project-name")
