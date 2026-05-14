@@ -22,7 +22,7 @@
             <div th:each="task : ${tasks}" class="task-item">
                 <button class="done-btn">Done</button>
                 <span th:text="${task.name}">Task name</span>
-                <span th:text="${task.time}">0</span>
+                <span th:text="${task.hours}">0</span>
             </div>
         </div>
 
@@ -31,7 +31,7 @@
             <div th:each="task : ${doneTasks}" class="task-item">
                 <button class="delete-btn">X</button>
                 <span th:text="${task.name}">Task name</span>
-                <span th:text="${task.time}">0</span>
+                <span th:text="${task.hours}">0</span>
             </div>
         </div>
     </div>
