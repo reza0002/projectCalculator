@@ -1,12 +1,14 @@
 package com.example.projectcalculator.model;
 
 public class User {
+    private int id;
     private String name;
     private String email;
     private int password;
 
 
-    public User (String name, String email, int password){
+    public User (int id, String name, String email, int password){
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -15,6 +17,14 @@ public class User {
     public User (String name, int password){
         this.name = name;
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
