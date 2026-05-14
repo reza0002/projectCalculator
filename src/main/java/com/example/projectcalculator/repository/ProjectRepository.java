@@ -1,9 +1,6 @@
 package com.example.projectcalculator.repository;
 
-import com.example.projectcalculator.model.Project;
-import com.example.projectcalculator.model.SubProject;
-import com.example.projectcalculator.model.Tasks;
-import com.example.projectcalculator.model.User;
+import com.example.projectcalculator.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -38,7 +35,7 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public Tasks saveTasks(Tasks tasks){
+    public Task saveTasks(Task tasks){
 
     }
 
@@ -53,7 +50,7 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public boolean deleteTasks(Tasks tasks){
+    public boolean deleteTasks(Task task){
 
     }
 
@@ -74,7 +71,13 @@ public class ProjectRepository {
 
     }
 
-    private List<Tasks> findTasks(Tasks tasks){
+    public void addTask(Task task){
+        String sql =
+                "INSERT INTO task (name, hours, price_per_hour, sub_project_id) VALUES (?, ?, ?, ?)";
+        template.update(sql,task.getName(),task.getHours(), task.getPricePerHour(),task.getSub_project_id());
+    }
+
+    private List<Task> findTasks(Task task){
 
     }
 
@@ -86,7 +89,7 @@ public class ProjectRepository {
 
     }
 
-    public void updateTasks(Tasks tasks){
+    public void updateTasks(Task task){
 
     }
 }

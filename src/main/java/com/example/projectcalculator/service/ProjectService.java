@@ -1,9 +1,6 @@
 package com.example.projectcalculator.service;
 
-import com.example.projectcalculator.model.Project;
-import com.example.projectcalculator.model.SubProject;
-import com.example.projectcalculator.model.Tasks;
-import com.example.projectcalculator.model.User;
+import com.example.projectcalculator.model.*;
 import com.example.projectcalculator.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +31,12 @@ public class ProjectService {
         return repository.findSubProject(subProject);
     }
 
-    public Tasks findTasks(Tasks tasks){
-        return repository.findTasks(tasks);
+    public void addTask(Task task){
+        repository.addTask(task);
+    }
+
+    public Task findTasks(Task task){
+        return repository.findTasks(task);
     }
 
     public Project saveProject(Project project){
@@ -46,8 +47,8 @@ public class ProjectService {
         return repository.saveSubProject(subProject);
     }
 
-    public Tasks saveTasks(Tasks tasks){
-        return repository.saveTasks(tasks);
+    public Task saveTasks(Task task){
+        return repository.saveTasks(task);
     }
 
     public void updateProject(){
