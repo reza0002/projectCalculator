@@ -2,7 +2,7 @@ package com.example.projectcalculator.repository;
 
 import com.example.projectcalculator.model.Project;
 import com.example.projectcalculator.model.SubProject;
-import com.example.projectcalculator.model.Task;
+import com.example.projectcalculator.model.Tasks;
 import com.example.projectcalculator.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
