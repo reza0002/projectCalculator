@@ -28,6 +28,10 @@ public class ProjectService {
         return repository.getProjects();
     }
 
+    public Project createProject(Project project) {
+        return repository.createProject(project);
+    }
+
     public Project findProject(Project project){
         return repository.findProject(project);
     }
@@ -76,7 +80,7 @@ public class ProjectService {
 
     }
 
-    public void deleteTasks(Tasks tasks){
+    public void deleteTasks(Task task){
 
     }
 

@@ -1,8 +1,9 @@
 package com.example.projectcalculator.repository;
 
 import com.example.projectcalculator.model.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import com.example.projectcalculator.rowmapper.ProjectRowMapper;
+import com.example.projectcalculator.rowmapper.UserRowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,15 +11,10 @@ import javax.sql.DataSource;
 import java.beans.Transient;
 import java.util.List;
 
-@org.springframework.stereotype.Repository
-
 @Repository
 public class ProjectRepository {
 
     private final JdbcTemplate template;
-
-    @Autowired
-    private DataSource dataSource;
 
     public ProjectRepository(JdbcTemplate template) {
         this.template = template;
@@ -61,6 +57,13 @@ public class ProjectRepository {
     @Transactional
     public User findUser(String username){
 
+    }
+
+    @Transactional
+    public Project createProject(Project project) {
+        String sql = "INSERT INTO project (name, project_leader, description, id) VALUES (?, ?)";
+        template.update(sql, project.getName(), project.getDescription(), project.getProjectLeader().getId());
+        return project;
     }
 
     private List<Project> findProjects(Project project){

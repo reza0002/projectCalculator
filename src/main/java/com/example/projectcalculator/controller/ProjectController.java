@@ -3,7 +3,6 @@ package com.example.projectcalculator.controller;
 
 import com.example.projectcalculator.model.Project;
 import com.example.projectcalculator.model.Task;
-import com.example.projectcalculator.model.Task;
 import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.service.ProjectService;
 import org.springframework.ui.Model;
@@ -33,6 +32,12 @@ public class ProjectController {
     public String createProjectPage(Model model) {
         model.addAttribute("project", new Project());
         return "projects-page";
+    }
+
+    @PostMapping("/create")
+    public String createProject(@ModelAttribute Project project) {
+        projectService.createProject(project);
+        return "redirect:/projects/";
     }
 
     @GetMapping("/{project-name}/subproject")
