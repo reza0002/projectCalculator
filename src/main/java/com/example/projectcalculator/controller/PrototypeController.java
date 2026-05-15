@@ -20,7 +20,8 @@ public class PrototypeController {
     }
 
     @GetMapping("/home")
-    public String homepage() {
+    public String homepage(Model model) {
+        model.addAttribute("projects", service.findProjects());
         return "homePage";
     }
 

@@ -15,7 +15,6 @@ import javax.sql.DataSource;
 import java.beans.Transient;
 import java.util.List;
 
-@org.springframework.stereotype.Repository
 
 @Repository
 public class ProjectRepository {
@@ -68,18 +67,14 @@ public class ProjectRepository {
 
     }
 
-    public List<Project> getProjects() {
+    private List<Project> findProjects(Project project){
         String sql = """
-                    SELECT p.id AS p_id, p.name AS p_name,
-                           u.id AS u_id, u.name AS u_name, u.password
-                    FROM project p
-                    JOIN user u ON p.project_leader = u.id
+                    SELECT project.id AS p_id, project.name AS p_name,
+                           user.id AS u_id, user.name AS u_name, user.password
+                    FROM project
+                    JOIN user ON p.project_leader = u.id
                 """;
         return template.query(sql, new ProjectRowMapper());
-    }
-
-    private List<Project> findProjects(Project project){
-
     }
 
     private List<SubProject> findSubProjects(SubProject subProject){
