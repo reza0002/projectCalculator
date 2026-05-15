@@ -68,8 +68,8 @@ public class ProjectService {
 
     }
 
-    public void updateSubProject(){
-
+    public void updateSubProject(SubProject subProject){
+        repository.updateSubProject(subProject);
     }
 
     public void updateTasks(){
