@@ -4,7 +4,6 @@ import com.example.projectcalculator.model.Project;
 import com.example.projectcalculator.model.SubProject;
 import com.example.projectcalculator.model.Tasks;
 import com.example.projectcalculator.model.User;
-import com.example.projectcalculator.rowmapper.ProjectRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -60,7 +59,7 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public Tasks saveTasks(Tasks tasks){
+    public Task saveTasks(Task tasks){
 
     }
 
@@ -88,14 +87,11 @@ public class ProjectRepository {
 
     }
 
-    public List<Project> getProjects() {
-        String sql = """
-                    SELECT p.id AS p_id, p.name AS p_name,
-                           u.id AS u_id, u.name AS u_name, u.password
-                    FROM project p
-                    JOIN user u ON p.project_leader = u.id
-                """;
-        return template.query(sql, new ProjectRowMapper());
+    @Transactional
+    public Project createProject(Project project) {
+        String sql = "INSERT INTO project (name, project_leader, description, id) VALUES (?, ?)";
+        template.update(sql, project.getName(), project.getDescription(), project.getProjectLeader().getId());
+        return project;
     }
 
     private List<Project> findProjects(Project project){
@@ -106,7 +102,13 @@ public class ProjectRepository {
 
     }
 
-    private List<Tasks> findTasks(Tasks tasks){
+    public void addTask(Task task){
+        String sql =
+                "INSERT INTO task (name, hours, price_per_hour, sub_project_id) VALUES (?, ?, ?, ?)";
+        template.update(sql,task.getName(),task.getHours(), task.getPricePerHour(),task.getSub_project_id());
+    }
+
+    private List<Task> findTasks(Task task){
 
     }
 

@@ -19,13 +19,13 @@
         <section class="form-section">
             <h2> New task </h2>
             <label for="name">Task name</label>
-            <input type="text" id="name" name="name" placeholder="Enter task name">
+            <input type="text" th:field="*{name}" placeholder="Enter task name">
         </section>
 
         <section class="hours-section">
             <h3>Add Est. Hours</h3>
 
-            <select id="hours" name="hours">
+            <select th:field="*{hours}">
                 <option value="">Choose hours</option>
                 <option value="1">1H</option>
                 <option value="2">2H</option>

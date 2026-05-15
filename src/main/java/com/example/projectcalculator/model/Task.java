@@ -1,15 +1,20 @@
 package com.example.projectcalculator.model;
 
-public class Tasks {
+public class Task {
     private String name;
-    private double PricePerHour;
+    private int PricePerHour;
     private int hours;
+    private int sub_project_id;
 
-    public Tasks(String name, double pricePerHour, int hours) {
+    public Task(String name, int pricePerHour, int hours) {
         this.name = name;
-        PricePerHour = pricePerHour;
+        this.PricePerHour = pricePerHour;
         this.hours = hours;
     }
+
+    public Task() {
+    }
+
     public String getName() {
         return name;
     }
@@ -22,8 +27,8 @@ public class Tasks {
         return PricePerHour;
     }
 
-    public void setPricePerHour(double pricePerHour) {
-        PricePerHour = pricePerHour;
+    public void setPricePerHour(int pricePerHour) {
+        this.PricePerHour = pricePerHour;
     }
 
     public double getHours() {
@@ -33,5 +38,13 @@ public class Tasks {
     public void setHours(int hours) {
         this.hours = hours;
 
+    }
+
+    public void setSub_project_id(int sub_project_id) {
+        this.sub_project_id = sub_project_id;
+    }
+
+    public int getSub_project_id() {
+        return sub_project_id;
     }
 }

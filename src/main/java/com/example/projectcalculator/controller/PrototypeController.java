@@ -1,8 +1,5 @@
 package com.example.projectcalculator.controller;
 
-import com.example.projectcalculator.model.SubProject;
-import com.example.projectcalculator.service.ProjectService;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @org.springframework.stereotype.Controller

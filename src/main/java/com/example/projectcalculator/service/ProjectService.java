@@ -31,6 +31,10 @@ public class ProjectService {
         return repository.getProjects();
     }
 
+    public Project createProject(Project project) {
+        return repository.createProject(project);
+    }
+
     public Project findProject(Project project){
         return repository.findProject(project);
     }
@@ -39,8 +43,12 @@ public class ProjectService {
         return repository.findSubProject(subProject);
     }
 
-    public Tasks findTasks(Tasks tasks){
-        return repository.findTasks(tasks);
+    public void addTask(Task task){
+        repository.addTask(task);
+    }
+
+    public Task findTasks(Task task){
+        return repository.findTasks(task);
     }
 
     public Project saveProject(Project project){
@@ -51,8 +59,8 @@ public class ProjectService {
         return repository.saveSubProject(subProject);
     }
 
-    public Tasks saveTasks(Tasks tasks){
-        return repository.saveTasks(tasks);
+    public Task saveTasks(Task task){
+        return repository.saveTasks(task);
     }
 
     public void updateProject(){
@@ -75,7 +83,7 @@ public class ProjectService {
 
     }
 
-    public void deleteTasks(Tasks tasks){
+    public void deleteTasks(Task task){
 
     }
 

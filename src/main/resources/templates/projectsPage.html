@@ -13,11 +13,9 @@
 <h1>Create New Project</h1>
 
 <div class="container">
-    <form th:action="@{/create/project}" method="post" th:object="${project}">
-
-
-        <label for="name"> Project name</label>
-        <input type="text" th:field="*{name}" id="name" placeholder="Enter project name">
+    <form th:action="@{/projects/create}" method="post" th:object="${project}">
+        <label for="name">Project name</label>
+        <input type="text" th:field="*{name}" id="name" placeholder="Enter project name" required>
 
 
         <label for="projectLeader"> Project leader</label>
