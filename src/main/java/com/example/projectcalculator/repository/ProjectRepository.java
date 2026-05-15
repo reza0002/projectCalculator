@@ -67,12 +67,15 @@ public class ProjectRepository {
 
     }
 
-    private List<Project> findProjects(Project project){
+    private List<Project> findProjects(Project project) {
         String sql = """
-                    SELECT project.id AS p_id, project.name AS p_name,
-                           user.id AS u_id, user.name AS u_name, user.password
+                    SELECT project.id   AS project_id,
+                           project.name AS project_name,
+                           user.id      AS user_id,
+                           user.name    AS user_name,
+                           user.password
                     FROM project
-                    JOIN user ON p.project_leader = u.id
+                    JOIN user ON project.project_leader = user.id
                 """;
         return template.query(sql, new ProjectRowMapper());
     }
