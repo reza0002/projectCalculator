@@ -88,8 +88,24 @@ public class ProjectRepository {
 
     }
 
-    public void updateSubProject(SubProject subProject){
-
+    public void updateSubProject(SubProject subProject) {
+        final String sql = """
+                        UPDATE sub_project
+                        SET
+                            name = ?,
+                            description = ? ,
+                            hours = ?,
+                            price_per_hour = ?
+                        WHERE sub_project.id = ?;
+                """;
+        // går ud fra at subprojektet kommer med id'et sat
+        template.update(sql,
+                subProject.getName(),
+                subProject.getDescription(),
+                subProject.getHours(),
+                subProject.getPrice_per_hour(),
+                subProject.getId()
+        );
     }
 
     public void updateTasks(Task task){
