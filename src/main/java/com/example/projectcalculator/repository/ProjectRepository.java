@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.beans.Transient;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -60,15 +62,13 @@ public class ProjectRepository {
     }
 
     public boolean login(String username, String password) {
-        final String sql = "SELECT * FROM user WHERE user.name = ? AND user.password = ?";
-        return !template.query(sql, new UserRowMapper(), username, password).isEmpty();
+        var user = findUser(username);
+        if (user == null) return false;
+        return user.getPassword().equals(password);
     }
 
     public User findUser(String username) {
-        final String sql = """
-                SELECT * FROM user
-                WHERE user.name = ?
-                """;
+        String sql = "SELECT * FROM user WHERE name = ?";
         return template.queryForObject(sql, new UserRowMapper(), username);
     }
 
