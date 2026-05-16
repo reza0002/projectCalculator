@@ -16,6 +16,7 @@ CREATE TABLE project
     id             INT AUTO_INCREMENT PRIMARY KEY,
     name           VARCHAR(250) NOT NULL,
     project_leader INT          NOT NULL,
+--  description    TEXT,
     FOREIGN KEY (project_leader) REFERENCES user (id)
 );
 

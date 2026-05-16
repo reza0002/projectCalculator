@@ -11,11 +11,14 @@ import java.sql.SQLException;
 public class ProjectRowMapper implements RowMapper<Project> {
     @Override
     public Project mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
-        User leader = new UserRowMapper().mapRow(rs, rowNum);
+        User projectLeader = new User();
+        projectLeader.setId(rs.getInt("project_leader"));
+
         Project project = new Project();
-        project.setId(rs.getInt("project_id"));
-        project.setName(rs.getString("project_name"));
-        project.setProjectLeader(leader);
+        project.setId(rs.getInt("id"));
+        project.setName(rs.getString("name"));
+        project.setProjectLeader(projectLeader);
+        // project.setDescription(rs.getString("description"));
         return project;
     }
 }

@@ -24,8 +24,8 @@ public class ProjectService {
         return repository.findUser(username);
     }
 
-    public List<Project> findProjects() {
-        return repository.findProjects();
+    public List<Project> findAllProjects() {
+        return repository.findAllProjects();
     }
 
     public Project findProject(Project project){

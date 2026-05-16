@@ -72,17 +72,33 @@ public class ProjectRepository {
         return template.queryForObject(sql, new UserRowMapper(), username);
     }
 
-    private List<Project> findProjects(Project project) {
+    public List<Project> findAllProjects() {
         String sql = """
-                    SELECT project.id   AS project_id,
-                           project.name AS project_name,
-                           user.id      AS user_id,
-                           user.name    AS user_name,
-                           user.password
+                    SELECT project.id,
+                           project.name,
+                           project.project_leader,
+                           user.name AS user_name,
+                           user.email AS user_email
+                           -- , project.description
                     FROM project
                     JOIN user ON project.project_leader = user.id
                 """;
-        return template.query(sql, new ProjectRowMapper());
+        return template.query(sql, (rs, rowNum) -> {
+            Project project = new Project();
+            project.setId(rs.getInt("id"));
+            project.setName(rs.getString("name"));
+            project.setProjectLeader(mapProjectLeader(rs));
+            // project.setDescription(rs.getString("description"));
+            return project;
+        });
+    }
+
+    private User mapProjectLeader(ResultSet rs) throws SQLException {
+        User projectLeader = new User();
+        projectLeader.setId(rs.getInt("project_leader"));
+        projectLeader.setName(rs.getString("user_name"));
+        projectLeader.setEmail(rs.getString("user_email"));
+        return projectLeader;
     }
 
     private List<SubProject> findSubProjects(SubProject subProject){
