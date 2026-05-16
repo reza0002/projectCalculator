@@ -2,7 +2,7 @@ package com.example.projectcalculator.repository;
 
 import com.example.projectcalculator.model.Project;
 import com.example.projectcalculator.model.SubProject;
-import com.example.projectcalculator.model.Tasks;
+import com.example.projectcalculator.model.Task;
 import com.example.projectcalculator.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,21 +28,21 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public SubProject createSubProject(SubProject subProject) {
+    public SubProject createSubProject(SubProject subProject){
 
         String sql = """
-        INSERT INTO sub_project
-        (name, description, hours, price_per_hour, project_id)
-        VALUES (?, ?, ?, ?, ?)
-        """;
+            INSERT INTO sub_project
+            (name, description, hours, price_per_hour, project_id)
+            VALUES (?, ?, ?, ?, ?)
+            """;
 
         template.update(
                 sql,
                 subProject.getName(),
                 subProject.getDescription(),
                 subProject.getHours(),
-                subProject.getPricePerHour(),
-                subProject.getProjectId()
+                subProject.getPrice_per_hour(),
+                subProject.getProject_id()
         );
 
         return subProject;
@@ -69,12 +69,13 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public boolean deleteSubProject(SubProject subProject){
-
+    public void deleteSubProject(int id){
+        String sql = "DELETE FROM sub_project WHERE id = ?";
+        template.update(sql, id);
     }
 
     @Transactional
-    public boolean deleteTasks(Tasks tasks){
+    public boolean deleteTasks(Task task){
 
     }
 
@@ -89,7 +90,7 @@ public class ProjectRepository {
 
     @Transactional
     public Project createProject(Project project) {
-        String sql = "INSERT INTO project (name, project_leader, description, id) VALUES (?, ?)";
+        String sql = "INSERT INTO project (name, project_leader, description, id) VALUES (?, ?, ?, ?)";
         template.update(sql, project.getName(), project.getDescription(), project.getProjectLeader().getId());
         return project;
     }
@@ -120,7 +121,7 @@ public class ProjectRepository {
 
     }
 
-    public void updateTasks(Tasks tasks){
+    public void updateTasks(Task task){
 
     }
 }

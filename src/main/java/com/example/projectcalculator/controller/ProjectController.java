@@ -2,6 +2,7 @@ package com.example.projectcalculator.controller;
 
 
 import com.example.projectcalculator.model.Project;
+import com.example.projectcalculator.model.SubProject;
 import com.example.projectcalculator.model.Task;
 import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.service.ProjectService;
@@ -43,6 +44,30 @@ public class ProjectController {
     @GetMapping("/{project-name}/subproject")
     public String subProjectPage() {
         return "subProjectsPage";
+    }
+
+    @GetMapping("/{project-name}/subproject/create")
+    public String createSubProjectPage(Model model) {
+        model.addAttribute("subProject", new SubProject());
+        return "createSubProjectPage";
+    }
+
+    @PostMapping("/{project-name}/subproject/create")
+    public String createSubProject(
+            @PathVariable("project-name") String projectName,
+            @ModelAttribute SubProject subProject) {
+
+        projectService.createSubProject(subProject);
+
+        return "redirect:/projects/" + projectName + "/subproject";
+    }
+
+    @PostMapping("/subproject/delete/{id}")
+    public String deleteSubProject(@PathVariable int id){
+
+        projectService.deleteSubProject(id);
+
+        return "redirect:/projects/";
     }
 
     @GetMapping("/{project-name}/")

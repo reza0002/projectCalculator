@@ -2,6 +2,7 @@ package com.example.projectcalculator.service;
 
 import com.example.projectcalculator.model.Project;
 import com.example.projectcalculator.model.SubProject;
+import com.example.projectcalculator.model.Task;
 import com.example.projectcalculator.model.Tasks;
 import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.repository.ProjectRepository;
@@ -79,15 +80,15 @@ public class ProjectService {
 
     }
 
-    public void deleteSubProject(SubProject subProject){
-
+    public void deleteSubProject(int id){
+        repository.deleteSubProject(id);
     }
 
     public void deleteTasks(Task task){
 
     }
 
-    public SubProject createSubProject(SubProject subProject){
+    public SubProject createSubProject(SubProject subProject) {
         return repository.createSubProject(subProject);
     }
 
