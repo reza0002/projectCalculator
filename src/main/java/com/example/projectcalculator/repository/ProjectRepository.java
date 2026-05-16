@@ -58,8 +58,9 @@ public class ProjectRepository {
 
     }
 
-    public User login(String username, String password){
-
+    public boolean login(String username, String password) {
+        final String sql = "SELECT * FROM user WHERE user.name = ? AND user.password = ?";
+        return !template.query(sql, new UserRowMapper(), username, password).isEmpty();
     }
 
     @Transactional

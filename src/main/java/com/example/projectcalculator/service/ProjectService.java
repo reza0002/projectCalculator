@@ -15,7 +15,7 @@ public class ProjectService {
         this.repository = repository;
     }
 
-    public User userLogin(String username, String password){
+    public boolean userLogin(String username, String password){
         return repository.login(username, password);
     }
 
