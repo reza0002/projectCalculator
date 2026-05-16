@@ -64,9 +64,14 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public boolean deleteProject(Project project){
-
+    public boolean deleteProject(Project project) {
+        final String sql = """
+            DELETE FROM project
+            WHERE id = ?
+            """;
+        return template.update(sql, project.getId());
     }
+
 
     @Transactional
     public void deleteSubProject(int id){
@@ -88,6 +93,16 @@ public class ProjectRepository {
 
     }
 
+    public List<Project> getProjects() {
+        String sql = """
+                    SELECT p.id AS p_id, p.name AS p_name,
+                           u.id AS u_id, u.name AS u_name, u.password
+                    FROM project p
+                    JOIN user u ON p.project_leader = u.id
+                """;
+        return template.query(sql, new ProjectRowMapper());
+    }
+
     @Transactional
     public Project createProject(Project project) {
         String sql = "INSERT INTO project (name, project_leader, description, id) VALUES (?, ?, ?, ?)";
@@ -95,7 +110,7 @@ public class ProjectRepository {
         return project;
     }
 
-    private List<Project> findProjects(Project project){
+    private List<Project> findProjects(Project project) {
 
     }
 

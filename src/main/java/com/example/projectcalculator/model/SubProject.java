@@ -1,6 +1,7 @@
 package com.example.projectcalculator.model;
 
 public class SubProject {
+    private int id;
     private String name;
     private String description;
     private int price_per_hour;

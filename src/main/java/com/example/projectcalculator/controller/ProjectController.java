@@ -40,6 +40,12 @@ public class ProjectController {
         return "redirect:/" + project.getName();
     }
 
+    @PostMapping("/delete")
+    public String deleteProject(@ModelAttribute Project project) {
+        projectService.deleteProject(project);
+        return "redirect:/projects";
+    }
+
     @GetMapping("/{project-name}/subproject")
     public String subProjectPage() {
         return "subProjectsPage";

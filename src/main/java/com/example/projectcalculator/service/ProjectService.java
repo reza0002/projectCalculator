@@ -77,6 +77,7 @@ public class ProjectService {
     }
 
     public void deleteProject(Project project){
+        repository.deleteProject(project);
 
     }
 
