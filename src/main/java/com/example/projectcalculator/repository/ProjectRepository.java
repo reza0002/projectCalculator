@@ -4,6 +4,7 @@ import com.example.projectcalculator.model.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import com.example.projectcalculator.rowmapper.ProjectRowMapper;
 import com.example.projectcalculator.rowmapper.UserRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,44 +21,40 @@ public class ProjectRepository {
         this.template = template;
     }
 
-    @Transactional
-    public Project saveProject(Project project) {
-
-    }
-
-    @Transactional
-    public SubProject saveSubProject(SubProject subProject){
-
-    }
-
-    @Transactional
-    public Task saveTasks(Task tasks){
-
-    }
-
-    @Transactional
-    public boolean deleteProject(Project project){
-
-    }
-
-    @Transactional
-    public boolean deleteSubProject(SubProject subProject){
-
-    }
-
-    @Transactional
-    public boolean deleteTasks(Task task){
-
-    }
-
-    public User login(String username, String password){
-
-    }
-
-    @Transactional
-    public User findUser(String username){
-
-    }
+//    @Transactional
+//    public Project saveProject(Project project) {
+//
+//    }
+//
+//    @Transactional
+//    public SubProject saveSubProject(SubProject subProject){
+//
+//    }
+//
+//    @Transactional
+//    public Task saveTasks(Task tasks){
+//
+//    }
+//
+//    @Transactional
+//    public boolean deleteProject(Project project){
+//
+//    }
+//
+//    @Transactional
+//    public boolean deleteSubProject(SubProject subProject){
+//
+//    }
+//
+//
+//    public User login(String username, String password){
+//
+//    }
+//
+//    @Transactional
+//    public User findUser(String username){
+//
+//    }
 
     @Transactional
     public Project createProject(Project project) {
@@ -66,13 +63,14 @@ public class ProjectRepository {
         return project;
     }
 
-    private List<Project> findProjects(Project project){
+//    private List<Project> findProjects(Project project){
+//
+//    }
+//
+//    private List<SubProject> findSubProjects(SubProject subProject){
+//
+//    }
 
-    }
-
-    private List<SubProject> findSubProjects(SubProject subProject){
-
-    }
 
     public void addTask(Task task){
         String sql =
@@ -80,9 +78,47 @@ public class ProjectRepository {
         template.update(sql,task.getName(),task.getHours(), task.getPricePerHour(),task.getSub_project_id());
     }
 
-    private List<Task> findTasks(Task task){
 
+    public void deleteTask(int id){
+        String sql =
+                "DELETE FROM task WHERE id = ?";
+        template.update(sql, id);
     }
+
+
+    public List<Task> findTasksBySubproject(int sub_project_id) {
+        String sql =
+                "SELECT * FROM task WHERE sub_project_id = ?";
+
+        final RowMapper<Task> rowMapper = ((rs, rowNum) -> {
+            final Task task = new Task(
+                    rs.getString("name"),
+                    rs.getInt("price_per_hour"),
+                    rs.getInt("hours")
+            );
+            return task;
+        });
+
+        return template.query(sql, rowMapper, sub_project_id );
+    }
+
+
+    public Task findTaskById(int id){
+        String sql =
+                "SELECT * FROM task WHERE  id = ?";
+
+        final RowMapper<Task> rowMapper = ((rs, rowNum) -> {
+            final Task task = new Task(
+                    rs.getString("name"),
+                    rs.getInt("price_per_hour"),
+                    rs.getInt("hours")
+            );
+            return task;
+        });
+
+        return template.queryForObject(sql, rowMapper, id );
+    }
+
 
     public void updateProject(String username, Project project){
 
@@ -109,6 +145,10 @@ public class ProjectRepository {
     }
 
     public void updateTasks(Task task){
-
+        final String sql = """
+                UPDATE task 
+                SET 
+                
+                """;
     }
 }

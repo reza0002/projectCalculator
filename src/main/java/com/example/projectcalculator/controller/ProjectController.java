@@ -34,11 +34,11 @@ public class ProjectController {
         return "projects-page";
     }
 
-    @PostMapping("/create")
-    public String createProject(@ModelAttribute Project project) {
-        projectService.createProject(project);
-        return "redirect:/projects/";
-    }
+//    @PostMapping("/create")
+//    public String createProject(@ModelAttribute Project project) {
+//        projectService.createProject(project);
+//        return "redirect:/projects/";
+//    }
 
     @GetMapping("/{project-name}/subproject")
     public String subProjectPage() {

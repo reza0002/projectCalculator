@@ -15,50 +15,58 @@ public class ProjectService {
         this.repository = repository;
     }
 
-    public User userLogin(String username, String password){
-        return repository.login(username, password);
-    }
+//    public User userLogin(String username, String password){
+//        return repository.login(username, password);
+//    }
+//
+//
+//    public User findUser(String username) {
+//        return repository.findUser(username);
+//    }
 
-
-    public User findUser(String username) {
-        return repository.findUser(username);
-    }
-
-    public List<Project> getProjects() {
-        return repository.getProjects();
-    }
-
-    public Project createProject(Project project) {
-        return repository.createProject(project);
-    }
-
-    public Project findProject(Project project){
-        return repository.findProject(project);
-    }
-
-    public SubProject findSubProject(SubProject subProject){
-        return repository.findSubProject(subProject);
-    }
+//    public List<Project> getProjects() {
+//        return repository.getProjects();
+//    }
+//
+//    public Project createProject(Project project) {
+//        return repository.createProject(project);
+//    }
+//
+//    public Project findProject(Project project){
+//        return repository.findProject(project);
+//    }
+//
+//    public SubProject findSubProject(SubProject subProject){
+//        return repository.findSubProject(subProject);
+//    }
 
     public void addTask(Task task){
         repository.addTask(task);
     }
 
-    public Task findTasks(Task task){
-        return repository.findTasks(task);
+    public void deleteTask(int id){
+        repository.deleteTask(id);
     }
 
-    public Project saveProject(Project project){
-        return repository.saveProject(project);
+    public Task findTaskById(int id){
+        return repository.findTaskById(id);
     }
 
-    public SubProject saveSubProject(SubProject subProject){
-        return repository.saveSubProject(subProject);
+    public List<Task> findTasksBySubproject(int sub_project_id) {
+        return repository.findTasksBySubproject(sub_project_id);
     }
 
-    public Task saveTasks(Task task){
-        return repository.saveTasks(task);
-    }
+//    public Project saveProject(Project project){
+//        return repository.saveProject(project);
+//    }
+//
+//    public SubProject saveSubProject(SubProject subProject){
+//        return repository.saveSubProject(subProject);
+//    }
+//
+//    public Task saveTasks(Task task){
+//        return repository.saveTasks(task);
+//    }
 
     public void updateProject(){
 
