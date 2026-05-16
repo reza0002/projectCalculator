@@ -6,6 +6,7 @@ import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.rowmapper.ProjectRowMapper;
 import com.example.projectcalculator.model.*;
 import com.example.projectcalculator.rowmapper.ProjectRowMapper;
+import com.example.projectcalculator.rowmapper.UserRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -63,9 +64,12 @@ public class ProjectRepository {
         return !template.query(sql, new UserRowMapper(), username, password).isEmpty();
     }
 
-    @Transactional
-    public User findUser(String username){
-
+    public User findUser(String username) {
+        final String sql = """
+                SELECT * FROM user
+                WHERE user.name = ?
+                """;
+        return template.queryForObject(sql, new UserRowMapper(), username);
     }
 
     private List<Project> findProjects(Project project) {
