@@ -30,14 +30,12 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public SubProject createSubProject(SubProject subProject){
-
+    public SubProject createSubProject(SubProject subProject) {
         String sql = """
-            INSERT INTO sub_project
-            (name, description, hours, price_per_hour, project_id)
-            VALUES (?, ?, ?, ?, ?)
-            """;
-
+                INSERT INTO sub_project
+                (name, description, hours, price_per_hour, project_id)
+                VALUES (?, ?, ?, ?, ?)
+                """;
         template.update(
                 sql,
                 subProject.getName(),
@@ -46,39 +44,59 @@ public class ProjectRepository {
                 subProject.getPrice_per_hour(),
                 subProject.getProject_id()
         );
-
         return subProject;
     }
 
     @Transactional
     public Project saveProject(Project project) {
+        String sql = """
+                INSERT INTO project (name, project_leader, description) VALUES (?, ?, ?);
+                """;
+        template.update(sql,
+                project.getName(),
+                project.getProjectLeader().getId(),
+                project.getDescription());
 
+        return project;
     }
 
     @Transactional
-    public SubProject saveSubProject(SubProject subProject){
-
+    public SubProject saveSubProject(SubProject subProject) {
+        String sql = """
+                INSERT INTO sub_project
+                (name, description, hours, price_per_hour, project_id)
+                VALUES (?, ?, ?, ?, ?)
+                """;
+        template.update(
+                sql,
+                subProject.getName(),
+                subProject.getDescription(),
+                subProject.getHours(),
+                subProject.getPrice_per_hour(),
+                subProject.getProject_id()
+        );
+        return subProject;
     }
 
     @Transactional
-    public boolean deleteProject(Project project) {
+    public void deleteProject(Project project) {
         final String sql = """
-            DELETE FROM project
-            WHERE id = ?
-            """;
-        return template.update(sql, project.getId());
+                DELETE FROM project
+                WHERE id = ?
+                """;
+        template.update(sql, project.getId());
     }
 
     @Transactional
-    public void deleteSubProject(int id){
+    public void deleteSubProject(int id) {
         String sql = "DELETE FROM sub_project WHERE id = ?";
         template.update(sql, id);
     }
 
-    @Transactional
-    public boolean deleteTasks(Task task) {
-
-    }
+//    @Transactional
+//    public boolean deleteTasks(Task task) {
+//
+//    }
 
     public boolean login(String username, String password) {
         var user = findUser(username);
@@ -93,8 +111,27 @@ public class ProjectRepository {
 
     @Transactional
     public Project createProject(Project project) {
-        String sql = "INSERT INTO project (name, project_leader, description, id) VALUES (?, ?, ?, ?)";
+        String sql = """                
+                        INSERT INTO project
+                        (name, projectLeader, description, id)
+                        VALUES (?, ?, ?, ?)
+                """;
         template.update(sql, project.getName(), project.getDescription(), project.getProjectLeader().getId());
+        return project;
+    }
+
+    public List<Project> findProject(Project project) {
+        final String sql = """
+                SELECT id, name,
+                FROM project
+                WHERE id = ?
+                """;
+        final RowMapper<Project> rowMapper = (rs, rowNum) -> new Project(
+                rs.getInt("id"),
+                rs.getString("name")
+        );
+
+        return template.query(sql, rowMapper, project.getId());
     }
 
     public List<Project> findAllProjects() {
@@ -126,16 +163,31 @@ public class ProjectRepository {
         return projectLeader;
     }
 
-    private List<SubProject> findSubProjects(SubProject subProject){
+    public SubProject findSubProject(int id) {
+        String sql = """
+                SELECT *
+                FROM sub_project
+                WHERE id = ?
+                """;
 
+        return template.queryForObject(
+                sql,
+                (rs, rowNum) -> new SubProject(
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getInt("price_per_hour"),
+                        rs.getInt("hours"),
+                        rs.getInt("project_id")
+                ),
+                id
+        );
     }
 
-    public void addTask(Task task){
+    public void addTask(Task task) {
         String sql =
                 "INSERT INTO task (name, hours, price_per_hour, sub_project_id) VALUES (?, ?, ?, ?)";
-        template.update(sql,task.getName(),task.getHours(), task.getPricePerHour(),task.getSub_project_id());
+        template.update(sql, task.getName(), task.getHours(), task.getPricePerHour(), task.getSub_project_id());
     }
-
 
     public void deleteTask(int id) {
         String sql =
@@ -163,7 +215,6 @@ public class ProjectRepository {
 
     }
 
-
     public List<Task> findTasksBySubproject(int sub_project_id) {
         String sql =
                 "SELECT * FROM task WHERE sub_project_id = ?";
@@ -180,7 +231,6 @@ public class ProjectRepository {
         return template.query(sql, rowMapper, sub_project_id);
     }
 
-
     public Task findTaskById(int id) {
         String sql =
                 "SELECT * FROM task WHERE  id = ?";
@@ -193,11 +243,22 @@ public class ProjectRepository {
             );
             return task;
         });
-
+        return template.queryForObject(sql, rowMapper, id);
     }
 
-    public void updateProject(String username, Project project) {
-
+    public void updateProject(Project project) {
+        final String sql = """
+                  UPDATE project
+                  SET
+                  id = ?,
+                  name = ?,
+                  projectLeader = ?,
+                  WHERE description = ?
+                """;
+        template.update(sql, project.getId(),
+                project.getName(),
+                project.getProjectLeader(),
+                project.getDescription());
     }
 
     public void updateSubProject(SubProject subProject) {

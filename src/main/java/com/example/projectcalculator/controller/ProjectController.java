@@ -2,13 +2,14 @@ package com.example.projectcalculator.controller;
 
 
 import com.example.projectcalculator.model.Project;
+import com.example.projectcalculator.model.SubProject;
 import com.example.projectcalculator.model.Task;
-import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.service.ProjectService;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@org.springframework.stereotype.Controller
+@Controller
 @RequestMapping("/projects")
 public class ProjectController {
 
@@ -51,6 +52,19 @@ public class ProjectController {
         return "subProjectsPage";
     }
 
+    @GetMapping("/subproject/{id}")
+    public String findSubProject(
+            @PathVariable int id,
+            Model model) {
+
+        model.addAttribute(
+                "subProject",
+                projectService.findSubProject(id)
+        );
+
+        return "subProjectsPage";
+    }
+
     @GetMapping("/{project-name}/subproject/create")
     public String createSubProjectPage(Model model) {
         model.addAttribute("subProject", new SubProject());
@@ -68,7 +82,7 @@ public class ProjectController {
     }
 
     @PostMapping("/subproject/delete/{id}")
-    public String deleteSubProject(@PathVariable int id){
+    public String deleteSubProject(@PathVariable int id) {
 
         projectService.deleteSubProject(id);
 
