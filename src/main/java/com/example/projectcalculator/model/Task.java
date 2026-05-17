@@ -5,6 +5,7 @@ public class Task {
     private int PricePerHour;
     private int hours;
     private int sub_project_id;
+    private int id;
 
     public Task(String name, int pricePerHour, int hours) {
         this.name = name;
@@ -23,28 +24,35 @@ public class Task {
         this.name = name;
     }
 
-    public double getPricePerHour() {
+    public int getPricePerHour() {
         return PricePerHour;
     }
 
     public void setPricePerHour(int pricePerHour) {
-        this.PricePerHour = pricePerHour;
+        PricePerHour = pricePerHour;
     }
 
-    public double getHours() {
+    public int getHours() {
         return hours;
     }
 
     public void setHours(int hours) {
         this.hours = hours;
+    }
 
+    public int getSub_project_id() {
+        return sub_project_id;
     }
 
     public void setSub_project_id(int sub_project_id) {
         this.sub_project_id = sub_project_id;
     }
 
-    public int getSub_project_id() {
-        return sub_project_id;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

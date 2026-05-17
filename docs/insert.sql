@@ -27,12 +27,12 @@ VALUES (1, 1),
        (9, 3),
        (10, 3);
 
-INSERT INTO sub_project (description, hours, project_id)
-VALUES ('Design mockups', 10, 1),
-       ('Frontend udvikling', 20, 1),
-       ('Backend API', 30, 2),
-       ('Database setup', 15, 2),
-       ('Data migration script', 25, 3);
+INSERT INTO sub_project (name, description, hours, price_per_hour, project_id)
+VALUES ('Design', 'Design mockups', 10, 500, 1),
+       ('Frontend', 'Frontend udvikling', 20, 600, 1),
+       ('Backend', 'Backend API', 30, 700, 2),
+       ('Database', 'Database setup', 15, 550, 2),
+       ('Migration', 'Data migration script', 25, 600, 3);
 
 INSERT INTO task (name, hours, price_per_hour, sub_project_id)
 VALUES ('Lav wireframes', 3, 500, 1),

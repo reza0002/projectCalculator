@@ -5,12 +5,16 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.example.projectcalculator.rowmapper.ProjectRowMapper;
 import com.example.projectcalculator.rowmapper.UserRowMapper;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
-import java.beans.Transient;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class ProjectRepository {
@@ -31,10 +35,6 @@ public class ProjectRepository {
 //
 //    }
 //
-//    @Transactional
-//    public Task saveTasks(Task tasks){
-//
-//    }
 //
 //    @Transactional
 //    public boolean deleteProject(Project project){
@@ -83,6 +83,26 @@ public class ProjectRepository {
         String sql =
                 "DELETE FROM task WHERE id = ?";
         template.update(sql, id);
+    }
+
+    @Transactional
+    public Task saveTasks(Task task){
+        final KeyHolder keyHolder = new GeneratedKeyHolder();
+        final String sql = "INSERT INTO task (name, hours, price_per_hour, sub_project_id) VALUES (?, ?, ?, ?)";
+
+        template.update(connection ->{
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, task.getName());
+            ps.setInt(2, task.getHours());
+            ps.setInt(3, task.getPricePerHour());
+            ps.setInt(4, task.getSub_project_id());
+            return ps;
+        }, keyHolder);
+
+        int taskId = Objects.requireNonNull(keyHolder.getKey()).intValue();
+        task.setId(taskId);
+        return task;
+
     }
 
 
@@ -144,11 +164,15 @@ public class ProjectRepository {
         );
     }
 
-    public void updateTasks(Task task){
+    public void updateTask(Task task){
         final String sql = """
-                UPDATE task 
-                SET 
-                
+                UPDATE task
+                SET
+                name = ?,
+                hours = ?,
+                price_per_hour = ?
+                WHERE id = ?;
                 """;
+        template.update(sql, task.getName(), task.getHours(), task.getPricePerHour());
     }
 }

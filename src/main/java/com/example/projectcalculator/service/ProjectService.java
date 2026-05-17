@@ -44,6 +44,10 @@ public class ProjectService {
         repository.addTask(task);
     }
 
+    public Task saveTask (Task task){
+        return repository.saveTasks(task);
+    }
+
     public void deleteTask(int id){
         repository.deleteTask(id);
     }
@@ -76,8 +80,8 @@ public class ProjectService {
         repository.updateSubProject(subProject);
     }
 
-    public void updateTasks(){
-
+    public void updateTask(Task task){
+        repository.updateTask(task);
     }
 
     public void deleteProject(Project project){
@@ -88,8 +92,5 @@ public class ProjectService {
 
     }
 
-    public void deleteTasks(Task task){
-
-    }
 
 }
