@@ -5,6 +5,7 @@ import com.example.projectcalculator.model.SubProject;
 import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.model.*;
 import com.example.projectcalculator.rowmapper.UserRowMapper;
+import com.example.projectcalculator.service.ProjectService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -24,9 +25,11 @@ import java.util.Objects;
 public class ProjectRepository {
 
     private final JdbcTemplate template;
+    private final ProjectService projectService;
 
-    public ProjectRepository(JdbcTemplate template) {
+    public ProjectRepository(JdbcTemplate template, ProjectService projectService) {
         this.template = template;
+        this.projectService = projectService;
     }
 
     @Transactional
@@ -93,11 +96,6 @@ public class ProjectRepository {
         template.update(sql, id);
     }
 
-//    @Transactional
-//    public boolean deleteTasks(Task task) {
-//
-//    }
-
     public boolean login(String username, String password) {
         var user = findUser(username);
         if (user == null) return false;
@@ -110,17 +108,16 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public Project createProject(Project project) {
+    public void createProject(Project project) {
         String sql = """                
                         INSERT INTO project
                         (name, projectLeader, description, id)
                         VALUES (?, ?, ?, ?)
                 """;
         template.update(sql, project.getName(), project.getDescription(), project.getProjectLeader().getId());
-        return project;
     }
 
-    public List<Project> findProject(Project project) {
+    public Project findProject(Project project) {
         final String sql = """
                 SELECT id, name,
                 FROM project
@@ -131,7 +128,7 @@ public class ProjectRepository {
                 rs.getString("name")
         );
 
-        return template.query(sql, rowMapper, project.getId());
+        return template.queryForObject(sql, rowMapper, project.getId());
     }
 
     public List<Project> findAllProjects() {
