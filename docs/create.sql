@@ -31,10 +31,12 @@ CREATE TABLE user_project
 
 CREATE TABLE sub_project
 (
-    id          INT AUTO_INCREMENT PRIMARY KEY,
-    description TEXT NOT NULL,
-    hours       INT  NOT NULL,
-    project_id  INT  NOT NULL,
+    id             INT AUTO_INCREMENT PRIMARY KEY,
+    name           VARCHAR(250) NOT NULL,
+    description    TEXT         NOT NULL,
+    hours          INT          NOT NULL,
+    price_per_hour INT          NOT NULL,
+    project_id     INT          NOT NULL,
     FOREIGN KEY (project_id) REFERENCES project (id)
 );
 
