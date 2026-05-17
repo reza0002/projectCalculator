@@ -35,8 +35,8 @@ public class ProjectService {
         return repository.findProject(project);
     }
 
-    public void createProject(Project project) {
-        repository.createProject(project);
+    public Project createProject(Project project) {
+        return repository.createProject(project);
     }
 
     public SubProject findSubProject(int id) {

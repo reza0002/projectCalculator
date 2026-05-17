@@ -37,8 +37,8 @@ public class ProjectController {
 
     @PostMapping("/create")
     public String createProject(@ModelAttribute Project project) {
-        var projects = projectService.createProject(project);
-        return "redirect:/" + project.getName();
+        var newProject = projectService.createProject(project);
+        return "redirect:/" + newProject.getName();
     }
 
     @PostMapping("/delete")
@@ -53,15 +53,8 @@ public class ProjectController {
     }
 
     @GetMapping("/subproject/{id}")
-    public String findSubProject(
-            @PathVariable int id,
-            Model model) {
-
-        model.addAttribute(
-                "subProject",
-                projectService.findSubProject(id)
-        );
-
+    public String findSubProject(@PathVariable int id, Model model) {
+        model.addAttribute("subProject", projectService.findSubProject(id));
         return "subProjectsPage";
     }
 
@@ -83,9 +76,7 @@ public class ProjectController {
 
     @PostMapping("/subproject/delete/{id}")
     public String deleteSubProject(@PathVariable int id) {
-
         projectService.deleteSubProject(id);
-
         return "redirect:/projects/";
     }
 
