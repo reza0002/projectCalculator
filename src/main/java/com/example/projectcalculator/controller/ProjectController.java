@@ -57,25 +57,25 @@ public class ProjectController {
     }
 
     @PostMapping("/task/add")
-    public String addTask(@ModelAttribute Task task){
+    public String addTask(@ModelAttribute Task task) {
         projectService.addTask(task);
         return "redirect:/{project-name}/";
     }
 
     @PostMapping("/task/{id}/delete")
-    public String deleteTask (@PathVariable int id){
+    public String deleteTask(@PathVariable int id) {
         projectService.deleteTask(id);
         return "redirect:/{project-name}/";
     }
 
     @PostMapping("/task/save")
-    public String saveTask(@ModelAttribute Task task){
+    public String saveTask(@ModelAttribute Task task) {
         projectService.saveTask(task);
         return "redirect:/{project-name}/";
     }
 
     @PostMapping("/task/{id}/edit")
-    public String updateTask (@PathVariable int id, @ModelAttribute Task task){
+    public String updateTask(@PathVariable int id, @ModelAttribute Task task) {
         task.setId(id);
         projectService.updateTask(task);
         return "redirect:/{project-name}/";

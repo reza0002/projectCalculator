@@ -4,6 +4,8 @@ import com.example.projectcalculator.model.*;
 import com.example.projectcalculator.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class ProjectService {
@@ -14,7 +16,7 @@ public class ProjectService {
         this.repository = repository;
     }
 
-    public boolean userLogin(String username, String password){
+    public boolean userLogin(String username, String password) {
         return repository.login(username, password);
     }
 
@@ -27,27 +29,31 @@ public class ProjectService {
         return repository.findAllProjects();
     }
 
-    public Project findProject(Project project){
+    public Project findProject(Project project) {
         return repository.findProject(project);
     }
 
-    public SubProject findSubProject(SubProject subProject){
+    public void createProject(Project project) {
+        repository.createProject(project);
+    }
+
+    public SubProject findSubProject(SubProject subProject) {
         return repository.findSubProject(subProject);
     }
 
-    public void addTask(Task task){
+    public void addTask(Task task) {
         repository.addTask(task);
     }
 
-    public Task saveTask (Task task){
+    public Task saveTask(Task task) {
         return repository.saveTasks(task);
     }
 
-    public void deleteTask(int id){
+    public void deleteTask(int id) {
         repository.deleteTask(id);
     }
 
-    public Task findTaskById(int id){
+    public Task findTaskById(int id) {
         return repository.findTaskById(id);
     }
 
@@ -67,23 +73,23 @@ public class ProjectService {
 //        return repository.saveTasks(task);
 //    }
 
-    public void updateProject(){
+    public void updateProject() {
 
     }
 
-    public void updateSubProject(SubProject subProject){
+    public void updateSubProject(SubProject subProject) {
         repository.updateSubProject(subProject);
     }
 
-    public void updateTask(Task task){
+    public void updateTask(Task task) {
         repository.updateTask(task);
     }
 
-    public void deleteProject(Project project){
+    public void deleteProject(Project project) {
 
     }
 
-    public void deleteSubProject(SubProject subProject){
+    public void deleteSubProject(SubProject subProject) {
 
     }
 

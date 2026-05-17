@@ -3,17 +3,15 @@ package com.example.projectcalculator.repository;
 import com.example.projectcalculator.model.Project;
 import com.example.projectcalculator.model.SubProject;
 import com.example.projectcalculator.model.User;
-import com.example.projectcalculator.rowmapper.ProjectRowMapper;
 import com.example.projectcalculator.model.*;
-import com.example.projectcalculator.rowmapper.ProjectRowMapper;
 import com.example.projectcalculator.rowmapper.UserRowMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.DataSource;
-import java.beans.Transient;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
@@ -37,27 +35,22 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public SubProject saveSubProject(SubProject subProject){
+    public SubProject saveSubProject(SubProject subProject) {
 
     }
 
     @Transactional
-    public Task saveTasks(Task tasks){
+    public boolean deleteProject(Project project) {
 
     }
 
     @Transactional
-    public boolean deleteProject(Project project){
+    public boolean deleteSubProject(SubProject subProject) {
 
     }
 
     @Transactional
-    public boolean deleteSubProject(SubProject subProject){
-
-    }
-
-    @Transactional
-    public boolean deleteTasks(Task task){
+    public boolean deleteTasks(Task task) {
 
     }
 
@@ -73,10 +66,9 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public Project createProject(Project project) {
+    public void createProject(Project project) {
         String sql = "INSERT INTO project (name, project_leader, description, id) VALUES (?, ?)";
         template.update(sql, project.getName(), project.getDescription(), project.getProjectLeader().getId());
-        return project;
     }
 
     public List<Project> findAllProjects() {
@@ -108,29 +100,29 @@ public class ProjectRepository {
         return projectLeader;
     }
 
-    private List<SubProject> findSubProjects(SubProject subProject){
+    private List<SubProject> findSubProjects(SubProject subProject) {
 
     }
 
-    public void addTask(Task task){
+    public void addTask(Task task) {
         String sql =
                 "INSERT INTO task (name, hours, price_per_hour, sub_project_id) VALUES (?, ?, ?, ?)";
-        template.update(sql,task.getName(),task.getHours(), task.getPricePerHour(),task.getSub_project_id());
+        template.update(sql, task.getName(), task.getHours(), task.getPricePerHour(), task.getSub_project_id());
     }
 
 
-    public void deleteTask(int id){
+    public void deleteTask(int id) {
         String sql =
                 "DELETE FROM task WHERE id = ?";
         template.update(sql, id);
     }
 
     @Transactional
-    public Task saveTasks(Task task){
+    public Task saveTasks(Task task) {
         final KeyHolder keyHolder = new GeneratedKeyHolder();
         final String sql = "INSERT INTO task (name, hours, price_per_hour, sub_project_id) VALUES (?, ?, ?, ?)";
 
-        template.update(connection ->{
+        template.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, task.getName());
             ps.setInt(2, task.getHours());
@@ -159,11 +151,11 @@ public class ProjectRepository {
             return task;
         });
 
-        return template.query(sql, rowMapper, sub_project_id );
+        return template.query(sql, rowMapper, sub_project_id);
     }
 
 
-    public Task findTaskById(int id){
+    public Task findTaskById(int id) {
         String sql =
                 "SELECT * FROM task WHERE  id = ?";
 
@@ -178,7 +170,7 @@ public class ProjectRepository {
 
     }
 
-    public void updateProject(String username, Project project){
+    public void updateProject(String username, Project project) {
 
     }
 
@@ -202,7 +194,7 @@ public class ProjectRepository {
         );
     }
 
-    public void updateTask(Task task){
+    public void updateTask(Task task) {
         final String sql = """
                 UPDATE task
                 SET
