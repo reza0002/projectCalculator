@@ -1,11 +1,14 @@
 package com.example.projectcalculator.service;
 
-import com.example.projectcalculator.model.*;
+import com.example.projectcalculator.model.Project;
+import com.example.projectcalculator.model.SubProject;
+import com.example.projectcalculator.model.Task;
+import com.example.projectcalculator.model.Tasks;
+import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 
 @Service
 public class ProjectService {
@@ -77,7 +80,7 @@ public class ProjectService {
 
     }
 
-    public void updateSubProject(SubProject subProject) {
+    public void updateSubProject(SubProject subProject){
         repository.updateSubProject(subProject);
     }
 
@@ -85,13 +88,17 @@ public class ProjectService {
         repository.updateTask(task);
     }
 
-    public void deleteProject(Project project) {
+    public void deleteProject(Project project){
+        repository.deleteProject(project);
 
     }
 
-    public void deleteSubProject(SubProject subProject) {
-
+    public void deleteSubProject(int id){
+        repository.deleteSubProject(id);
     }
 
+    public void deleteTasks(Task task){
+
+    }
 
 }

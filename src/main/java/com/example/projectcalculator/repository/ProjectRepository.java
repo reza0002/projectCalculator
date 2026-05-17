@@ -30,23 +30,49 @@ public class ProjectRepository {
     }
 
     @Transactional
+    public SubProject createSubProject(SubProject subProject){
+
+        String sql = """
+            INSERT INTO sub_project
+            (name, description, hours, price_per_hour, project_id)
+            VALUES (?, ?, ?, ?, ?)
+            """;
+
+        template.update(
+                sql,
+                subProject.getName(),
+                subProject.getDescription(),
+                subProject.getHours(),
+                subProject.getPrice_per_hour(),
+                subProject.getProject_id()
+        );
+
+        return subProject;
+    }
+
+    @Transactional
     public Project saveProject(Project project) {
 
     }
 
     @Transactional
-    public SubProject saveSubProject(SubProject subProject) {
+    public SubProject saveSubProject(SubProject subProject){
 
     }
 
     @Transactional
     public boolean deleteProject(Project project) {
-
+        final String sql = """
+            DELETE FROM project
+            WHERE id = ?
+            """;
+        return template.update(sql, project.getId());
     }
 
     @Transactional
-    public boolean deleteSubProject(SubProject subProject) {
-
+    public void deleteSubProject(int id){
+        String sql = "DELETE FROM sub_project WHERE id = ?";
+        template.update(sql, id);
     }
 
     @Transactional
@@ -66,8 +92,8 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public void createProject(Project project) {
-        String sql = "INSERT INTO project (name, project_leader, description, id) VALUES (?, ?)";
+    public Project createProject(Project project) {
+        String sql = "INSERT INTO project (name, project_leader, description, id) VALUES (?, ?, ?, ?)";
         template.update(sql, project.getName(), project.getDescription(), project.getProjectLeader().getId());
     }
 
@@ -100,14 +126,14 @@ public class ProjectRepository {
         return projectLeader;
     }
 
-    private List<SubProject> findSubProjects(SubProject subProject) {
+    private List<SubProject> findSubProjects(SubProject subProject){
 
     }
 
-    public void addTask(Task task) {
+    public void addTask(Task task){
         String sql =
                 "INSERT INTO task (name, hours, price_per_hour, sub_project_id) VALUES (?, ?, ?, ?)";
-        template.update(sql, task.getName(), task.getHours(), task.getPricePerHour(), task.getSub_project_id());
+        template.update(sql,task.getName(),task.getHours(), task.getPricePerHour(),task.getSub_project_id());
     }
 
 

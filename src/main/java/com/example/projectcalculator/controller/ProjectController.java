@@ -36,13 +36,43 @@ public class ProjectController {
 
     @PostMapping("/create")
     public String createProject(@ModelAttribute Project project) {
-        projectService.createProject(project);
-        return "redirect:/projects/";
+        var projects = projectService.createProject(project);
+        return "redirect:/" + project.getName();
+    }
+
+    @PostMapping("/delete")
+    public String deleteProject(@ModelAttribute Project project) {
+        projectService.deleteProject(project);
+        return "redirect:/projects";
     }
 
     @GetMapping("/{project-name}/subproject")
     public String subProjectPage() {
         return "subProjectsPage";
+    }
+
+    @GetMapping("/{project-name}/subproject/create")
+    public String createSubProjectPage(Model model) {
+        model.addAttribute("subProject", new SubProject());
+        return "createSubProjectPage";
+    }
+
+    @PostMapping("/{project-name}/subproject/create")
+    public String createSubProject(
+            @PathVariable("project-name") String projectName,
+            @ModelAttribute SubProject subProject) {
+
+        projectService.createSubProject(subProject);
+
+        return "redirect:/projects/" + projectName + "/subproject";
+    }
+
+    @PostMapping("/subproject/delete/{id}")
+    public String deleteSubProject(@PathVariable int id){
+
+        projectService.deleteSubProject(id);
+
+        return "redirect:/projects/";
     }
 
     @GetMapping("/{project-name}/")
