@@ -4,7 +4,6 @@ import com.example.projectcalculator.model.*;
 import com.example.projectcalculator.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class ProjectService {
@@ -40,32 +39,44 @@ public class ProjectService {
         repository.addTask(task);
     }
 
-    public Task findTasks(Task task){
-        return repository.findTasks(task);
-    }
-
-    public Project saveProject(Project project){
-        return repository.saveProject(project);
-    }
-
-    public SubProject saveSubProject(SubProject subProject){
-        return repository.saveSubProject(subProject);
-    }
-
-    public Task saveTasks(Task task){
+    public Task saveTask (Task task){
         return repository.saveTasks(task);
     }
+
+    public void deleteTask(int id){
+        repository.deleteTask(id);
+    }
+
+    public Task findTaskById(int id){
+        return repository.findTaskById(id);
+    }
+
+    public List<Task> findTasksBySubproject(int sub_project_id) {
+        return repository.findTasksBySubproject(sub_project_id);
+    }
+
+//    public Project saveProject(Project project){
+//        return repository.saveProject(project);
+//    }
+//
+//    public SubProject saveSubProject(SubProject subProject){
+//        return repository.saveSubProject(subProject);
+//    }
+//
+//    public Task saveTasks(Task task){
+//        return repository.saveTasks(task);
+//    }
 
     public void updateProject(){
 
     }
 
-    public void updateSubProject(){
-
+    public void updateSubProject(SubProject subProject){
+        repository.updateSubProject(subProject);
     }
 
-    public void updateTasks(){
-
+    public void updateTask(Task task){
+        repository.updateTask(task);
     }
 
     public void deleteProject(Project project){
@@ -76,8 +87,5 @@ public class ProjectService {
 
     }
 
-    public void deleteTasks(Tasks tasks){
-
-    }
 
 }
