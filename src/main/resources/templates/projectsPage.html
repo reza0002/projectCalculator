@@ -19,7 +19,7 @@
 
 
         <label for="projectLeader"> Project leader</label>
-        <input type="text" th:field="*{projectLeader}" id="projectLeader" placeholder="Enter leader name">
+        <input type="text" th:field="*{projectLeader.name}" name="projectLeader" placeholder="Enter leader user name">
 
         <label for="description">Description</label>
         <textarea type="text" th:field="*{description}" id="description" placeholder="Write a short project description...">
@@ -37,9 +37,7 @@
 
             </div>
 
-            <button class="create-btn" type="submit">
-                <a href="/prototype/project-name/subproject">Create</a>
-            </button>
+            <button class="create-btn" type="submit">Create</button>
         </section>
     </form>
 </div>

@@ -19,7 +19,7 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/home")
     public String homepage() {
         return "homePage";
     }
@@ -32,19 +32,26 @@ public class ProjectController {
     @GetMapping("/create")
     public String createProjectPage(Model model) {
         model.addAttribute("project", new Project());
-        return "projects-page";
+        return "projectsPage";
     }
 
     @PostMapping("/create")
     public String createProject(@ModelAttribute Project project) {
         var newProject = projectService.createProject(project);
-        return "redirect:/" + newProject.getName();
+        return "redirect:/subProjectsPage" + newProject.getName();
     }
 
     @PostMapping("/delete")
     public String deleteProject(@ModelAttribute Project project) {
         projectService.deleteProject(project);
         return "redirect:/projects";
+    }
+
+    @PostMapping("/project/{id}/edit")
+    public String updateProject(@PathVariable int id, @ModelAttribute Project project) {
+        project.setId(id);
+        projectService.updateProject(project);
+        return "redirect:/{project-name}/";
     }
 
     @GetMapping("/{project-name}/subproject")
@@ -115,5 +122,6 @@ public class ProjectController {
         projectService.updateTask(task);
         return "redirect:/{project-name}/";
     }
+
 
 }

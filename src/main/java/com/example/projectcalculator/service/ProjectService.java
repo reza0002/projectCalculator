@@ -63,19 +63,20 @@ public class ProjectService {
         return repository.findTasksBySubproject(sub_project_id);
     }
 
-//    public Project saveProject(Project project){
-//        return repository.saveProject(project);
-//    }
-//
-//    public SubProject saveSubProject(SubProject subProject){
-//        return repository.saveSubProject(subProject);
-//    }
-//
-//    public Task saveTasks(Task task){
-//        return repository.saveTasks(task);
-//    }
+    public Project saveProject(Project project){
+        return repository.saveProject(project);
+    }
 
-    public void updateProject() {
+    public SubProject saveSubProject(SubProject subProject){
+        return repository.saveSubProject(subProject);
+    }
+
+   public Task saveTasks(Task task){
+        return repository.saveTasks(task);
+    }
+
+    public Project updateProject(Project project) {
+        return repository.updateProject(project);
 
     }
 
@@ -87,8 +88,8 @@ public class ProjectService {
         repository.updateTask(task);
     }
 
-    public void deleteProject(Project project) {
-        repository.deleteProject(project);
+    public Project deleteProject(Project project) {
+        return repository.deleteProject(project);
 
     }
 
@@ -100,8 +101,8 @@ public class ProjectService {
         repository.deleteSubProject(id);
     }
 
-    public void deleteTasks(Task task) {
+    //public void deleteTasks(Task task) {
 
-    }
+    //}
 
 }

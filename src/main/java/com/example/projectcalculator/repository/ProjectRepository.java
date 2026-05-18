@@ -5,7 +5,6 @@ import com.example.projectcalculator.model.SubProject;
 import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.model.*;
 import com.example.projectcalculator.rowmapper.UserRowMapper;
-import com.example.projectcalculator.service.ProjectService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -25,11 +24,9 @@ import java.util.Objects;
 public class ProjectRepository {
 
     private final JdbcTemplate template;
-    private final ProjectService projectService;
 
-    public ProjectRepository(JdbcTemplate template, ProjectService projectService) {
+    public ProjectRepository(JdbcTemplate template) {
         this.template = template;
-        this.projectService = projectService;
     }
 
     @Transactional
@@ -82,12 +79,13 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public void deleteProject(Project project) {
+    public Project deleteProject(Project project) {
         final String sql = """
                 DELETE FROM project
                 WHERE id = ?
                 """;
         template.update(sql, project.getId());
+        return project;
     }
 
     @Transactional
@@ -109,12 +107,12 @@ public class ProjectRepository {
 
     @Transactional
     public Project createProject(Project project) {
-        String sql = """                
-                        INSERT INTO project
-                        (name, projectLeader, description, id)
-                        VALUES (?, ?, ?, ?)
-                """;
-        template.update(sql, project.getName(), project.getDescription(), project.getProjectLeader().getId());
+        String sql = """
+        INSERT INTO project (name, project_leader) VALUES (?, ?);
+        """;
+        template.update(sql,
+                project.getName(),
+                project.getProjectLeader() != null ? project.getProjectLeader().getId() : null);
         return project;
     }
 
@@ -244,7 +242,7 @@ public class ProjectRepository {
         return template.queryForObject(sql, rowMapper, id);
     }
 
-    public void updateProject(Project project) {
+    public Project updateProject(Project project) {
         final String sql = """
                   UPDATE project
                   SET
@@ -257,6 +255,7 @@ public class ProjectRepository {
                 project.getName(),
                 project.getProjectLeader(),
                 project.getDescription());
+        return project;
     }
 
     public void updateSubProject(SubProject subProject) {
