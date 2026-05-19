@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Task</title>
+    <link rel="stylesheet" href="/addTasks.css"/>
+    <link rel="stylesheet" href="/navbar.css"/>
+    <link rel="stylesheet" href="/footer.css">
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<h1>Add new task</h1>
+
+<form th:action="@{/{project-id}/saveSubProject}" method="post" th:object="${subProject}">
+    <h1 th:text="*{project_id}"></h1>
+
+    <div class="container">
+
+        <section class="form-section">
+            <h2> New task </h2>
+            <label for="name">Task name</label>
+            <input id="name" type="text" th:field="*{name}" placeholder="Enter task name">
+        </section>
+
+
+        <button class="add-btn" type="submit">Add</button>
+    </div>
+</form>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
