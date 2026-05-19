@@ -19,28 +19,28 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping("/home")
-    public String homepage() {
-        return "homePage";
+    @GetMapping("/")
+    public String homepage(Model model) {
+        model.addAttribute("projects", projectService.findAllProjects());
+        return "home-page";
     }
 
     @GetMapping("/login")
     public String loginPage() {
-        return "loginPage";
+        return "login-page";
     }
 
     @GetMapping("/create")
     public String createProjectPage(Model model) {
         model.addAttribute("project", new Project());
-        return "projectsPage";
+        model.addAttribute("employees", projectService.findAllUsers());
+        return "create-project";
     }
 
     @PostMapping("/create")
     public String createProject(@ModelAttribute Project project) {
-        User leader = projectService.findUser(project.getProjectLeader().getName());
-        project.setProjectLeader(leader);
         var newProject = projectService.createProject(project);
-        return "redirect:/prototype/" + newProject.getName() + "/subproject";
+        return "redirect:/projects/" + newProject.getId() + "/subproject";
     }
 
     @PostMapping("/delete")
@@ -66,7 +66,7 @@ public class ProjectController {
     @GetMapping("/{project-name}/subproject/create")
     public String createSubProjectPage(Model model) {
         model.addAttribute("subProject", new SubProject());
-        return "createSubProjectPage";
+        return "create-sub-project";
     }
 
     @PostMapping("/{project-name}/subproject/create")
@@ -76,7 +76,7 @@ public class ProjectController {
 
         projectService.createSubProject(subProject);
 
-        return "redirect:/projects/" + projectName + "/subproject";
+        return "redirect:/projects/" + projectId + "/subproject";
     }
 
     @PostMapping("/subproject/delete/{id}")
@@ -85,15 +85,18 @@ public class ProjectController {
         return "redirect:/projects/";
     }
 
-    @GetMapping("/{project-name}/")
-    public String taskPage() {
-        return "tasksPage";
+    @GetMapping("/{project-id}/{sub-project-id}/task")
+    public String taskPage(@PathVariable("project-id") int projectId,
+                           @PathVariable("sub-project-id") int subProjectId, Model model) {
+        model.addAttribute("tasks", projectService.findTasksBySubproject(subProjectId));
+
+        return "sub-project-tasks";
     }
 
     @GetMapping("/{project-name}/{sub-project-name}/addtask")
     public String addTaskPage(Model model) {
         model.addAttribute("task", new Task());
-        return "addTasks";
+        return "add-task";
     }
 
     @PostMapping("/task/add")
