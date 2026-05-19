@@ -80,13 +80,12 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public Project deleteProject(Project project) {
+    public void deleteProject(int projectId) {
         final String sql = """
                 DELETE FROM project
                 WHERE id = ?
                 """;
-        template.update(sql, project.getId());
-        return project;
+        template.update(sql, projectId);
     }
 
     @Transactional
@@ -181,7 +180,7 @@ public class ProjectRepository {
         return projectLeader;
     }
 
-    public SubProject findSubProject(int id) {
+    public SubProject findSubProject(int subProjectId) {
         String sql = """
                 SELECT *
                 FROM sub_project
@@ -197,7 +196,7 @@ public class ProjectRepository {
                         rs.getInt("hours"),
                         rs.getInt("project_id")
                 ),
-                id
+                subProjectId
         );
     }
 

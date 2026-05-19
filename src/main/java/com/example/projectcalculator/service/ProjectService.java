@@ -38,6 +38,7 @@ public class ProjectService {
     public Project findProject(int projectId) {
         return repository.findProject(projectId);
     }
+
     // overload hvis man vil brug navn i stedet for id
     public Project findProject(String projectName) {
         return repository.findProject(projectName);
@@ -47,8 +48,8 @@ public class ProjectService {
         return repository.createProject(project);
     }
 
-    public SubProject findSubProject(int id) {
-        return repository.findSubProject(id);
+    public SubProject findSubProject(int subProjectId) {
+        return repository.findSubProject(subProjectId);
     }
 
     public List<SubProject> findSubProjectsForProject(int projectId) {
@@ -83,7 +84,7 @@ public class ProjectService {
         return repository.saveSubProject(subProject);
     }
 
-   public Task saveTasks(Task task){
+    public Task saveTasks(Task task) {
         return repository.saveTasks(task);
     }
 
@@ -100,9 +101,8 @@ public class ProjectService {
         repository.updateTask(task);
     }
 
-    public Project deleteProject(Project project) {
-        return repository.deleteProject(project);
-
+    public void deleteProject(int projectId) {
+        repository.deleteProject(projectId);
     }
 
     public SubProject createSubProject(SubProject subProject) {
