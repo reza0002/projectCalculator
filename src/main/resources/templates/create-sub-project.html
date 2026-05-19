@@ -11,17 +11,24 @@
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<h1>Add new task</h1>
 
-<form th:action="@{/{project-id}/saveSubProject}" method="post" th:object="${subProject}">
-    <h1 th:text="*{project_id}"></h1>
+<form th:action="@{/subproject/save}" method="post" th:object="${subProject}">
+    <h1 th:text="'Add new sub-project for ' + ${project.name}"></h1>
+    <input type="hidden" th:field="*{project_id}">
 
     <div class="container">
 
         <section class="form-section">
-            <h2> New task </h2>
-            <label for="name">Task name</label>
-            <input id="name" type="text" th:field="*{name}" placeholder="Enter task name">
+            <div>
+                <h2> New Sub-Project </h2>
+                <label for="name">Sub-Project name</label>
+                <input id="name" type="text" th:field="*{name}" placeholder="Sub-Project name">
+            </div>
+            <div>
+                <label for="description">Description</label>
+                <textarea id="description" th:field="*{description}" placeholder="Description"></textarea>
+            </div>
+
         </section>
 
 

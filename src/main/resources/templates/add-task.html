@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Task</title>
+    <title th:text="${subProject.name} + ' Add Task'">Add Task</title>
     <link rel="stylesheet" href="/addTasks.css"/>
     <link rel="stylesheet" href="/navbar.css"/>
     <link rel="stylesheet" href="/footer.css">
@@ -11,9 +11,10 @@
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<h1>Add new task</h1>
+<h1 th:text="'Add new task for ' + ${subProject.name}">Add new task</h1>
 
-<form th:action="@{/tasks/add}" method="post" th:object="${task}">
+<form th:action="@{/task/create}" method="post" th:object="${task}">
+    <input type="hidden" th:field="*{sub_project_id}" />
 
     <div class="container">
 

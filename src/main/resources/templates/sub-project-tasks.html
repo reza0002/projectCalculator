@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${subProject.name} + ' add task'"></title>
     <link rel="stylesheet" href="/tasksPage.css"/>
     <link rel="stylesheet" href="/navbar.css"/>
     <link rel="stylesheet" href="/footer.css">
@@ -13,7 +13,9 @@
 
 <main class="SpalteAdd">
     <div class="sidebar">
-        <a href="/projects/project-name/subproject/addtask" class="add-tasks"> Add Tasks + </a>
+        <a th:href="@{/task/{subProjectId}/create(subProjectId=${subProjectId})}" class="add-tasks">
+            Add Tasks +
+        </a>
     </div>
 
     <div class="tasks-board">

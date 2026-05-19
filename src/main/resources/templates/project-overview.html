@@ -18,10 +18,10 @@
     <div class="column">
         <h3>Add</h3>
         <div class="add-box">
-<!--            <a th:href="/{project-id}/subproject/create(project-id=${project.id})">-->
-<!--                <span>＋</span>-->
-<!--                <p>Create new</p>-->
-<!--            </a>-->
+            <a th:href="@{/subproject/{projectId}/create(projectId=${project.id})}">
+                <span>＋</span>
+                <p>Create new</p>
+            </a>
         </div>
         <div class="task"></div>
     </div>
@@ -32,7 +32,7 @@
         <div class="task" th:each="subProject : ${subProjects}">
             <div th:text="${subProject.name}"></div>
             <div th:text="${subProject.description}"></div>
-            <a th:href="@{/projects/{projectId}/subproject(projectId=${subProject.project_id})}">
+            <a th:href="@{/subproject/{subProjectId}(subProjectId=${subProject.id})}">
                 Go to sub-project
             </a>
         </div>

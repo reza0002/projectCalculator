@@ -20,7 +20,7 @@
         Create new project
     </div>
 
-    <a class="create-box" href="/projects/create">
+    <a class="create-box" href="/project/create">
         <div class="plus">+</div>
     </a>
 
@@ -38,7 +38,7 @@
             <div th:text="${project.id}"></div>
             <div th:text="${project.name}"></div>
             <div th:text="${project.projectLeader.name}"></div>
-            <a th:href="@{/projects/{project_id}/subproject(project_id=${project.id})}">
+            <a th:href="@{/project/{project_id}(project_id=${project.id})}">
                 Go to project
             </a>
         </div>
