@@ -4,6 +4,7 @@ import com.example.projectcalculator.model.Project;
 import com.example.projectcalculator.model.SubProject;
 import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.model.*;
+import com.example.projectcalculator.rowmapper.SubProjectRowMapper;
 import com.example.projectcalculator.rowmapper.UserRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -172,6 +173,10 @@ public class ProjectRepository {
                 ),
                 id
         );
+    }
+
+    public List<SubProject> findSubProjectsForProject(int projectId) {
+        return template.query("SELECT * FROM sub_project WHERE project_id = ?", new SubProjectRowMapper(), projectId);
     }
 
     public void addTask(Task task) {

@@ -56,16 +56,11 @@ public class ProjectController {
         return "redirect:/{project-name}/";
     }
 
-    @GetMapping("/{project-name}/subproject")
-    public String subProjectPage(Model model) {
-        model.addAttribute("subproject", new SubProject());
-        return "subProjectsPage";
-    }
-
-    @GetMapping("/subproject/{id}")
-    public String findSubProject(@PathVariable int id, Model model) {
-        model.addAttribute("subProject", projectService.findSubProject(id));
-        return "subProjectsPage";
+    @GetMapping("/{project-id}/subproject")
+    public String findSubProject(@PathVariable("project-id") int projectId, Model model) {
+        model.addAttribute("subProjects", projectService.findSubProjectsForProject(projectId));
+        model.addAttribute("project", projectService.findProject(projectId));
+        return "project-overview";
     }
 
     @GetMapping("/{project-name}/subproject/create")

@@ -43,6 +43,10 @@ public class ProjectService {
         return repository.findSubProject(id);
     }
 
+    public List<SubProject> findSubProjectsForProject(int projectId) {
+        return repository.findSubProjectsForProject(projectId);
+    }
+
     public void addTask(Task task) {
         repository.addTask(task);
     }
