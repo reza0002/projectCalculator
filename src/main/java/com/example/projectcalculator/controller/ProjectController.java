@@ -49,9 +49,9 @@ public class ProjectController {
         return "redirect:/projects";
     }
 
-    @PostMapping("/project/{id}/edit")
-    public String updateProject(@PathVariable int id, @ModelAttribute Project project) {
-        project.setId(id);
+    @PostMapping("/{project-id}/edit")
+    public String updateProject(@PathVariable("project-id") int projectId, @ModelAttribute Project project) {
+        project.setId(projectId);
         projectService.updateProject(project);
         return "redirect:/{project-name}/";
     }
@@ -63,15 +63,15 @@ public class ProjectController {
         return "project-overview";
     }
 
-    @GetMapping("/{project-name}/subproject/create")
-    public String createSubProjectPage(Model model) {
+    @GetMapping("/{project-id}/subproject/create")
+    public String createSubProjectPage(@PathVariable("project-id") int projectId, Model model) {
         model.addAttribute("subProject", new SubProject());
         return "create-sub-project";
     }
 
-    @PostMapping("/{project-name}/subproject/create")
+    @PostMapping("/{project-id}/subproject/create")
     public String createSubProject(
-            @PathVariable("project-name") String projectName,
+            @PathVariable("project-id") int projectId,
             @ModelAttribute SubProject subProject) {
 
         projectService.createSubProject(subProject);
@@ -93,8 +93,26 @@ public class ProjectController {
         return "sub-project-tasks";
     }
 
-    @GetMapping("/{project-name}/{sub-project-name}/addtask")
-    public String addTaskPage(Model model) {
+    @GetMapping("/{project-id}/addSubProject")
+    public String addSubProject(@PathVariable("project-id") int projectId, Model model) {
+        var subProject = new SubProject();
+
+        subProject.setProject_id(projectId);
+        model.addAttribute("subProject", subProject);
+        return "create-sub-project";
+    }
+
+    @PostMapping("/{project-id}/saveSubProject")
+    public String saveSubProject(@ModelAttribute SubProject subProject) {
+        projectService.saveSubProject(subProject);
+
+        return "redirect:";
+    }
+
+    @GetMapping("/{project-id}/{sub-project-id}/addtask")
+    public String addTaskPage(@PathVariable("project-id") int projectId,
+                              @PathVariable("sub-project-id") int subProjectId,
+                              Model model) {
         model.addAttribute("task", new Task());
         return "add-task";
     }

@@ -106,15 +106,28 @@ public class ProjectRepository {
         return template.queryForObject(sql, new UserRowMapper(), username);
     }
 
-    @Transactional
-    public void createProject(Project project) {
-        String sql = "INSERT INTO project (name, project_leader) VALUES (?, ?)";
-        template.update(sql, project.getName(), project.getProjectLeader().getId());
+    public List<User> findAllUsers() {
+        return template.query("SELECT * FROM user", new UserRowMapper());
     }
 
-    public Project findProject(Project project) {
+    @Transactional
+    public Project createProject(Project project) {
+        KeyHolder keyholder = new GeneratedKeyHolder();
+        String sql = "INSERT INTO project (name, project_leader) VALUES (?, ?)";
+        template.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, project.getName());
+            ps.setInt(2, project.getProjectLeader().getId());
+            return ps;
+        }, keyholder);
+
+        project.setId(Objects.requireNonNull(keyholder.getKey()).intValue());
+        return project;
+    }
+
+    public Project findProject(int projectId) {
         final String sql = """
-                SELECT id, name,
+                SELECT id, name
                 FROM project
                 WHERE id = ?
                 """;
@@ -123,7 +136,20 @@ public class ProjectRepository {
                 rs.getString("name")
         );
 
-        return template.queryForObject(sql, rowMapper, project.getId());
+        return template.queryForObject(sql, rowMapper, projectId);
+    }
+
+    public Project findProject(String projectName) {
+        final String sql = """
+                SELECT id, name
+                FROM project
+                WHERE name = ?
+                """;
+        final RowMapper<Project> rowMapper = (rs, rowNum) -> new Project(
+                rs.getInt("id"),
+                rs.getString("name")
+        );
+        return template.queryForObject(sql, rowMapper, projectName);
     }
 
     public List<Project> findAllProjects() {

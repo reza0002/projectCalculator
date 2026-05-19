@@ -27,16 +27,24 @@ public class ProjectService {
         return repository.findUser(username);
     }
 
+    public List<User> findAllUsers() {
+        return repository.findAllUsers();
+    }
+
     public List<Project> findAllProjects() {
         return repository.findAllProjects();
     }
 
-    public Project findProject(Project project) {
-        return repository.findProject(project);
+    public Project findProject(int projectId) {
+        return repository.findProject(projectId);
+    }
+    // overload hvis man vil brug navn i stedet for id
+    public Project findProject(String projectName) {
+        return repository.findProject(projectName);
     }
 
-    public void createProject(Project project) {
-        repository.createProject(project);
+    public Project createProject(Project project) {
+        return repository.createProject(project);
     }
 
     public SubProject findSubProject(int id) {
@@ -105,8 +113,8 @@ public class ProjectService {
         repository.deleteSubProject(id);
     }
 
-    //public void deleteTasks(Task task) {
+    public void deleteTasks(Task task) {
 
-    //}
+    }
 
 }

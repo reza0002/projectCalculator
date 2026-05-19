@@ -21,18 +21,18 @@ public class PrototypeController {
 
     @GetMapping("/home")
     public String homepage() {
-        return "homePage";
+        return "home-page";
     }
 
     @GetMapping("/login")
     public String loginPage() {
-        return "loginPage";
+        return "login-page";
     }
 
     @GetMapping("/create")
     public String createProjectPage(Model model) {
         model.addAttribute("project", new Project());
-        return "projectsPage";
+        return "create-project";
     }
 
     @PostMapping("/create")
@@ -58,13 +58,13 @@ public class PrototypeController {
 
     @GetMapping("/{project-name}/subproject")
     public String subProjectPage() {
-        return "subProjectsPage";
+        return "project-overview";
     }
 
     @GetMapping("/subproject/{id}")
     public String findSubProject(@PathVariable int id, Model model) {
         model.addAttribute("subProject", projectService.findSubProject(id));
-        return "subProjectsPage";
+        return "project-overview";
     }
 
     @GetMapping("/{project-name}/subproject/create")
@@ -91,13 +91,13 @@ public class PrototypeController {
 
     @GetMapping("/{project-name}/")
     public String taskPage() {
-        return "tasksPage";
+        return "sub-project-tasks";
     }
 
     @GetMapping("/{project-name}/{sub-project-name}/addtask")
     public String addTaskPage(Model model) {
         model.addAttribute("task", new Task());
-        return "addTasks";
+        return "add-task";
     }
 
     @PostMapping("/task/add")
