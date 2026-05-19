@@ -20,10 +20,12 @@
 
 
         <label for="name"> Project leader</label>
-        <input type="text" th:field="*{projectLeader.name}" name="projectLeader" placeholder="Enter leader user name">
+        <select th:field="*{projectLeader.id}" id="projectLeader">
+            <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.name}"></option>
+        </select>
 
         <label for="description">Description</label>
-        <textarea type="text" th:field="*{description}" id="description" placeholder="Write a short project description...">
+        <textarea th:field="*{description}" id="description" placeholder="Write a short project description...">
         </textarea>
 
         <label>Project members</label>

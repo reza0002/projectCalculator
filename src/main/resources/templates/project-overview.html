@@ -12,17 +12,16 @@
 <body>
 
 
-<h1>Projects Overview</h1>
-
+<h1 th:text="${project.name + ' Overview'}"></h1>
 <div class="main-container">
     <!-- Add -->
     <div class="column">
         <h3>Add</h3>
         <div class="add-box">
-            <a href="/projects/project-name">
-                <span>＋</span>
-                <p>Create new</p>
-            </a>
+<!--            <a th:href="/{project-id}/subproject/create(project-id=${project.id})">-->
+<!--                <span>＋</span>-->
+<!--                <p>Create new</p>-->
+<!--            </a>-->
         </div>
         <div class="task"></div>
     </div>
@@ -30,9 +29,13 @@
     <!-- On going -->
     <div class="column">
         <h3>On going</h3>
-        <div class="task"></div>
-        <div class="task"></div>
-        <div class="task"></div>
+        <div class="task" th:each="subProject : ${subProjects}">
+            <div th:text="${subProject.name}"></div>
+            <div th:text="${subProject.description}"></div>
+            <a th:href="@{/projects/{projectId}/subproject(projectId=${subProject.project_id})}">
+                Go to sub-project
+            </a>
+        </div>
     </div>
 
     <!-- Finished -->
