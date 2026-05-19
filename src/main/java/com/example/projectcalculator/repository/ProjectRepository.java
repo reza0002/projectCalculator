@@ -106,14 +106,9 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public Project createProject(Project project) {
-        String sql = """
-        INSERT INTO project (name, project_leader) VALUES (?, ?);
-        """;
-        template.update(sql,
-                project.getName(),
-                project.getProjectLeader() != null ? project.getProjectLeader().getId() : null);
-        return project;
+    public void createProject(Project project) {
+        String sql = "INSERT INTO project (name, project_leader) VALUES (?, ?)";
+        template.update(sql, project.getName(), project.getProjectLeader().getId());
     }
 
     public Project findProject(Project project) {

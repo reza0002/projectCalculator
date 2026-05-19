@@ -18,7 +18,7 @@
         <input type="text" th:field="*{name}" id="name" placeholder="Enter project name" required>
 
 
-        <label for="projectLeader"> Project leader</label>
+        <label for="name"> Project leader</label>
         <input type="text" th:field="*{projectLeader.name}" name="projectLeader" placeholder="Enter leader user name">
 
         <label for="description">Description</label>
@@ -26,7 +26,7 @@
         </textarea>
 
         <label>Project members</label>
-        <button class="add-button">Add colleagues ▼</button>
+        <button class="add-button" type="button">Add colleagues ▼</button>
 
         <div class="add-colleagues-list">
 
@@ -36,7 +36,6 @@
             <div class="colleagues-added">
 
             </div>
-
             <button class="create-btn" type="submit">Create</button>
         </section>
     </form>
