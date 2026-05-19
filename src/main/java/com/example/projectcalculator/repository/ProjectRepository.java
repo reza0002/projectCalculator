@@ -68,14 +68,19 @@ public class ProjectRepository {
                 (name, description, hours, price_per_hour, project_id)
                 VALUES (?, ?, ?, ?, ?)
                 """;
-        template.update(
-                sql,
-                subProject.getName(),
-                subProject.getDescription(),
-                subProject.getHours(),
-                subProject.getPrice_per_hour(),
-                subProject.getProject_id()
-        );
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        template.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, subProject.getName());
+            ps.setString(2, subProject.getDescription());
+            ps.setInt(3, subProject.getHours());
+            ps.setInt(4, subProject.getPrice_per_hour());
+            ps.setLong(5, subProject.getProject_id());
+            return ps;
+        }, keyHolder);
+
+        subProject.setId(Objects.requireNonNull(keyHolder.getKey()).intValue());
         return subProject;
     }
 

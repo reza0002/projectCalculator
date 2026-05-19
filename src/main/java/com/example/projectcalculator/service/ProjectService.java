@@ -76,11 +76,22 @@ public class ProjectService {
         return repository.findTasksBySubproject(sub_project_id);
     }
 
-    public Project saveProject(Project project){
+    public Project saveProject(Project project) {
         return repository.saveProject(project);
     }
 
-    public SubProject saveSubProject(SubProject subProject){
+    public SubProject saveSubProject(SubProject subProject) {
+
+        // kæmpe hack, skal rettes senere
+        subProject.setDescription("");
+        subProject.setPrice_per_hour(1200);
+        var tasks = findTasksBySubproject(subProject.getId());
+        int totalHours = 0;
+        for (Task task : tasks) {
+            totalHours += task.getHours();
+        }
+        subProject.setHours(totalHours);
+
         return repository.saveSubProject(subProject);
     }
 
