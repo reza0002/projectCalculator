@@ -38,7 +38,7 @@
             <div th:text="${project.id}"></div>
             <div th:text="${project.name}"></div>
             <div th:text="${project.projectLeader.name}"></div>
-            <a th:href="@{/prototype/{project_id}(project_id=${project.id})}">
+            <a th:href="@{/projects/{project_id}/subproject(project_id=${project.id})}">
                 Go to project
             </a>
         </div>
