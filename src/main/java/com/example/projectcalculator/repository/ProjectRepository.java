@@ -84,8 +84,9 @@ public class ProjectRepository {
 
     @Transactional
     public void deleteSubProject(int id) {
-        String sql = "DELETE FROM sub_project WHERE id = ?";
-        template.update(sql, id);
+        // Delete tasks first to satisfy FK constraint
+        template.update("DELETE FROM task WHERE sub_project_id = ?", id);
+        template.update("DELETE FROM sub_project WHERE id = ?", id);
     }
 
     public boolean login(String username, String password) {
@@ -208,8 +209,8 @@ public class ProjectRepository {
     @Transactional
     public void addTask(Task task) {
         String sql =
-                "INSERT INTO task (name, hours, price_per_hour, sub_project_id) VALUES (?, ?, ?, ?)";
-        template.update(sql, task.getName(), task.getHours(), task.getPricePerHour(), task.getSub_project_id());
+                "INSERT INTO task (name, hours, price_per_hour, sub_project_id, is_done) VALUES (?, ?, ?, ?, ?)";
+        template.update(sql, task.getName(), task.getHours(), task.getPricePerHour(), task.getSub_project_id(), false);
     }
 
     @Transactional
