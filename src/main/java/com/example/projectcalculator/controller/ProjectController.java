@@ -32,6 +32,11 @@ public class ProjectController {
     public String projectOverview(@PathVariable int projectId, Model model) {
         model.addAttribute("subProjects", service.findSubProjectsForProject(projectId));
         model.addAttribute("project", service.findProject(projectId));
+
+        int totalHours = service.calculateTotalHours(projectId);
+        model.addAttribute("totalHours", totalHours);
+        model.addAttribute("totalPrice", totalHours * 1200);
+
         return "project-overview";
     }
 

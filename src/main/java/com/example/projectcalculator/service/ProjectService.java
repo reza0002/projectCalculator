@@ -76,7 +76,7 @@ public class ProjectService {
         return repository.findTasksBySubproject(sub_project_id);
     }
 
-    public Project saveProject(Project project) {
+    public Project saveProject(Project project){
         return repository.saveProject(project);
     }
 
@@ -124,8 +124,17 @@ public class ProjectService {
         repository.deleteSubProject(id);
     }
 
-    public void deleteTasks(Task task) {
+   public int calculateTotalHours(int projectId){
+        List<SubProject> subProjects = repository.findSubProjectsForProject(projectId);
+        int totalHours = 0;
+        for(SubProject subProject : subProjects){
+            List<Task> tasks = repository.findTasksBySubproject(subProject.getId());
+            for(Task task : tasks){
+                totalHours += task.getHours();
+            }
+        }
+        return totalHours;
+   }
 
-    }
 
 }
