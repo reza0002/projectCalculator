@@ -47,8 +47,8 @@
 </div>
 
 <footer>
-    <div>Price Est.:</div>
-    <div>Hours/days:</div>
+    <div>Est. Price: <span th:text="${totalPrice} + 'kr.'">0 kr</span></div>
+    <div>Est. Time:<span th:text="${totalHours} + 'h.'">0 h.</span></div>
 </footer>
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
