@@ -49,7 +49,7 @@ public class ProjectController {
 
     @PostMapping("/save")
     public String createProject(@ModelAttribute Project project) {
-        var newProject = service.createProject(project);
+        var newProject = service.saveProject(project);
         return "redirect:/project/" + newProject.getId();
     }
 

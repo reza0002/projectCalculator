@@ -44,10 +44,6 @@ public class ProjectService {
         return repository.findProject(projectName);
     }
 
-    public Project createProject(Project project) {
-        return repository.createProject(project);
-    }
-
     public SubProject findSubProject(int subProjectId) {
         return repository.findSubProject(subProjectId);
     }

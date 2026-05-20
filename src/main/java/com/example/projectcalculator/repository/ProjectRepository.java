@@ -34,8 +34,8 @@ public class ProjectRepository {
     public SubProject createSubProject(SubProject subProject) {
         String sql = """
                 INSERT INTO sub_project
-                (name, description, hours, price_per_hour, project_id)
-                VALUES (?, ?, ?, ?, ?)
+                (name, description, hours, price_per_hour, project_id, is_done)
+                VALUES (?, ?, ?, ?, ?, ?)
                 """;
         template.update(
                 sql,
@@ -43,30 +43,18 @@ public class ProjectRepository {
                 subProject.getDescription(),
                 subProject.getHours(),
                 subProject.getPrice_per_hour(),
-                subProject.getProject_id()
+                subProject.getProject_id(),
+                subProject.isDone()
         );
         return subProject;
-    }
-
-    @Transactional
-    public Project saveProject(Project project) {
-        String sql = """
-                INSERT INTO project (name, project_leader, description) VALUES (?, ?, ?);
-                """;
-        template.update(sql,
-                project.getName(),
-                project.getProjectLeader().getId(),
-                project.getDescription());
-
-        return project;
     }
 
     @Transactional
     public SubProject saveSubProject(SubProject subProject) {
         String sql = """
                 INSERT INTO sub_project
-                (name, description, hours, price_per_hour, project_id)
-                VALUES (?, ?, ?, ?, ?)
+                (name, description, hours, price_per_hour, project_id, is_done)
+                VALUES (?, ?, ?, ?, ?, ?)
                 """;
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -77,6 +65,7 @@ public class ProjectRepository {
             ps.setInt(3, subProject.getHours());
             ps.setInt(4, subProject.getPrice_per_hour());
             ps.setLong(5, subProject.getProject_id());
+            ps.setBoolean(6, subProject.isDone());
             return ps;
         }, keyHolder);
 
@@ -115,13 +104,15 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public Project createProject(Project project) {
+    public Project saveProject(Project project) {
         KeyHolder keyholder = new GeneratedKeyHolder();
-        String sql = "INSERT INTO project (name, project_leader) VALUES (?, ?)";
+        String sql = "INSERT INTO project (name, project_leader, description, is_done) VALUES (?, ?, ?, ?)";
         template.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, project.getName());
             ps.setInt(2, project.getProjectLeader().getId());
+            ps.setString(3, project.getDescription());
+            ps.setBoolean(4, project.isDone());
             return ps;
         }, keyholder);
 
@@ -131,13 +122,15 @@ public class ProjectRepository {
 
     public Project findProject(int projectId) {
         final String sql = """
-                SELECT id, name
+                SELECT id, name, description, is_done
                 FROM project
                 WHERE id = ?
                 """;
         final RowMapper<Project> rowMapper = (rs, rowNum) -> new Project(
                 rs.getInt("id"),
-                rs.getString("name")
+                rs.getString("name"),
+                rs.getString("description"),
+                rs.getBoolean("is_done")
         );
 
         return template.queryForObject(sql, rowMapper, projectId);
@@ -145,13 +138,15 @@ public class ProjectRepository {
 
     public Project findProject(String projectName) {
         final String sql = """
-                SELECT id, name
+                SELECT id, name, description, is_done
                 FROM project
                 WHERE name = ?
                 """;
         final RowMapper<Project> rowMapper = (rs, rowNum) -> new Project(
                 rs.getInt("id"),
-                rs.getString("name")
+                rs.getString("name"),
+                rs.getString("description"),
+                rs.getBoolean("is_done")
         );
         return template.queryForObject(sql, rowMapper, projectName);
     }
@@ -162,8 +157,8 @@ public class ProjectRepository {
                            project.name,
                            project.project_leader,
                            user.name AS user_name,
-                           user.email AS user_email
-                           -- , project.description
+                           user.email AS user_email,
+                           project.description
                     FROM project
                     JOIN user ON project.project_leader = user.id
                 """;
@@ -172,7 +167,7 @@ public class ProjectRepository {
             project.setId(rs.getInt("id"));
             project.setName(rs.getString("name"));
             project.setProjectLeader(mapProjectLeader(rs));
-            // project.setDescription(rs.getString("description"));
+            project.setDescription(rs.getString("description"));
             return project;
         });
     }
@@ -199,7 +194,8 @@ public class ProjectRepository {
                         rs.getString("description"),
                         rs.getInt("price_per_hour"),
                         rs.getInt("hours"),
-                        rs.getInt("project_id")
+                        rs.getInt("project_id"),
+                        rs.getBoolean("is_done")
                 ),
                 subProjectId
         );
@@ -209,12 +205,14 @@ public class ProjectRepository {
         return template.query("SELECT * FROM sub_project WHERE project_id = ?", new SubProjectRowMapper(), projectId);
     }
 
+    @Transactional
     public void addTask(Task task) {
         String sql =
                 "INSERT INTO task (name, hours, price_per_hour, sub_project_id) VALUES (?, ?, ?, ?)";
         template.update(sql, task.getName(), task.getHours(), task.getPricePerHour(), task.getSub_project_id());
     }
 
+    @Transactional
     public void deleteTask(int id) {
         String sql =
                 "DELETE FROM task WHERE id = ?";
@@ -224,7 +222,7 @@ public class ProjectRepository {
     @Transactional
     public Task saveTasks(Task task) {
         final KeyHolder keyHolder = new GeneratedKeyHolder();
-        final String sql = "INSERT INTO task (name, hours, price_per_hour, sub_project_id) VALUES (?, ?, ?, ?)";
+        final String sql = "INSERT INTO task (name, hours, price_per_hour, sub_project_id, is_done) VALUES (?, ?, ?, ?, ?)";
 
         template.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -232,6 +230,7 @@ public class ProjectRepository {
             ps.setInt(2, task.getHours());
             ps.setInt(3, task.getPricePerHour());
             ps.setInt(4, task.getSub_project_id());
+            ps.setBoolean(5, task.isDone());
             return ps;
         }, keyHolder);
 
@@ -249,7 +248,8 @@ public class ProjectRepository {
             final Task task = new Task(
                     rs.getString("name"),
                     rs.getInt("price_per_hour"),
-                    rs.getInt("hours")
+                    rs.getInt("hours"),
+                    rs.getBoolean("is_done")
             );
             return task;
         });
@@ -265,7 +265,8 @@ public class ProjectRepository {
             final Task task = new Task(
                     rs.getString("name"),
                     rs.getInt("price_per_hour"),
-                    rs.getInt("hours")
+                    rs.getInt("hours"),
+                    rs.getBoolean("is_done")
             );
             return task;
         });
@@ -279,15 +280,14 @@ public class ProjectRepository {
                   id = ?,
                   name = ?,
                   projectLeader = ?,
+                  is_done = ?
                   WHERE description = ?
                 """;
-        template.update(sql, project.getId(),
-                project.getName(),
-                project.getProjectLeader(),
-                project.getDescription());
+        template.update(sql, project.getId(),project.getName(),project.getProjectLeader(),project.getDescription(),project.isDone());
         return project;
     }
 
+    @Transactional
     public void updateSubProject(SubProject subProject) {
         final String sql = """
                         UPDATE sub_project
@@ -295,7 +295,8 @@ public class ProjectRepository {
                             name = ?,
                             description = ? ,
                             hours = ?,
-                            price_per_hour = ?
+                            price_per_hour = ?,
+                            is_done = ?
                         WHERE sub_project.id = ?;
                 """;
         // går ud fra at subprojektet kommer med id'et sat
@@ -304,19 +305,22 @@ public class ProjectRepository {
                 subProject.getDescription(),
                 subProject.getHours(),
                 subProject.getPrice_per_hour(),
-                subProject.getId()
+                subProject.getId(),
+                subProject.isDone()
         );
     }
 
+    @Transactional
     public void updateTask(Task task) {
         final String sql = """
                 UPDATE task
                 SET
                 name = ?,
                 hours = ?,
-                price_per_hour = ?
+                price_per_hour = ?,
+                is_done = ?
                 WHERE id = ?;
                 """;
-        template.update(sql, task.getName(), task.getHours(), task.getPricePerHour());
+        template.update(sql, task.getName(), task.getHours(), task.getPricePerHour(), task.isDone());
     }
 }
