@@ -6,10 +6,12 @@
     <link rel="stylesheet" href="/addTasks.css"/>
     <link rel="stylesheet" href="/navbar.css"/>
     <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/goback.css">
 </head>
 <body>
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/goback :: goback}"></div>
 
 <h1 th:text="'Add new task for ' + ${subProject.name}">Add new task</h1>
 

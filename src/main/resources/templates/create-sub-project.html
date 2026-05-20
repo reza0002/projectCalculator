@@ -10,6 +10,7 @@
 <body>
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
+<button onclick="history.back()" class="add-button">Go back</button>
 
 
 <form th:action="@{/subproject/save}" method="post" th:object="${subProject}">
