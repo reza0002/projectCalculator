@@ -1,14 +1,14 @@
-INSERT INTO user (name, email, password)
-VALUES ('Anders Jensen', 'anders@mail.dk', '1234'),
-       ('Maria Nielsen', 'maria@mail.dk', '1234'),
-       ('Sofie Hansen', 'sofie@mail.dk', '1234'),
-       ('Mikkel Larsen', 'mikkel@mail.dk', '1234'),
-       ('Emma Pedersen', 'emma@mail.dk', '1234'),
-       ('Lucas Christensen', 'lucas@mail.dk', '1234'),
-       ('Freja Madsen', 'freja@mail.dk', '1234'),
-       ('Oliver Thomsen', 'oliver@mail.dk', '1234'),
-       ('Clara Poulsen', 'clara@mail.dk', '1234'),
-       ('William Mortensen', 'william@mail.dk', '1234');
+INSERT INTO user (name, email)
+VALUES ('Anders Jensen', 'anders@mail.dk'),
+       ('Maria Nielsen', 'maria@mail.dk'),
+       ('Sofie Hansen', 'sofie@mail.dk'),
+       ('Mikkel Larsen', 'mikkel@mail.dk'),
+       ('Emma Pedersen', 'emma@mail.dk'),
+       ('Lucas Christensen', 'lucas@mail.dk'),
+       ('Freja Madsen', 'freja@mail.dk'),
+       ('Oliver Thomsen', 'oliver@mail.dk'),
+       ('Clara Poulsen', 'clara@mail.dk'),
+       ('William Mortensen', 'william@mail.dk');
 
 INSERT INTO project (name, project_leader, description, is_done)
 VALUES ('Website Redesign', 1, 'Redesign af virksomhedens hjemmeside', 0),
