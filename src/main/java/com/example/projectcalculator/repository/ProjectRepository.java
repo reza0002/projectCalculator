@@ -84,7 +84,6 @@ public class ProjectRepository {
 
     @Transactional
     public void deleteSubProject(int id) {
-        // Delete tasks first to satisfy FK constraint
         template.update("DELETE FROM task WHERE sub_project_id = ?", id);
         template.update("DELETE FROM sub_project WHERE id = ?", id);
     }
