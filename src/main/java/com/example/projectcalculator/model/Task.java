@@ -6,6 +6,7 @@ public class Task {
     private int hours;
     private int sub_project_id;
     private int id;
+    private boolean isDone;
 
     public Task(String name, int pricePerHour, int hours) {
         this.name = name;
@@ -54,5 +55,13 @@ public class Task {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
     }
 }

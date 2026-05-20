@@ -7,6 +7,7 @@ public class SubProject {
     private int price_per_hour;
     private int hours;
     private int project_id;
+    private boolean isDone;
 
     public SubProject() {
     }
@@ -69,6 +70,14 @@ public class SubProject {
 
     public void setProject_id(int project_id) {
         this.project_id = project_id;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
     }
 }
 

@@ -5,6 +5,7 @@ public class Project {
     private String name;
     private User projectLeader;
     private String description;
+    private boolean isDone;
 
     public Project (int id, String name, User projectLeader, String description){
         this.id = id;
@@ -51,5 +52,13 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
     }
 }
