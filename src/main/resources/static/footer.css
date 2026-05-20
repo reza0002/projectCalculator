@@ -1,0 +1,42 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border-top: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    gap: 10px;
+    z-index: 1000;
+}
+footer {
+    font-size: 14px;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.footer a {
+    padding: 8px 10px;
+    border: 1px solid lightgray;
+    font-size: 14px;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+}
+
+.footer a:hover {
+    background-color: lightgray;
+}
+
+.footer-logo img {
+    height: 40px;
+}

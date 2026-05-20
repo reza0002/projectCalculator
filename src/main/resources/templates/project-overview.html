@@ -5,20 +5,20 @@
     <title>Projects Page</title>
     <link rel="stylesheet" href="/subProjectsPage.css">
     <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="/footer.css">
 </head>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
 <body>
 
 
-<h1>Projects Overview</h1>
-
+<h1 th:text="${project.name + ' Overview'}"></h1>
 <div class="main-container">
     <!-- Add -->
     <div class="column">
         <h3>Add</h3>
         <div class="add-box">
-            <a href="/prototype/project-name">
+            <a th:href="@{/subproject/{projectId}/create(projectId=${project.id})}">
                 <span>＋</span>
                 <p>Create new</p>
             </a>
@@ -29,9 +29,13 @@
     <!-- On going -->
     <div class="column">
         <h3>On going</h3>
-        <div class="task"></div>
-        <div class="task"></div>
-        <div class="task"></div>
+        <div class="task" th:each="subProject : ${subProjects}">
+            <div th:text="${subProject.name}"></div>
+            <div th:text="${subProject.description}"></div>
+            <a th:href="@{/subproject/{subProjectId}(subProjectId=${subProject.id})}">
+                Go to sub-project
+            </a>
+        </div>
     </div>
 
     <!-- Finished -->
@@ -43,9 +47,9 @@
 </div>
 
 <footer>
-    <div>Price Est.:</div>
-    <div>Hours/days:</div>
+    <div>Est. Price: <span th:text="${totalPrice} + 'kr.'">0 kr</span></div>
+    <div>Est. Time:<span th:text="${totalHours} + 'h.'">0 h.</span></div>
 </footer>
-
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

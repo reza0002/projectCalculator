@@ -24,6 +24,7 @@ public class Project {
     }
 
     public Project() {
+        this.projectLeader = new User();
     }
     public int getId() {
         return id;

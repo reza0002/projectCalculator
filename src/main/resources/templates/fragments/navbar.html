@@ -8,8 +8,8 @@
 
 <nav th:fragment="navbar">
     <img src="/images/img_1.png" alt="Alpha Solutions" style="height: 50px;">
-    <a href="/prototype/home">Home</a>
-    <a href="/prototype/">Logout</a>
+    <a th:href="@{/project}">Home</a>
+    <a th:href="@{/project/login}">Logout</a>
 </nav>
 
 </body>

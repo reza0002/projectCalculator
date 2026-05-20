@@ -2,9 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${subProject.name} + ' add task'"></title>
     <link rel="stylesheet" href="/tasksPage.css"/>
     <link rel="stylesheet" href="/navbar.css"/>
+    <link rel="stylesheet" href="/footer.css">
 </head>
 <body>
 
@@ -12,7 +13,9 @@
 
 <main class="SpalteAdd">
     <div class="sidebar">
-        <a href="/prototype/project-name/subproject/addtask" class="add-tasks"> Add Tasks + </a>
+        <a th:href="@{/task/{subProjectId}/create(subProjectId=${subProjectId})}" class="add-tasks">
+            Add Tasks +
+        </a>
     </div>
 
     <div class="tasks-board">
@@ -22,7 +25,7 @@
             <div th:each="task : ${tasks}" class="task-item">
                 <button class="done-btn">Done</button>
                 <span th:text="${task.name}">Task name</span>
-                <span th:text="${task.time}">0</span>
+                <span th:text="${task.hours}">0</span>
             </div>
         </div>
 
@@ -31,13 +34,13 @@
             <div th:each="task : ${doneTasks}" class="task-item">
                 <button class="delete-btn">X</button>
                 <span th:text="${task.name}">Task name</span>
-                <span th:text="${task.time}">0</span>
+                <span th:text="${task.hours}">0</span>
             </div>
         </div>
     </div>
 
 
 </main>
-
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

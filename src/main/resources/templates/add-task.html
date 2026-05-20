@@ -2,31 +2,33 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Task</title>
+    <title th:text="${subProject.name} + ' Add Task'">Add Task</title>
     <link rel="stylesheet" href="/addTasks.css"/>
     <link rel="stylesheet" href="/navbar.css"/>
+    <link rel="stylesheet" href="/footer.css">
 </head>
 <body>
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<h1>Add new task</h1>
+<h1 th:text="'Add new task for ' + ${subProject.name}">Add new task</h1>
 
-<form th:action="@{/tasks/add}" method="post" th:object="${task}">
+<form th:action="@{/task/create}" method="post" th:object="${task}">
+    <input type="hidden" th:field="*{sub_project_id}" />
 
     <div class="container">
 
         <section class="form-section">
             <h2> New task </h2>
             <label for="name">Task name</label>
-            <input type="text" id="name" name="name" placeholder="Enter task name">
+            <input id="name" type="text" th:field="*{name}" placeholder="Enter task name">
         </section>
 
         <section class="hours-section">
             <h3>Add Est. Hours</h3>
 
-            <select id="hours" name="hours">
-                <option value="">Choose hours</option>
+            <select th:field="*{hours}">
+                <option value="0">Choose hours</option>
                 <option value="1">1H</option>
                 <option value="2">2H</option>
                 <option value="3">3H</option>
@@ -43,5 +45,6 @@
         </section>
     </div>
 </form>
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

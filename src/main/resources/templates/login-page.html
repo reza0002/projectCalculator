@@ -5,6 +5,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="/login-page.css">
     <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="/footer.css">
 </head>
 <body>
 
@@ -19,13 +20,13 @@
             <input placeholder="Adgangskode"/>
         <div class="login-buttons">
             <button type="submit">
-                <a href="/prototype/home">Login</a>
+                <a th:href="@{/project}">Login</a>
             </button>
             <button type="button">Opret bruger</button>
         </div>
         <button type="button">Glemt adgangskode</button>
     </div>
 </form>
-
+<div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

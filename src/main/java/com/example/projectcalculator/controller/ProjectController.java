@@ -2,42 +2,67 @@ package com.example.projectcalculator.controller;
 
 
 import com.example.projectcalculator.model.Project;
-import com.example.projectcalculator.model.User;
+import com.example.projectcalculator.service.ProjectService;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@org.springframework.stereotype.Controller
-@RequestMapping("/projects")
+@Controller
+@RequestMapping("/project")
 public class ProjectController {
 
-    @GetMapping("/")
-    public String homepage() {
-        return "homePage";
+    private final ProjectService service;
+
+    public ProjectController(ProjectService service) {
+        this.service = service;
+    }
+
+    @GetMapping
+    public String listProjects(Model model) {
+        model.addAttribute("projects", service.findAllProjects());
+        return "home-page";
     }
 
     @GetMapping("/login")
     public String loginPage() {
-        return "loginPage";
+        return "login-page";
+    }
+
+    @GetMapping("/{projectId}")
+    public String projectOverview(@PathVariable int projectId, Model model) {
+        model.addAttribute("subProjects", service.findSubProjectsForProject(projectId));
+        model.addAttribute("project", service.findProject(projectId));
+
+        int totalHours = service.calculateTotalHours(projectId);
+        model.addAttribute("totalHours", totalHours);
+        model.addAttribute("totalPrice", totalHours * 1200);
+
+        return "project-overview";
     }
 
     @GetMapping("/create")
     public String createProjectPage(Model model) {
         model.addAttribute("project", new Project());
-        return "projects-page";
+        model.addAttribute("employees", service.findAllUsers());
+        return "create-project";
     }
 
-    @GetMapping("/{project-name}/subproject")
-    public String subProjectPage() {
-        return "subProjectsPage";
+    @PostMapping("/save")
+    public String createProject(@ModelAttribute Project project) {
+        var newProject = service.createProject(project);
+        return "redirect:/project/" + newProject.getId();
     }
 
-    @GetMapping("/{project-name}/")
-    public String taskPage() {
-        return "tasksPage";
+    @PostMapping("/{projectId}/delete")
+    public String deleteProject(@PathVariable int projectId) {
+        service.deleteProject(projectId);
+        return "redirect:/project";
     }
 
-    @GetMapping("/{project-name}/{sub-project-name}/addtask")
-    public String addTaskPage() {
-        return "addTasks";
+    @PostMapping("/{projectId}/edit")
+    public String updateProject(@PathVariable int projectId, @ModelAttribute Project project) {
+        project.setId(projectId);
+        service.updateProject(project);
+        return "redirect:/project";
     }
 }

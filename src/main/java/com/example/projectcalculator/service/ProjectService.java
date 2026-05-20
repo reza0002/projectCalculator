@@ -2,11 +2,12 @@ package com.example.projectcalculator.service;
 
 import com.example.projectcalculator.model.Project;
 import com.example.projectcalculator.model.SubProject;
-import com.example.projectcalculator.model.Tasks;
+import com.example.projectcalculator.model.Task;
 import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 @Service
 public class ProjectService {
@@ -17,7 +18,7 @@ public class ProjectService {
         this.repository = repository;
     }
 
-    public User userLogin(String username, String password){
+    public boolean userLogin(String username, String password) {
         return repository.login(username, password);
     }
 
@@ -26,52 +27,114 @@ public class ProjectService {
         return repository.findUser(username);
     }
 
-    public Project findProject(Project project){
-        return repository.findProject(project);
+    public List<User> findAllUsers() {
+        return repository.findAllUsers();
     }
 
-    public SubProject findSubProject(SubProject subProject){
-        return repository.findSubProject(subProject);
+    public List<Project> findAllProjects() {
+        return repository.findAllProjects();
     }
 
-    public Tasks findTasks(Tasks tasks){
-        return repository.findTasks(tasks);
+    public Project findProject(int projectId) {
+        return repository.findProject(projectId);
+    }
+
+    // overload hvis man vil brug navn i stedet for id
+    public Project findProject(String projectName) {
+        return repository.findProject(projectName);
+    }
+
+    public Project createProject(Project project) {
+        return repository.createProject(project);
+    }
+
+    public SubProject findSubProject(int subProjectId) {
+        return repository.findSubProject(subProjectId);
+    }
+
+    public List<SubProject> findSubProjectsForProject(int projectId) {
+        return repository.findSubProjectsForProject(projectId);
+    }
+
+    public void addTask(Task task) {
+        repository.addTask(task);
+    }
+
+    public Task saveTask(Task task) {
+        return repository.saveTasks(task);
+    }
+
+    public void deleteTask(int id) {
+        repository.deleteTask(id);
+    }
+
+    public Task findTaskById(int id) {
+        return repository.findTaskById(id);
+    }
+
+    public List<Task> findTasksBySubproject(int sub_project_id) {
+        return repository.findTasksBySubproject(sub_project_id);
     }
 
     public Project saveProject(Project project){
         return repository.saveProject(project);
     }
 
-    public SubProject saveSubProject(SubProject subProject){
+    public SubProject saveSubProject(SubProject subProject) {
+
+        // kæmpe hack, skal rettes senere
+        subProject.setDescription("");
+        subProject.setPrice_per_hour(1200);
+        var tasks = findTasksBySubproject(subProject.getId());
+        int totalHours = 0;
+        for (Task task : tasks) {
+            totalHours += task.getHours();
+        }
+        subProject.setHours(totalHours);
+
         return repository.saveSubProject(subProject);
     }
 
-    public Tasks saveTasks(Tasks tasks){
-        return repository.saveTasks(tasks);
+    public Task saveTasks(Task task) {
+        return repository.saveTasks(task);
     }
 
-    public void updateProject(){
-
-    }
-
-    public void updateSubProject(){
+    public Project updateProject(Project project) {
+        return repository.updateProject(project);
 
     }
 
-    public void updateTasks(){
-
+    public void updateSubProject(SubProject subProject) {
+        repository.updateSubProject(subProject);
     }
 
-    public void deleteProject(Project project){
-
+    public void updateTask(Task task) {
+        repository.updateTask(task);
     }
 
-    public void deleteSubProject(SubProject subProject){
-
+    public void deleteProject(int projectId) {
+        repository.deleteProject(projectId);
     }
 
-    public void deleteTasks(Tasks tasks){
-
+    public SubProject createSubProject(SubProject subProject) {
+        return repository.createSubProject(subProject);
     }
+
+    public void deleteSubProject(int id) {
+        repository.deleteSubProject(id);
+    }
+
+   public int calculateTotalHours(int projectId){
+        List<SubProject> subProjects = repository.findSubProjectsForProject(projectId);
+        int totalHours = 0;
+        for(SubProject subProject : subProjects){
+            List<Task> tasks = repository.findTasksBySubproject(subProject.getId());
+            for(Task task : tasks){
+                totalHours += task.getHours();
+            }
+        }
+        return totalHours;
+   }
+
 
 }
