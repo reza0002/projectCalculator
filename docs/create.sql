@@ -16,7 +16,8 @@ CREATE TABLE project
     id             INT AUTO_INCREMENT PRIMARY KEY,
     name           VARCHAR(250) NOT NULL,
     project_leader INT          NOT NULL,
---  description    TEXT,
+    description    TEXT,
+    is_done        TINYINT(1) NOT NULL,
     FOREIGN KEY (project_leader) REFERENCES user (id)
 );
 
@@ -37,6 +38,7 @@ CREATE TABLE sub_project
     hours          INT          NOT NULL,
     price_per_hour INT          NOT NULL,
     project_id     INT          NOT NULL,
+    is_done        TINYINT(1) NOT NULL,
     FOREIGN KEY (project_id) REFERENCES project (id)
 );
 
@@ -47,5 +49,6 @@ CREATE TABLE task
     hours          INT          NOT NULL,
     price_per_hour INT          NOT NULL,
     sub_project_id INT          NOT NULL,
+    is_done        TINYINT(1) NOT NULL,
     FOREIGN KEY (sub_project_id) REFERENCES sub_project (id)
 );
