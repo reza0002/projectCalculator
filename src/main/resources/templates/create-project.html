@@ -11,7 +11,12 @@
 <body>
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
-<div th:replace="~{fragments/goback :: goback}"></div>
+<!--<div th:replace="~{fragments/goback :: goback}"></div>-->
+<button>
+    <a th:href="@{/project}">
+        Go back
+    </a>
+</button>
 
 <h1>Create New Project</h1>
 
@@ -41,7 +46,7 @@
             <div class="colleagues-added">
 
             </div>
-            <button class="create-btn" type="submit"> Create </button>
+            <button class="create-btn" type="submit"> Create</button>
         </section>
     </form>
 </div>
