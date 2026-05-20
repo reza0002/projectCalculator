@@ -15,8 +15,12 @@
 
 
 <h1 th:text="${project.name + ' Overview'}"></h1>
+
+<form th:action="@{/project/{id}/delete(id=${project.id})}" method="post">
+    <button type="submit">Delete project</button>
+</form>
 <div class="main-container">
-    <!-- Add -->
+
     <div class="column">
         <h3>Add</h3>
         <div class="add-box">
@@ -28,7 +32,7 @@
         <div class="task"></div>
     </div>
 
-    <!-- On going -->
+
     <div class="column">
         <h3>On going</h3>
         <div class="task" th:each="subProject : ${subProjects}">
@@ -40,7 +44,7 @@
         </div>
     </div>
 
-    <!-- Finished -->
+
     <div class="column">
         <h3>Finished</h3>
         <div class="task"></div>
