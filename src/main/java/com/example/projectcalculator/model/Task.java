@@ -8,10 +8,11 @@ public class Task {
     private int id;
     private boolean isDone;
 
-    public Task(String name, int pricePerHour, int hours) {
+    public Task(String name, int pricePerHour, int hours, boolean isDone) {
         this.name = name;
         this.PricePerHour = pricePerHour;
         this.hours = hours;
+        this.isDone = isDone;
     }
 
     public Task() {

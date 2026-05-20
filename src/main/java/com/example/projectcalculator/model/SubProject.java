@@ -15,13 +15,14 @@ public class SubProject {
     public SubProject(String name, String description,
                       int price_per_hour,
                       int hours,
-                      int project_id) {
+                      int project_id, boolean isDone) {
 
         this.name = name;
         this.description = description;
         this.price_per_hour = price_per_hour;
         this.hours = hours;
         this.project_id = project_id;
+        this.isDone = isDone;
     }
 
     public String getName() {
