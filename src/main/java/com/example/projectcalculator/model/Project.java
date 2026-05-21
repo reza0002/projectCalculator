@@ -1,11 +1,14 @@
 package com.example.projectcalculator.model;
 
+import java.util.List;
+
 public class Project {
     private int id;
     private String name;
     private User projectLeader;
     private String description;
     private boolean isDone;
+    private List<User> employees;
 
     public Project(int id, String name, User projectLeader, String description) {
         this.id = id;
@@ -69,5 +72,13 @@ public class Project {
 
     public void setDone(boolean done) {
         isDone = done;
+    }
+
+    public List<User> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<User> employees) {
+        this.employees = employees;
     }
 }

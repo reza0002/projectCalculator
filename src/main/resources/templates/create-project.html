@@ -35,10 +35,14 @@
         <textarea th:field="*{description}" id="description" placeholder="Write a short project description...">
         </textarea>
 
-        <label>Project members</label>
-        <select th:field="*{id}" id="userId">
-            <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.name}"></option>
-        </select>
+        <div>
+            <div th:each="employee : ${employees}">
+                <label>
+                    <input type="checkbox" th:field="*{employees}" th:value="${employee.id}"/>
+                    <span th:text="${employee.name}"></span>
+                </label>
+            </div>
+        </div>
 
         <div class="add-colleagues-list">
 
