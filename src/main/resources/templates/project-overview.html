@@ -62,7 +62,7 @@
     </div>
 
     <div class="column">
-        <h3 th:text="'Assigned:' + ${project.name}">Assigned:</h3>
+        <h3>Team Members</h3>
         <div class="task" th:text="${project.projectLeader.name}"></div>
         <div class="task" th:each="employee : ${assignedEmployees}" th:text="${employee.name}"></div>
     </div>
