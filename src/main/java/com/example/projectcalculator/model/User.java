@@ -1,9 +1,14 @@
 package com.example.projectcalculator.model;
 
+import com.example.projectcalculator.model.enums.Expertise;
+import com.example.projectcalculator.model.enums.UserRole;
+
 public class User {
     private int id;
     private String name;
     private String email;
+    private UserRole userRole;
+    private Expertise expertiseLevel;
 
 
     public User (int id, String name, String email){
@@ -42,5 +47,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
+    public Expertise getExpertiseLevel() {
+        return expertiseLevel;
+    }
+
+    public void setExpertiseLevel(Expertise expertiseLevel) {
+        this.expertiseLevel = expertiseLevel;
     }
 }
