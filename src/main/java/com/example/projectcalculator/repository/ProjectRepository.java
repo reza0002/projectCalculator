@@ -246,6 +246,7 @@ public class ProjectRepository {
 
         final RowMapper<Task> rowMapper = ((rs, rowNum) -> {
             final Task task = new Task(
+                    rs.getInt("id"),
                     rs.getString("name"),
                     rs.getInt("price_per_hour"),
                     rs.getInt("hours"),
@@ -263,6 +264,7 @@ public class ProjectRepository {
 
         final RowMapper<Task> rowMapper = ((rs, rowNum) -> {
             final Task task = new Task(
+                    rs.getInt("id"),
                     rs.getString("name"),
                     rs.getInt("price_per_hour"),
                     rs.getInt("hours"),
@@ -321,6 +323,6 @@ public class ProjectRepository {
                 is_done = ?
                 WHERE id = ?;
                 """;
-        template.update(sql, task.getName(), task.getHours(), task.getPricePerHour(), task.isDone());
+        template.update(sql, task.getName(), task.getHours(), task.getPricePerHour(), task.isDone(), task.getId());
     }
 }

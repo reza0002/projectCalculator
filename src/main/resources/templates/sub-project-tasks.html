@@ -24,17 +24,20 @@
 
         <div class="column">
             <h2>Tasks added</h2>
-            <div th:each="task : ${tasks}" class="task-item">
-                <button class="done-btn">Done</button>
+            <div class="task-item" th:each="task : ${tasks}" th:unless="${task.isDone}">
+                <form th:action="@{/task/{subProjectId}/update(subProjectId=${task.sub_project_id})}" th:method="post">
+                    <button type="submit" class="done-btn">Done</button>
+                </form>
                 <span th:text="${task.name}">Task name</span>
                 <span th:text="${task.hours}">0</span>
             </div>
         </div>
-
         <div class="column">
             <h2>Done Tasks</h2>
-            <div th:each="task : ${doneTasks}" class="task-item">
-                <button class="delete-btn">X</button>
+            <div class="task-item" th:each="task : ${tasks}" th:if="${task.isDone}">
+                <form th:action="@{/task/{subProjectId}/delete(subProjectId=${task.sub_project_id})}" th:method="post">
+                    <button type="submit" class="delete-btn">X</button>
+                </form>
                 <span th:text="${task.name}">Task name</span>
                 <span th:text="${task.hours}">0</span>
             </div>

@@ -32,21 +32,27 @@ public class TaskController {
         return "redirect:/subproject/" + task.getSub_project_id();
     }
 
-    @PostMapping("/{projectId}/{subProjectId}/{taskId}/delete")
-    public String deleteTask(@PathVariable int projectId,
-                             @PathVariable int subProjectId,
+    @PostMapping("/{subProjectId}/{taskId}/delete")
+    public String deleteTask(@PathVariable int subProjectId,
                              @PathVariable int taskId) {
         service.deleteTask(taskId);
-        return "redirect:/projects/" + projectId + "/subprojects/" + subProjectId + "/tasks";
+        return "redirect:/subprojects/" + subProjectId;
     }
 
-    @PostMapping("/{projectId}/{subProjectId}/{taskId}/edit")
-    public String updateTask(@PathVariable int projectId,
-                             @PathVariable int subProjectId,
+    @PostMapping("/{subProjectId}/{taskId}/edit")
+    public String updateTask(@PathVariable int subProjectId,
                              @PathVariable int taskId,
                              @ModelAttribute Task task) {
         task.setId(taskId);
         service.updateTask(task);
-        return "redirect:/projects/" + projectId + "/subprojects/" + subProjectId + "/tasks";
+        return "redirect:/subprojects/" + subProjectId;
+    }
+
+    @PostMapping("/{taskId}/update")
+    public String markDone(@PathVariable int taskId) {
+        var task = service.findTaskById(taskId);
+        task.setDone(true);
+        service.updateTask(task);
+        return "redirect:/";
     }
 }
