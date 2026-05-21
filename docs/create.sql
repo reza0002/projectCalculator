@@ -1,13 +1,12 @@
 DROP SCHEMA IF EXISTS calculator;
 CREATE SCHEMA calculator;
-USE
-calculator;
+USE calculator;
 
 CREATE TABLE user
 (
     id       INT AUTO_INCREMENT PRIMARY KEY,
     name     VARCHAR(250) NOT NULL,
-    email    VARCHAR(250) NOT NULL,
+    email    VARCHAR(250) NOT NULL
 );
 
 CREATE TABLE project

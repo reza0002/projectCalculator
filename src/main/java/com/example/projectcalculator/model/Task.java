@@ -2,16 +2,17 @@ package com.example.projectcalculator.model;
 
 public class Task {
     private String name;
-    private int PricePerHour;
+    private int pricePerHour;
     private int hours;
-    private int sub_project_id;
+    private int subProjectId;
     private int id;
     private boolean isDone;
 
-    public Task(int id, String name, int pricePerHour, int hours, boolean isDone) {
+    public Task(int id, String name, int pricePerHour, int subProjectId, int hours, boolean isDone) {
         this.id = id;
         this.name = name;
-        this.PricePerHour = pricePerHour;
+        this.pricePerHour = pricePerHour;
+        this.subProjectId = subProjectId;
         this.hours = hours;
         this.isDone = isDone;
     }
@@ -28,11 +29,11 @@ public class Task {
     }
 
     public int getPricePerHour() {
-        return PricePerHour;
+        return pricePerHour;
     }
 
     public void setPricePerHour(int pricePerHour) {
-        PricePerHour = pricePerHour;
+        pricePerHour = pricePerHour;
     }
 
     public int getHours() {
@@ -43,12 +44,12 @@ public class Task {
         this.hours = hours;
     }
 
-    public int getSub_project_id() {
-        return sub_project_id;
+    public int getSubProjectId() {
+        return subProjectId;
     }
 
-    public void setSub_project_id(int sub_project_id) {
-        this.sub_project_id = sub_project_id;
+    public void setSubProjectId(int subProjectId) {
+        this.subProjectId = subProjectId;
     }
 
     public int getId() {

@@ -68,8 +68,8 @@ public class ProjectService {
         return repository.findTaskById(id);
     }
 
-    public List<Task> findTasksBySubproject(int sub_project_id) {
-        return repository.findTasksBySubproject(sub_project_id);
+    public List<Task> findTasksBySubproject(int subProjectId) {
+        return repository.findTasksBySubproject(subProjectId);
     }
 
     public Project saveProject(Project project){

@@ -5,6 +5,7 @@ import com.example.projectcalculator.model.SubProject;
 import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.model.*;
 import com.example.projectcalculator.rowmapper.SubProjectRowMapper;
+import com.example.projectcalculator.rowmapper.TaskRowMapper;
 import com.example.projectcalculator.rowmapper.UserRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -209,7 +210,7 @@ public class ProjectRepository {
     public void addTask(Task task) {
         String sql =
                 "INSERT INTO task (name, hours, price_per_hour, sub_project_id, is_done) VALUES (?, ?, ?, ?, ?)";
-        template.update(sql, task.getName(), task.getHours(), task.getPricePerHour(), task.getSub_project_id(), false);
+        template.update(sql, task.getName(), task.getHours(), task.getPricePerHour(), task.getSubProjectId(), false);
     }
 
     @Transactional
@@ -229,7 +230,7 @@ public class ProjectRepository {
             ps.setString(1, task.getName());
             ps.setInt(2, task.getHours());
             ps.setInt(3, task.getPricePerHour());
-            ps.setInt(4, task.getSub_project_id());
+            ps.setInt(4, task.getSubProjectId());
             ps.setBoolean(5, task.isDone());
             return ps;
         }, keyHolder);
@@ -240,39 +241,16 @@ public class ProjectRepository {
 
     }
 
-    public List<Task> findTasksBySubproject(int sub_project_id) {
+    public List<Task> findTasksBySubproject(int subProjectId) {
         String sql =
                 "SELECT * FROM task WHERE sub_project_id = ?";
-
-        final RowMapper<Task> rowMapper = ((rs, rowNum) -> {
-            final Task task = new Task(
-                    rs.getInt("id"),
-                    rs.getString("name"),
-                    rs.getInt("price_per_hour"),
-                    rs.getInt("hours"),
-                    rs.getBoolean("is_done")
-            );
-            return task;
-        });
-
-        return template.query(sql, rowMapper, sub_project_id);
+        return template.query(sql, new TaskRowMapper(), subProjectId);
     }
 
     public Task findTaskById(int id) {
         String sql =
                 "SELECT * FROM task WHERE  id = ?";
-
-        final RowMapper<Task> rowMapper = ((rs, rowNum) -> {
-            final Task task = new Task(
-                    rs.getInt("id"),
-                    rs.getString("name"),
-                    rs.getInt("price_per_hour"),
-                    rs.getInt("hours"),
-                    rs.getBoolean("is_done")
-            );
-            return task;
-        });
-        return template.queryForObject(sql, rowMapper, id);
+        return template.queryForObject(sql, new TaskRowMapper(), id);
     }
 
     public Project updateProject(Project project) {

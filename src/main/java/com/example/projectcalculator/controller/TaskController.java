@@ -20,7 +20,7 @@ public class TaskController {
     public String createTaskPage(@PathVariable int subProjectId,
                                  Model model) {
         var task = new Task();
-        task.setSub_project_id(subProjectId);
+        task.setSubProjectId(subProjectId);
         model.addAttribute("task", task);
         model.addAttribute("subProject", service.findSubProject(subProjectId));
         return "add-task";
@@ -29,14 +29,14 @@ public class TaskController {
     @PostMapping("/create")
     public String createTask(@ModelAttribute Task task) {
         service.addTask(task);
-        return "redirect:/subproject/" + task.getSub_project_id();
+        return "redirect:/subproject/" + task.getSubProjectId();
     }
 
-    @PostMapping("/{subProjectId}/{taskId}/delete")
-    public String deleteTask(@PathVariable int subProjectId,
-                             @PathVariable int taskId) {
+    @PostMapping("/{taskId}/delete")
+    public String deleteTask(@PathVariable int taskId) {
+        var task = service.findTaskById(taskId);
         service.deleteTask(taskId);
-        return "redirect:/subprojects/" + subProjectId;
+        return "redirect:/subproject/" + task.getSubProjectId();
     }
 
     @PostMapping("/{subProjectId}/{taskId}/edit")
@@ -45,7 +45,7 @@ public class TaskController {
                              @ModelAttribute Task task) {
         task.setId(taskId);
         service.updateTask(task);
-        return "redirect:/subprojects/" + subProjectId;
+        return "redirect:/subproject/" + subProjectId;
     }
 
     @PostMapping("/{taskId}/update")
@@ -53,6 +53,6 @@ public class TaskController {
         var task = service.findTaskById(taskId);
         task.setDone(true);
         service.updateTask(task);
-        return "redirect:/";
+        return "redirect:/subproject/" + task.getSubProjectId();
     }
 }
