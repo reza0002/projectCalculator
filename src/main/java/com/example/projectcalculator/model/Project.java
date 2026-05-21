@@ -9,6 +9,7 @@ public class Project {
     private String description;
     private boolean isDone;
     private List<User> employees;
+    private List<Integer> employeeIds;
 
     public Project(int id, String name, User projectLeader, String description) {
         this.id = id;
@@ -80,5 +81,13 @@ public class Project {
 
     public void setEmployees(List<User> employees) {
         this.employees = employees;
+    }
+
+    public List<Integer> getEmployeeIds() {
+        return employeeIds;
+    }
+
+    public void setEmployeeIds(List<Integer> employeeIds) {
+        this.employeeIds = employeeIds;
     }
 }

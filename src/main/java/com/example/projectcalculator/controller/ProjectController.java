@@ -2,6 +2,7 @@ package com.example.projectcalculator.controller;
 
 
 import com.example.projectcalculator.model.Project;
+import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.service.ProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,7 @@ public class ProjectController {
     public String projectOverview(@PathVariable int projectId, Model model) {
         model.addAttribute("subProjects", service.findSubProjectsForProject(projectId));
         model.addAttribute("project", service.findProject(projectId));
+        model.addAttribute("assignedEmployees", service.findEmployeesInProject(projectId));
 
         int totalHours = service.calculateTotalHours(projectId);
         model.addAttribute("totalHours", totalHours);

@@ -73,6 +73,8 @@ public class ProjectService {
     }
 
     public Project saveProject(Project project){
+        project.setEmployees(repository.findEmployeesById(project.getEmployeeIds()));
+        project.getEmployees().removeIf(user -> user == project.getProjectLeader());
         return repository.saveProject(project);
     }
 
@@ -132,5 +134,8 @@ public class ProjectService {
         return totalHours;
    }
 
+   public List<User> findEmployeesInProject(int projectId) {
+        return repository.findEmployeesInProject(projectId);
+   }
 
 }
