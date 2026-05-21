@@ -33,7 +33,7 @@ public class Task {
     }
 
     public void setPricePerHour(int pricePerHour) {
-        pricePerHour = pricePerHour;
+        this.pricePerHour = pricePerHour;
     }
 
     public int getHours() {

@@ -27,7 +27,7 @@ public class SubProjectController {
     @GetMapping("/{projectId}/create")
     public String createSubProjectPage(@PathVariable int projectId, Model model) {
         var subProject = new SubProject();
-        subProject.setProject_id(projectId);
+        subProject.setProjectId(projectId);
         model.addAttribute("subProject", subProject);
         model.addAttribute("project", service.findProject(projectId));
         return "create-sub-project";
