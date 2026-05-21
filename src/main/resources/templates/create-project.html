@@ -36,7 +36,9 @@
         </textarea>
 
         <label>Project members</label>
-        <button class="add-button" type="button">Add colleagues ▼</button>
+        <select th:field="*{id}" id="userId">
+            <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.name}"></option>
+        </select>
 
         <div class="add-colleagues-list">
 
