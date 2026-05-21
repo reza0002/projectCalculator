@@ -2,13 +2,10 @@ package com.example.projectcalculator.controller;
 
 
 import com.example.projectcalculator.model.Project;
-import com.example.projectcalculator.model.SubProject;
 import com.example.projectcalculator.service.ProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/project")
@@ -35,6 +32,7 @@ public class ProjectController {
     public String projectOverview(@PathVariable int projectId, Model model) {
         model.addAttribute("subProjects", service.findSubProjectHours(projectId));
         model.addAttribute("project", service.findProject(projectId));
+        model.addAttribute("assignedEmployees", service.findEmployeesInProject(projectId));
 
         int totalHours = service.calculateTotalHours(projectId);
         model.addAttribute("totalHours", totalHours);

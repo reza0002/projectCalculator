@@ -38,7 +38,7 @@
         <div>
             <div th:each="employee : ${employees}">
                 <label>
-                    <input type="checkbox" th:field="*{employees}" th:value="${employee.id}"/>
+                    <input type="checkbox" name="employeeIds" th:value="${employee.id}"/>
                     <span th:text="${employee.name}"></span>
                 </label>
             </div>

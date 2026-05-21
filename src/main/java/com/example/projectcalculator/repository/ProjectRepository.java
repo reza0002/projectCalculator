@@ -14,10 +14,8 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Objects;
@@ -104,6 +102,21 @@ public class ProjectRepository {
         return template.query("SELECT * FROM user", new UserRowMapper());
     }
 
+    public List<User> findEmployeesById(final List<Integer> employeeIds) {
+        final String sql = "SELECT * FROM user WHERE id = ?";
+        final List<User> users = new ArrayList<>();
+        final var rowMapper = new UserRowMapper();
+        for (final var id : employeeIds) {
+            users.add(template.queryForObject(sql, rowMapper, id));
+        }
+        return users;
+    }
+
+    public List<User> findEmployeesInProject(int projectId) {
+        final String sql = "SELECT * FROM user JOIN user_project ON user.id = user_project.user_id WHERE user_project.project_id = ?";
+        return template.query(sql, new UserRowMapper(), projectId);
+    }
+
     @Transactional
     public Project saveProject(Project project) {
         KeyHolder keyholder = new GeneratedKeyHolder();
@@ -118,7 +131,18 @@ public class ProjectRepository {
         }, keyholder);
 
         project.setId(Objects.requireNonNull(keyholder.getKey()).intValue());
+
+        saveEmployeesInProject(project.getEmployees(), project.getId());
         return project;
+    }
+
+    private void saveEmployeesInProject(List<User> employees, int projectId) {
+        final String sql = "INSERT INTO user_project (user_id, project_id) VALUES (?, ?)";
+        template.batchUpdate(sql, employees, employees.size(),
+                (ps, user) -> {
+                    ps.setInt(1, user.getId());
+                    ps.setInt(2, projectId);
+                });
     }
 
     public Project findProject(int projectId) {
@@ -133,8 +157,16 @@ public class ProjectRepository {
                 rs.getString("description"),
                 rs.getBoolean("is_done")
         );
+        var project = template.queryForObject(sql, rowMapper, projectId);
 
-        return template.queryForObject(sql, rowMapper, projectId);
+        User projectLeader = findProjectLead(project.getId());
+        project.setProjectLeader(projectLeader);
+        return project;
+    }
+
+    private User findProjectLead(int projectId) {
+        final String sql = "SELECT * FROM user INNER JOIN project ON project.project_leader = user.id WHERE project.id = ?";
+        return template.queryForObject(sql, new UserRowMapper(), projectId);
     }
 
     public Project findProject(String projectName) {
