@@ -72,9 +72,11 @@ public class ProjectService {
         return repository.findTasksBySubproject(subProjectId);
     }
 
-    public Project saveProject(Project project){
+    public Project saveProject(Project project) {
+        final int leaderId = project.getProjectLeader().getId();
         project.setEmployees(repository.findEmployeesById(project.getEmployeeIds()));
-        project.getEmployees().removeIf(user -> user == project.getProjectLeader());
+
+        project.getEmployees().removeIf(user -> user.getId() == leaderId);
         return repository.saveProject(project);
     }
 
@@ -122,39 +124,39 @@ public class ProjectService {
         repository.deleteSubProject(id);
     }
 
-   public int calculateTotalHours(int projectId){
+    public int calculateTotalHours(int projectId) {
         List<SubProject> subProjects = repository.findSubProjectsForProject(projectId);
         int totalHours = 0;
-        for(SubProject subProject : subProjects){
+        for (SubProject subProject : subProjects) {
             List<Task> tasks = repository.findTasksBySubproject(subProject.getId());
-            for(Task task : tasks){
+            for (Task task : tasks) {
                 totalHours += task.getHours();
             }
         }
         return totalHours;
-   }
+    }
 
     public List<User> findEmployeesInProject(int projectId) {
         return repository.findEmployeesInProject(projectId);
     }
 
-   public int calculateHoursSubproject(int subProjectId){
+    public int calculateHoursSubproject(int subProjectId) {
         List<Task> tasks = repository.findTasksBySubproject(subProjectId);
         int totalHours = 0;
-        for (Task task : tasks){
+        for (Task task : tasks) {
             totalHours += task.getHours();
         }
         return totalHours;
-   }
+    }
 
-   public List<SubProject> findSubProjectHours(int projectId){
-       List<SubProject> subProjects = repository.findSubProjectsForProject(projectId);
-       for(SubProject subProject : subProjects){
-           int hours = calculateHoursSubproject(subProject.getId());
-           subProject.setHours(hours);
-       }
-       return subProjects;
-   }
+    public List<SubProject> findSubProjectHours(int projectId) {
+        List<SubProject> subProjects = repository.findSubProjectsForProject(projectId);
+        for (SubProject subProject : subProjects) {
+            int hours = calculateHoursSubproject(subProject.getId());
+            subProject.setHours(hours);
+        }
+        return subProjects;
+    }
 
 
 }
