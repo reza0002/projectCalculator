@@ -8,17 +8,17 @@
     <link rel="stylesheet" href="/footer.css">
 
 </head>
+
+
+<body>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
-<button class="bck-btn">
+<button>
     <a th:href="@{/project}">
         Go back
     </a>
 </button>
 
-<body>
-
-
-<h1 th:text="${project.name + ' Overview'}"></h1>
+<h1 th:text="${project.name + ' - Project overview'}"></h1>
 
 <form th:action="@{/project/{id}/delete(id=${project.id})}" method="post">
     <button type="submit">Delete project</button>
@@ -62,8 +62,9 @@
     </div>
 
     <div class="column">
-        <h3>Team Members</h3>
+        <h3>Team Leader</h3>
         <div class="task" th:text="${project.projectLeader.name}"></div>
+        <h3>Team Members</h3>
         <div class="task" th:each="employee : ${assignedEmployees}" th:text="${employee.name}"></div>
     </div>
 </div>
