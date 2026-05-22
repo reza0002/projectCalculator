@@ -132,5 +132,23 @@ public class ProjectService {
         return totalHours;
    }
 
+   public int calculateHoursSubproject(int subProjectId){
+        List<Task> tasks = repository.findTasksBySubproject(subProjectId);
+        int totalHours = 0;
+        for (Task task : tasks){
+            totalHours += task.getHours();
+        }
+        return totalHours;
+   }
+
+   public List<SubProject> findSubProjectHours(int projectId){
+       List<SubProject> subProjects = repository.findSubProjectsForProject(projectId);
+       for(SubProject subProject : subProjects){
+           int hours = calculateHoursSubproject(subProject.getId());
+           subProject.setHours(hours);
+       }
+       return subProjects;
+   }
+
 
 }

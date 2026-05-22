@@ -9,7 +9,7 @@
 
 </head>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
-<button>
+<button class="bck-btn">
     <a th:href="@{/project}">
         Go back
     </a>
@@ -42,6 +42,7 @@
         <div class="task" th:each="subProject : ${subProjects}">
             <div th:text="${subProject.name}"></div>
             <div th:text="${subProject.description}"></div>
+            <div th:text="${subProject.hours + 'h.'}"></div>
             <a th:href="@{/subproject/{subProjectId}(subProjectId=${subProject.id})}">
                 Go to sub-project
             </a>
@@ -61,7 +62,7 @@
     </div>
 </div>
 
-<footer>
+<footer class="totals">
     <div>Est. Price: <span th:text="${totalPrice} + 'kr.'">0 kr</span></div>
     <div>Est. Time:<span th:text="${totalHours} + 'h.'">0 h.</span></div>
 </footer>
