@@ -34,7 +34,6 @@
         <section class="assignee-section">
             <h2>Assign member</h2>
             <label for="assignee"></label>
-            <!--- --->
             <select id="assignee" th:field="*{assigneeId}">
                 <option th:each="teamMember : ${teamMembers}" th:value="${teamMember.id}" th:text="${teamMember.name}"></option>
             </select>
