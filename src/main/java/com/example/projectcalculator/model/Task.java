@@ -7,6 +7,7 @@ public class Task {
     private int subProjectId;
     private int id;
     private boolean isDone;
+    private int assigneeId;
 
     public Task(int id, String name, int pricePerHour, int subProjectId, int hours, boolean isDone) {
         this.id = id;
@@ -66,5 +67,13 @@ public class Task {
 
     public void setDone(boolean done) {
         isDone = done;
+    }
+
+    public int getAssigneeId() {
+        return assigneeId;
+    }
+
+    public void setAssigneeId(int assigneeId) {
+        this.assigneeId = assigneeId;
     }
 }
