@@ -1,5 +1,6 @@
 package com.example.projectcalculator.controller;
 
+import com.example.projectcalculator.model.SubProject;
 import com.example.projectcalculator.model.Task;
 import com.example.projectcalculator.service.ProjectService;
 import org.springframework.stereotype.Controller;
@@ -17,12 +18,15 @@ public class TaskController {
     }
 
     @GetMapping("/{subProjectId}/create")
-    public String createTaskPage(@PathVariable int subProjectId,
-                                 Model model) {
+    public String createTaskPage(@PathVariable int subProjectId, Model model) {
         var task = new Task();
         task.setSubProjectId(subProjectId);
+        final SubProject subProject = service.findSubProject(subProjectId);
+        final var employees = service.findEmployeesInProject(subProject.getProjectId());
+
         model.addAttribute("task", task);
-        model.addAttribute("subProject", service.findSubProject(subProjectId));
+        model.addAttribute("subProject", subProject);
+        model.addAttribute("teamMembers", employees);
         return "add-task";
     }
 

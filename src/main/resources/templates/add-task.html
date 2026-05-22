@@ -31,6 +31,14 @@
             <input id="name" type="text" th:field="*{name}" placeholder="Enter task name">
         </section>
 
+        <section class="assignee-section">
+            <h2>Assign member</h2>
+            <label for="assignee"></label>
+            <select id="assignee" th:field="*{assigneeId}">
+                <option th:each="teamMember : ${teamMembers}" th:value="${teamMember.id}" th:text="${teamMember.name}"></option>
+            </select>
+        </section>
+
         <section class="hours-section">
             <h3>Add Est. Hours</h3>
 
