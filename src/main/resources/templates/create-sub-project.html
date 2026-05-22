@@ -11,7 +11,7 @@
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 <button>
-    <a th:href="@{/project/{projectId}(projectId = ${subProject.project_id})}">
+    <a th:href="@{/project/{projectId}(projectId = ${subProject.projectId})}">
         Go back
     </a>
 </button>
@@ -19,7 +19,7 @@
 
 <form th:action="@{/subproject/save}" method="post" th:object="${subProject}">
     <h1 th:text="'Add new sub-project for ' + ${project.name}"></h1>
-    <input type="hidden" th:field="*{project_id}">
+    <input type="hidden" th:field="*{projectId}">
 
     <div class="container">
 

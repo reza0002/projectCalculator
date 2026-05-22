@@ -60,6 +60,12 @@
         <div class="task"></div>
         <div class="task"></div>
     </div>
+
+    <div class="column">
+        <h3>Team Members</h3>
+        <div class="task" th:text="${project.projectLeader.name}"></div>
+        <div class="task" th:each="employee : ${assignedEmployees}" th:text="${employee.name}"></div>
+    </div>
 </div>
 
 <footer class="totals">
