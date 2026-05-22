@@ -10,19 +10,12 @@ public class SubProject {
     private boolean isDone;
 
     public SubProject() {
+        this.pricePerHour = 1200;
+        this.hours = 0;
+        this.isDone = false;
     }
 
     public SubProject(String name, String description, int pricePerHour, int hours, int projectId, boolean isDone) {
-        this.name = name;
-        this.description = description;
-        this.pricePerHour = pricePerHour;
-        this.hours = hours;
-        this.projectId = projectId;
-        this.isDone = isDone;
-    }
-
-    public SubProject(int id, String name, String description, int pricePerHour, int hours, int projectId, boolean isDone) {
-        this.id = id;
         this.name = name;
         this.description = description;
         this.pricePerHour = pricePerHour;

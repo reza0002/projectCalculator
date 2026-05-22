@@ -81,17 +81,6 @@ public class ProjectService {
     }
 
     public SubProject saveSubProject(SubProject subProject) {
-
-        // kæmpe hack, skal rettes senere
-        subProject.setDescription("");
-        subProject.setPricePerHour(1200);
-        var tasks = findTasksBySubproject(subProject.getId());
-        int totalHours = 0;
-        for (Task task : tasks) {
-            totalHours += task.getHours();
-        }
-        subProject.setHours(totalHours);
-
         return repository.saveSubProject(subProject);
     }
 
