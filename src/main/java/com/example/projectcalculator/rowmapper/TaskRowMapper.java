@@ -18,6 +18,7 @@ public class TaskRowMapper implements RowMapper<Task> {
         task.setSubProjectId(rs.getInt("sub_project_id"));
         task.setHours(rs.getInt("hours"));
         task.setDone(rs.getBoolean("is_done"));
+        task.setAssigneeId(rs.getInt("assigneeId"));
 
         return task;
     }

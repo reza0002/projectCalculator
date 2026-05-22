@@ -2,10 +2,13 @@ package com.example.projectcalculator.controller;
 
 import com.example.projectcalculator.model.SubProject;
 import com.example.projectcalculator.model.Task;
+import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.service.ProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/task")
@@ -22,7 +25,7 @@ public class TaskController {
         var task = new Task();
         task.setSubProjectId(subProjectId);
         final SubProject subProject = service.findSubProject(subProjectId);
-        final var employees = service.findEmployeesInProject(subProject.getProjectId());
+        final List<User> employees = service.findEmployeesInProject(subProject.getProjectId());
         final var projectsDeadline = service.ProjectDeadline(subProject.getProjectId());
 
         model.addAttribute("task", task);
@@ -34,8 +37,8 @@ public class TaskController {
 
     @PostMapping("/create")
     public String createTask(@ModelAttribute Task task) {
-        service.addTask(task);
-        return "redirect:/subproject/" + task.getSubProjectId();
+        Task savedTask = service.saveTask(task);
+        return "redirect:/subproject/" + savedTask.getSubProjectId();
     }
 
     @PostMapping("/{taskId}/delete")

@@ -53,10 +53,6 @@ public class ProjectService {
         return repository.findSubProjectsForProject(projectId);
     }
 
-    public void addTask(Task task) {
-        repository.addTask(task);
-    }
-
     public Task saveTask(Task task) {
         return repository.saveTasks(task);
     }
