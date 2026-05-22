@@ -4,9 +4,9 @@ USE calculator;
 
 CREATE TABLE user
 (
-    id       INT AUTO_INCREMENT PRIMARY KEY,
-    name     VARCHAR(250) NOT NULL,
-    email    VARCHAR(250) NOT NULL
+    id    INT AUTO_INCREMENT PRIMARY KEY,
+    name  VARCHAR(250) NOT NULL,
+    email VARCHAR(250) NOT NULL
 );
 
 CREATE TABLE project
@@ -48,5 +48,7 @@ CREATE TABLE task
     price_per_hour INT          NOT NULL,
     sub_project_id INT          NOT NULL,
     is_done        TINYINT(1) NOT NULL,
-    FOREIGN KEY (sub_project_id) REFERENCES sub_project (id)
+    assigneeId     INT          NOT NULL,
+    FOREIGN KEY (sub_project_id) REFERENCES sub_project (id),
+    FOREIGN KEY (assigneeId) REFERENCES user (id)
 );

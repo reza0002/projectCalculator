@@ -18,64 +18,77 @@ VALUES ('Website Redesign', 1, 'Redesign af virksomhedens hjemmeside', 0),
        ('Analytics Dashboard', 5, 'Dashboard til dataanalyse', 0);
 
 INSERT INTO user_project (user_id, project_id)
-VALUES (1, 1),
-       (2, 1),
+VALUES (2, 1),
        (3, 1),
-
-       (2, 2),
        (4, 2),
        (5, 2),
-
-       (3, 3),
        (6, 3),
        (7, 3),
-
-       (4, 4),
        (8, 4),
        (9, 4),
-
-       (5, 5),
        (10, 5),
        (1, 5);
 
-INSERT INTO sub_project
-    (name, description, hours, price_per_hour, project_id, is_done)
+INSERT INTO sub_project (name, description, hours, price_per_hour, project_id, is_done)
 VALUES ('Frontend Development', 'Udvikling af frontend', 0, 1200, 1, 0),
        ('Backend API', 'REST API udvikling', 1, 1200, 1, 0),
-
        ('iOS App', 'Udvikling til iOS', 2, 1200, 2, 0),
        ('Android App', 'Udvikling til Android', 3, 1200, 2, 1),
-
        ('Employee Management', 'Håndtering af medarbejdere', 4, 1200, 3, 1),
        ('Vacation Module', 'Ferie og fravær', 5, 1200, 3, 1),
-
        ('Payment System', 'Betalingsgateway integration', 6, 1200, 4, 0),
        ('Product Catalog', 'Produkt administration', 7, 1200, 4, 0),
-
        ('Statistics Engine', 'Databehandling', 8, 1200, 5, 0),
        ('Graph Components', 'Grafer og visualisering', 9, 1200, 5, 0);
 
-INSERT INTO task
-    (name, hours, price_per_hour, sub_project_id, is_done)
-VALUES ('Landing Page', 0, 1200, 1, 1),
-       ('Navigation Menu', 1, 1200, 1, 0),
-       ('User Authentication', 2, 1200, 2, 1),
-       ('Database Setup', 3, 1200, 2, 0),
-
-       ('Login Screen', 4, 1200, 3, 1),
-       ('Push Notifications', 5, 1200, 3, 0),
-       ('Android UI', 6, 1200, 4, 1),
-       ('Play Store Deployment', 7, 1200, 4, 1),
-
-       ('Employee CRUD', 8, 1200, 5, 1),
-       ('Role Permissions', 9, 1200, 5, 1),
-       ('Vacation Requests', 10, 1200, 6, 1),
-
-       ('Stripe Integration', 0, 1200, 7, 0),
-       ('Checkout Flow', 1, 1200, 7, 0),
-       ('Product Search', 2, 1200, 8, 1),
-
-       ('Generate Reports', 3, 1200, 9, 0),
-       ('Export Data', 4, 1200, 9, 0),
-       ('Bar Charts', 5, 1200, 10, 1),
-       ('Responsive Dashboard', 6, 1200, 10, 0);
+INSERT INTO task (name, hours, price_per_hour, sub_project_id, is_done, assigneeId)
+VALUES ('Landing Page', 0, 1200, 1, 1, 1),
+       ('Navigation Menu', 1, 1200, 1, 0, 2),
+       ('Footer Design', 2, 1200, 1, 0, 3),
+       ('Contact Form', 1, 1200, 1, 0, 1),
+       ('Responsive Layout', 3, 1200, 1, 1, 2),
+       ('User Authentication', 2, 1200, 2, 1, 3),
+       ('Database Setup', 3, 1200, 2, 0, 1),
+       ('REST Endpoints', 4, 1200, 2, 0, 2),
+       ('Error Handling', 2, 1200, 2, 0, 3),
+       ('API Documentation', 1, 1200, 2, 0, 1),
+       ('Login Screen', 4, 1200, 3, 1, 2),
+       ('Push Notifications', 5, 1200, 3, 0, 4),
+       ('Profile Page', 3, 1200, 3, 0, 5),
+       ('Onboarding Flow', 4, 1200, 3, 1, 2),
+       ('App Settings Screen', 2, 1200, 3, 0, 4),
+       ('Android UI', 6, 1200, 4, 1, 5),
+       ('Play Store Deployment', 7, 1200, 4, 1, 4),
+       ('Android Push Notifications', 5, 1200, 4, 1, 5),
+       ('Offline Mode', 6, 1200, 4, 0, 4),
+       ('Android Performance Test', 3, 1200, 4, 1, 5),
+       ('Employee CRUD', 8, 1200, 5, 1, 3),
+       ('Role Permissions', 9, 1200, 5, 1, 6),
+       ('Employee Search', 4, 1200, 5, 1, 7),
+       ('Department Management', 5, 1200, 5, 0, 3),
+       ('Employee Reports', 3, 1200, 5, 1, 6),
+       ('Vacation Requests', 10, 1200, 6, 1, 7),
+       ('Absence Calendar', 6, 1200, 6, 1, 3),
+       ('Approval Workflow', 5, 1200, 6, 1, 6),
+       ('Notification Emails', 3, 1200, 6, 0, 7),
+       ('Leave Balance Tracker', 4, 1200, 6, 1, 3),
+       ('Stripe Integration', 0, 1200, 7, 0, 4),
+       ('Checkout Flow', 1, 1200, 7, 0, 8),
+       ('Order Confirmation Email', 2, 1200, 7, 0, 9),
+       ('Refund Handling', 3, 1200, 7, 0, 4),
+       ('Invoice Generation', 4, 1200, 7, 0, 8),
+       ('Product Search', 2, 1200, 8, 1, 9),
+       ('Product Detail Page', 3, 1200, 8, 0, 4),
+       ('Category Filtering', 2, 1200, 8, 0, 8),
+       ('Stock Management', 4, 1200, 8, 0, 9),
+       ('Product Import Tool', 5, 1200, 8, 0, 4),
+       ('Generate Reports', 3, 1200, 9, 0, 5),
+       ('Export Data', 4, 1200, 9, 0, 10),
+       ('Data Aggregation', 5, 1200, 9, 0, 1),
+       ('Scheduled Reports', 3, 1200, 9, 0, 5),
+       ('Data Filtering', 2, 1200, 9, 0, 10),
+       ('Bar Charts', 5, 1200, 10, 1, 1),
+       ('Responsive Dashboard', 6, 1200, 10, 0, 5),
+       ('Line Charts', 4, 1200, 10, 0, 10),
+       ('Pie Charts', 3, 1200, 10, 0, 1),
+       ('Dashboard Export PDF', 4, 1200, 10, 0, 5);
