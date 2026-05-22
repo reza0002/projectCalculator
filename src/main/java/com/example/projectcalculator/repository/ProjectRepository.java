@@ -240,6 +240,13 @@ public class ProjectRepository {
     }
 
     @Transactional
+    public void addTask(Task task) {
+        String sql =
+                "INSERT INTO task (name, hours, price_per_hour, sub_project_id, is_done) VALUES (?, ?, ?, ?, ?)";
+        template.update(sql, task.getName(), task.getHours(), task.getPricePerHour(), task.getSubProjectId(), false);
+    }
+
+    @Transactional
     public void deleteTask(int id) {
         String sql =
                 "DELETE FROM task WHERE id = ?";
@@ -329,5 +336,18 @@ public class ProjectRepository {
                 WHERE id = ?;
                 """;
         template.update(sql, task.getName(), task.getHours(), task.getPricePerHour(), task.isDone(), task.getId());
+    }
+
+    public int findMaxEmployeeHours(int projectId) {
+        String sql = """
+                SELECT SUM(hours) AS total
+                FROM task
+                WHERE sub_project_id IN (SELECT id FROM sub_project WHERE project_id = ?)
+                GROUP BY user_id
+                ORDER BY total DESC
+                LIMIT 1
+                """;
+        List<Integer> result = template.query(sql, (rs, rowNum) -> rs.getInt("total"), projectId);
+        return result.isEmpty() ? 0 : result.get(0);
     }
 }

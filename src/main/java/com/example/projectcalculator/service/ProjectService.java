@@ -122,12 +122,14 @@ public class ProjectService {
             }
         }
         return totalHours;
-
     }
 
+
+
+    // Deadline baseret på den medarbejder med FLEST timer (ikke samlet)
     public LocalDate ProjectDeadline(int projectId) {
-        int totalHours = calculateTotalHours(projectId);
-        int days = (int) Math.ceil(totalHours / 8.0);
+        int maxEmployeeHours = repository.findMaxEmployeeHours(projectId);
+        int days = (int) Math.ceil(maxEmployeeHours / 8.0);
         return LocalDate.now().plusDays(days);
     }
 
