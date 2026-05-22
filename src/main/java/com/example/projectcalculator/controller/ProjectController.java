@@ -2,6 +2,7 @@ package com.example.projectcalculator.controller;
 
 
 import com.example.projectcalculator.model.Project;
+import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.service.ProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
