@@ -45,8 +45,8 @@ public class ProjectRepository {
                 subProject.getName(),
                 subProject.getDescription(),
                 subProject.getHours(),
-                subProject.getPrice_per_hour(),
-                subProject.getProject_id(),
+                subProject.getPricePerHour(),
+                subProject.getProjectId(),
                 subProject.isDone()
         );
         return subProject;
@@ -66,8 +66,8 @@ public class ProjectRepository {
             ps.setString(1, subProject.getName());
             ps.setString(2, subProject.getDescription());
             ps.setInt(3, subProject.getHours());
-            ps.setInt(4, subProject.getPrice_per_hour());
-            ps.setLong(5, subProject.getProject_id());
+            ps.setInt(4, subProject.getPricePerHour());
+            ps.setLong(5, subProject.getProjectId());
             ps.setBoolean(6, subProject.isDone());
             return ps;
         }, keyHolder);
@@ -284,7 +284,7 @@ public class ProjectRepository {
                 subProject.getName(),
                 subProject.getDescription(),
                 subProject.getHours(),
-                subProject.getPrice_per_hour(),
+                subProject.getPricePerHour(),
                 subProject.getId(),
                 subProject.isDone()
         );

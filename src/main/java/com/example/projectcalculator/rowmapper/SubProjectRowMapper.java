@@ -15,9 +15,9 @@ public class SubProjectRowMapper implements RowMapper<SubProject> {
         subProject.setId(rs.getInt("id"));
         subProject.setName(rs.getString("name"));
         subProject.setDescription(rs.getString("description"));
-        subProject.setPrice_per_hour(rs.getInt("price_per_hour"));
+        subProject.setPricePerHour(rs.getInt("price_per_hour"));
         subProject.setHours(rs.getInt("hours"));
-        subProject.setProject_id(rs.getInt("project_id"));
+        subProject.setProjectId(rs.getInt("project_id"));
         subProject.setDone(rs.getBoolean("is_done"));
         return subProject;
     }

@@ -80,7 +80,7 @@ public class ProjectService {
 
         // kæmpe hack, skal rettes senere
         subProject.setDescription("");
-        subProject.setPrice_per_hour(1200);
+        subProject.setPricePerHour(1200);
         var tasks = findTasksBySubproject(subProject.getId());
         int totalHours = 0;
         for (Task task : tasks) {
