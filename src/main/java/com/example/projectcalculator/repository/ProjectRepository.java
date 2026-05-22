@@ -137,6 +137,7 @@ public class ProjectRepository {
     }
 
     private void saveEmployeesInProject(List<User> employees, int projectId) {
+        if (employees == null || employees.isEmpty()) return;
         final String sql = "INSERT INTO user_project (user_id, project_id) VALUES (?, ?)";
         template.batchUpdate(sql, employees, employees.size(),
                 (ps, user) -> {

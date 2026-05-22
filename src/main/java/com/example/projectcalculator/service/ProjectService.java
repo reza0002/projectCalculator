@@ -75,9 +75,11 @@ public class ProjectService {
 
     public Project saveProject(Project project) {
         final int leaderId = project.getProjectLeader().getId();
-        project.setEmployees(repository.findEmployeesById(project.getEmployeeIds()));
 
-        project.getEmployees().removeIf(user -> user.getId() == leaderId);
+        if (project.getEmployeeIds() != null) {
+            project.setEmployees(repository.findEmployeesById(project.getEmployeeIds()));
+            project.getEmployees().removeIf(user -> user.getId() == leaderId);
+        }
         return repository.saveProject(project);
     }
 
