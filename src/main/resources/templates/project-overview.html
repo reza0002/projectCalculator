@@ -70,10 +70,11 @@
     </div>
 </div>
 
-<footer class="totals">
-    <div>Est. Price: <span th:text="${totalPrice} + 'kr.'">0 kr</span></div>
-    <div>Est. Time:<span th:text="${totalHours} + 'h.'">0 h.</span></div>
-</footer>
+<div class="stats-bar">
+    <div>Est. Price: <span th:text="${totalPrice} + ' kr.'">0 kr</span></div>
+    <div>Est. Time: <span th:text="${totalHours} + ' h.'">0 h.</span></div>
+    <div>Deadline: <span th:text="${estimatedDeadline}">-</span></div>
+</div>
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

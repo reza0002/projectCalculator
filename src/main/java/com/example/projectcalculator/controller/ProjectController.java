@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
@@ -36,8 +38,10 @@ public class ProjectController {
         model.addAttribute("assignedEmployees", service.findEmployeesInProject(projectId));
 
         int totalHours = service.calculateTotalHours(projectId);
+        LocalDate deadline = service.ProjectDeadline(projectId);
         model.addAttribute("totalHours", totalHours);
         model.addAttribute("totalPrice", totalHours * 1200);
+        model.addAttribute("estimatedDeadline", deadline);
 
         return "project-overview";
     }

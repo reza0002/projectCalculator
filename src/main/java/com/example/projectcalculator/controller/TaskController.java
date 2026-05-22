@@ -23,10 +23,12 @@ public class TaskController {
         task.setSubProjectId(subProjectId);
         final SubProject subProject = service.findSubProject(subProjectId);
         final var employees = service.findEmployeesInProject(subProject.getProjectId());
+        final var projectsDeadline = service.ProjectDeadline(subProject.getProjectId());
 
         model.addAttribute("task", task);
         model.addAttribute("subProject", subProject);
         model.addAttribute("teamMembers", employees);
+        model.addAttribute("projectDeadline", projectsDeadline);
         return "add-task";
     }
 

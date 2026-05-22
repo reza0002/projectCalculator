@@ -7,6 +7,7 @@ import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -123,6 +124,13 @@ public class ProjectService {
             }
         }
         return totalHours;
+
+    }
+
+    public LocalDate ProjectDeadline(int projectId) {
+        int totalHours = calculateTotalHours(projectId);
+        int days = (int) Math.ceil(totalHours / 8.0);
+        return LocalDate.now().plusDays(days);
     }
 
     public List<User> findEmployeesInProject(int projectId) {
