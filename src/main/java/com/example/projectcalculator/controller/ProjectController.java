@@ -1,9 +1,10 @@
 package com.example.projectcalculator.controller;
 
 
+import com.example.projectcalculator.authvalidation.LoginValidation;
 import com.example.projectcalculator.model.Project;
-import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.service.ProjectService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,24 +16,25 @@ import java.time.LocalDate;
 public class ProjectController {
 
     private final ProjectService service;
+    private final LoginValidation validation;
 
-    public ProjectController(ProjectService service) {
+    public ProjectController(ProjectService service, LoginValidation validation) {
         this.service = service;
+        this.validation = validation;
     }
 
     @GetMapping
-    public String listProjects(Model model) {
+    public String listProjects(Model model, HttpSession session) {
+        validation.isLoggedIn(session);
+
         model.addAttribute("projects", service.findAllProjects());
         return "home-page";
     }
 
-    @GetMapping("/login")
-    public String loginPage() {
-        return "login-page";
-    }
-
     @GetMapping("/{projectId}")
-    public String projectOverview(@PathVariable int projectId, Model model) {
+    public String projectOverview(@PathVariable int projectId, Model model, HttpSession session) {
+        validation.isLoggedIn(session);
+
         model.addAttribute("subProjects", service.findSubProjectHours(projectId));
         model.addAttribute("project", service.findProject(projectId));
         model.addAttribute("assignedEmployees", service.findEmployeesInProject(projectId));
@@ -47,26 +49,34 @@ public class ProjectController {
     }
 
     @GetMapping("/create")
-    public String createProjectPage(Model model) {
+    public String createProjectPage(Model model, HttpSession session) {
+        validation.isLoggedIn(session);
+
         model.addAttribute("project", new Project());
         model.addAttribute("employees", service.findAllUsers());
         return "create-project";
     }
 
     @PostMapping("/save")
-    public String createProject(@ModelAttribute Project project) {
+    public String createProject(@ModelAttribute Project project, HttpSession session) {
+        validation.isLoggedIn(session);
+
         var newProject = service.saveProject(project);
         return "redirect:/project/" + newProject.getId();
     }
 
     @PostMapping("/{projectId}/delete")
-    public String deleteProject(@PathVariable int projectId) {
+    public String deleteProject(@PathVariable int projectId, HttpSession session) {
+        validation.isLoggedIn(session);
+
         service.deleteProject(projectId);
         return "redirect:/project";
     }
 
     @PostMapping("/{projectId}/edit")
-    public String updateProject(@PathVariable int projectId, @ModelAttribute Project project) {
+    public String updateProject(@PathVariable int projectId, @ModelAttribute Project project, HttpSession session) {
+        validation.isLoggedIn(session);
+
         project.setId(projectId);
         service.updateProject(project);
         return "redirect:/project";

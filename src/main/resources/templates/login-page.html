@@ -11,17 +11,15 @@
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
 
-<form>
+<form th:action="@{/login}" method="post">
     <div class="login-title">
         <h1>Alpha Solutions</h1>
     </div>
     <div class="login">
-            <input placeholder="Username:"/>
-            <input placeholder="Password:"/>
+        <input type="text" name="username" placeholder="Username"/>
+        <input type="password" name="password" placeholder="Password"/>
         <div class="login-buttons">
-            <button type="submit">
-                <a th:href="@{/project}">Login</a>
-            </button>
+            <button type="submit">Login</button>
         </div>
         <h5>Forgot your Password/Username? </h5>
         <button type="button">

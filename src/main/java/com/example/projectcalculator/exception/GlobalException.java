@@ -53,7 +53,7 @@ public class GlobalException {
     public String handleDatabaseError(Model model,DataAccessException e) {
         e.printStackTrace();
         model.addAttribute("status", 500);
-        model.addAttribute("message", e.getMessage());
+        model.addAttribute("message", "Database error occurred");
 
         return "error";
     }
@@ -71,5 +71,12 @@ public class GlobalException {
         model.addAttribute("status",404);
         model.addAttribute("message", "Resource not found");
         return "error";
+    }
+
+    @ExceptionHandler(UnauthorizedAccessException.class)
+    public String handleAccessError(Model model) {
+        model.addAttribute("status", 401);
+        model.addAttribute("message", "Unauthorized access");
+        return "redirect:/login";
     }
 }
