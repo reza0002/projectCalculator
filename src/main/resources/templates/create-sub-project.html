@@ -6,15 +6,12 @@
     <link rel="stylesheet" href="/addTasks.css"/>
     <link rel="stylesheet" href="/navbar.css"/>
     <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/goback.css">
 </head>
 <body>
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
-<button>
-    <a th:href="@{/project/{projectId}(projectId = ${subProject.projectId})}">
-        Go back
-    </a>
-</button>
+<div th:replace="~{fragments/goback :: goback}"></div>
 
 
 <form th:action="@{/subproject/save}" method="post" th:object="${subProject}">
