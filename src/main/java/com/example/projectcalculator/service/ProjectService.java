@@ -292,9 +292,6 @@ public class ProjectService {
         return totalHours;
     }
 
-
-
-    // Deadline baseret på den medarbejder med FLEST timer (ikke samlet)
     public LocalDate ProjectDeadline(int projectId) {
         int maxEmployeeHours = repository.findMaxEmployeeHours(projectId);
         int days = maxEmployeeHours / 8;
