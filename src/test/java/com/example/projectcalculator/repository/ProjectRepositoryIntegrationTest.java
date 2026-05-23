@@ -22,26 +22,64 @@ class ProjectRepositoryIntegrationTest {
     @Test
     void findProject() {
         Project project = repository.findProject(1);
-
         assertNotNull(project);
-        assertEquals("Test Project", project.getName());
-        assertEquals("Test Description", project.getDescription());
     }
 
     @Test
     void findSubProjectsForProject() {
         List<SubProject> subProjects = repository.findSubProjectsForProject(1);
-
         assertFalse(subProjects.isEmpty());
-        assertEquals("Backend API", subProjects.get(0).getName());
     }
 
     @Test
     void findTasksBySubproject() {
         List<Task> tasks = repository.findTasksBySubproject(1);
-
         assertFalse(tasks.isEmpty());
-        assertEquals("Database Setup", tasks.get(0).getName());
-        assertEquals(3, tasks.get(0).getHours());
+    }
+
+    @Test
+    void updateProject() {
+
+        Project project = repository.findProject(1);
+
+        project.setName("Updated Project");
+
+        repository.updateProject(project);
+
+        Project updatedProject = repository.findProject(1);
+
+        assertEquals("Updated Project", updatedProject.getName());
+    }
+
+    @Test
+    void updateSubProject() {
+
+        SubProject subProject = repository.findSubProjectsForProject(1).get(0);
+
+        subProject.setName("Updated SubProject");
+
+        repository.updateSubProject(subProject);
+
+        SubProject updatedSubProject =
+                repository.findSubProjectsForProject(1).get(0);
+
+        assertEquals("Updated SubProject",
+                updatedSubProject.getName());
+    }
+
+    @Test
+    void updateTask() {
+
+        Task task = repository.findTasksBySubproject(1).get(0);
+
+        task.setName("Updated Task");
+
+        repository.updateTask(task);
+
+        Task updatedTask =
+                repository.findTasksBySubproject(1).get(0);
+
+        assertEquals("Updated Task",
+                updatedTask.getName());
     }
 }

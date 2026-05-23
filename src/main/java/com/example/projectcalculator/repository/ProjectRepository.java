@@ -282,38 +282,44 @@ public class ProjectRepository {
 
     public Project updateProject(Project project) {
         final String sql = """
-                  UPDATE project
-                  SET
-                  id = ?,
-                  name = ?,
-                  projectLeader = ?,
-                  is_done = ?
-                  WHERE description = ?
+                UPDATE project
+                SET
+                name = ?,
+                project_leader = ?,
+                description = ?,
+                is_done = ?
+                WHERE id = ?
                 """;
-        template.update(sql, project.getId(), project.getName(), project.getProjectLeader(), project.getDescription(), project.isDone());
+        template.update(sql,
+                project.getName(),
+                project.getProjectLeader().getId(),
+                project.getDescription(),
+                project.isDone(),
+                project.getId()
+        );
         return project;
     }
 
     @Transactional
     public void updateSubProject(SubProject subProject) {
         final String sql = """
-                        UPDATE sub_project
-                        SET
-                            name = ?,
-                            description = ? ,
-                            hours = ?,
-                            price_per_hour = ?,
-                            is_done = ?
-                        WHERE sub_project.id = ?;
-                """;
+            UPDATE sub_project
+            SET
+            name = ?,
+            description = ?,
+            hours = ?,
+            price_per_hour = ?,
+            is_done = ?
+            WHERE id = ?
+            """;
         // går ud fra at subprojektet kommer med id'et sat
         template.update(sql,
                 subProject.getName(),
                 subProject.getDescription(),
                 subProject.getHours(),
                 subProject.getPricePerHour(),
-                subProject.getId(),
-                subProject.isDone()
+                subProject.isDone(),
+                subProject.getId()
         );
     }
 
