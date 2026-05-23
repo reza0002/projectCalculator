@@ -10,8 +10,11 @@
 </head>
 <body>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
-<div th:replace="~{fragments/goback :: goback}"></div>
-
+<button class="go-back-btn">
+    <a th:href="@{/subproject/{subProjectId}(subProjectId=${task.subProjectId})}">
+        Go back
+    </a>
+</button>
 
 <h1 th:text="'Add new task for ' + ${subProject.name}">Add new task</h1>
 
