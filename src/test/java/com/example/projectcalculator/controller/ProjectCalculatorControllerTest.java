@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -93,6 +94,31 @@ public class ProjectCalculatorControllerTest {
                 .andExpect(model().attributeExists("estimatedDeadline"))
                 .andExpect(model().attribute("estimatedDeadline", LocalDate.now().plusDays(5)))
                 .andExpect(model().attributeExists("assignedEmployees"));
+    }
+
+    @Test
+    void createProject() throws Exception {
+        var newProject = new Project();
+        newProject.setId(2);
+        newProject.setName("New Project");
+
+        when(service.saveProject(any(Project.class)))
+                .thenReturn(newProject);
+
+        mockMvc.perform(post("/project/save")
+                .param("name", "New Project")
+                .param("description", "Test Description"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/project/2"));
+    }
+
+    @Test
+    void updateProject() throws Exception {
+        mockMvc.perform(post("/project/{projectId}/edit", 1)
+                .param("name", "Updated Project")
+                .param("description", "Updated Description"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/project"));
     }
 
     @Test
