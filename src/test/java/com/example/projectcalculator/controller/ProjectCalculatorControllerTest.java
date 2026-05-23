@@ -1,4 +1,4 @@
-package controller;
+package com.example.projectcalculator.controller;
 
 import com.example.projectcalculator.controller.ProjectController;
 import com.example.projectcalculator.model.Project;
@@ -25,7 +25,7 @@ public class ProjectCalculatorControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockitoBeans
+    @MockitoBean
     private ProjectService service;
 
     @Test
