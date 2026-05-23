@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/homepage.css">
     <link rel="stylesheet" href="/navbar.css">
     <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/homepage.css?v=7">
 </head>
 
 <body>
@@ -37,10 +38,10 @@
         <a th:each="project : ${projects}"
            th:href="@{/project/{project_id}(project_id=${project.id})}">
             <div class="project">
-                <div th:text="${project.id}"></div>
-                <div th:text="${project.name}"></div>
+                <div th:text="'ID: ' + ${project.id}"></div>
+                <strong th:text="${project.name}"></strong>
                 <div th:text="${project.description}"></div>
-                <div th:text="${project.projectLeader.name}"></div>
+                <div th:text="'- ' + ${project.projectLeader.name}"></div>
             </div>
 
             <form th:action="@{/project/{id}/delete(id=${project.id})}" method="post"

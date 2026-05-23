@@ -32,16 +32,6 @@ public class ProjectService {
     }
 
 
-    public User findUser(String username) {
-        User user = repository.findUser(username);
-
-        if(user == null){
-            throw new InvalidInputException(
-                    "User not found");
-        }
-        return user;
-    }
-
     public List<User> findAllUsers() {
         return repository.findAllUsers();
     }
@@ -59,15 +49,6 @@ public class ProjectService {
         return project;
     }
 
-    // overload hvis man vil brug navn i stedet for id
-    public Project findProject(String projectName) {
-        Project project = repository.findProject(projectName);
-
-        if(project == null) {
-            throw new ProjectNotFound(-1);
-        }
-        return project;
-    }
 
     public SubProject findSubProject(int subProjectId) {
         SubProject subProject =
@@ -80,33 +61,6 @@ public class ProjectService {
         return subProject;
     }
 
-    public List<SubProject> findSubProjectsForProject(int projectId) {
-
-        findProject(projectId);
-
-        return repository.findSubProjectsForProject(projectId);
-    }
-
-    public void addTask(Task task) {
-
-        if(task.getName() == null ||
-                task.getName().isBlank()) {
-            throw new InvalidInputException(
-                    "Task name cannot be empty");
-        }
-
-        if(task.getHours() < 0) {
-            throw new InvalidInputException(
-                    "Hours cannot be negative");
-        }
-
-        if(task.getPricePerHour() < 0) {
-            throw new InvalidInputException(
-                    "Price per hour cannot be negative");
-        }
-
-        repository.saveTasks(task);
-    }
 
     public Task saveTask(Task task) {
         if(task.getName() == null || task.getName().isBlank()) {
@@ -192,10 +146,6 @@ public class ProjectService {
         return repository.saveSubProject(subProject);
     }
 
-    public Task saveTasks(Task task) {
-        return repository.saveTasks(task);
-    }
-
     public Project updateProject(Project project) {
 
         if(project.getName() == null ||
@@ -211,27 +161,6 @@ public class ProjectService {
         }
         return repository.updateProject(project);
 
-    }
-
-    public void updateSubProject(SubProject subProject) {
-
-        if(subProject.getName() == null ||
-                subProject.getName().isBlank()) {
-            throw new InvalidInputException(
-                    "Subproject name cannot be empty");
-        }
-
-        if(subProject.getPricePerHour() < 0) {
-            throw new InvalidInputException(
-                    "Price per hour cannot be negative");
-        }
-
-        if(subProject.getHours() < 0) {
-            throw new InvalidInputException(
-                    "Hours cannot be negative");
-        }
-
-        repository.updateSubProject(subProject);
     }
 
     public void updateTask(Task task) {
@@ -255,22 +184,6 @@ public class ProjectService {
         findProject(projectId);
 
         repository.deleteProject(projectId);
-    }
-
-    public SubProject createSubProject(SubProject subProject) {
-        if(subProject.getName() == null || subProject.getName().isBlank()) {
-            throw new InvalidInputException("Subproject name cannot be empty");
-        }
-
-        if(subProject.getPricePerHour() < 0) {
-            throw new InvalidInputException("Price per hour cannot be negative");
-        }
-
-        if(subProject.getHours() < 0) {
-            throw new InvalidInputException("Hours cannot be negative");
-        }
-
-        return repository.createSubProject(subProject);
     }
 
     public void deleteSubProject(int id) {

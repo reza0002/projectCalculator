@@ -166,7 +166,7 @@ public class ProjectRepository {
     }
 
     private User findProjectLead(int projectId) {
-        final String sql = "SELECT * FROM user INNER JOIN project ON project.project_leader = user.id WHERE project.id = ?";
+        final String sql = "SELECT u.id, u.name, u.email\n" + "FROM `user` u\n" + "INNER JOIN project p ON p.project_leader = u.id\n" + "WHERE p.id = ?";
         return template.queryForObject(sql, new UserRowMapper(), projectId);
     }
 
