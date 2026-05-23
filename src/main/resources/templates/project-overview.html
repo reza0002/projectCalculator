@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="/footer.css">
     <link rel="stylesheet" href="/goback.css">
 </head>
+
 <body>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
+
 <div th:replace="~{fragments/goback :: goback}"></div>
 
 <h1 th:text="${project.name + ' - Project overview'}"></h1>
