@@ -21,6 +21,7 @@ public class SubProjectController {
                                  Model model) {
         model.addAttribute("subProject", service.findSubProject(subProjectId));
         model.addAttribute("tasks", service.findTasksBySubproject(subProjectId));
+        model.addAttribute("users", service.findAllUsers());
         return "sub-project-tasks";
     }
 

@@ -51,6 +51,7 @@ public class GlobalException {
 
     @ExceptionHandler (DataAccessException.class)
     public String handleDatabaseError(Model model,DataAccessException e) {
+        e.printStackTrace();
         model.addAttribute("status", 500);
         model.addAttribute("message", e.getMessage());
 
@@ -59,6 +60,7 @@ public class GlobalException {
 
     @ExceptionHandler(RuntimeException.class)
     public String handleGenericError(Model model, RuntimeException ex) {
+        ex.printStackTrace();
         model.addAttribute("status", 500);
         model.addAttribute("message", ex.getMessage() != null ? ex.getMessage() : "Unexpected error");
         return "error";

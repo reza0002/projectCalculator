@@ -16,15 +16,17 @@
         <h1>Alpha Solutions</h1>
     </div>
     <div class="login">
-            <input placeholder="Brugernavn"/>
-            <input placeholder="Adgangskode"/>
+            <input placeholder="Username:"/>
+            <input placeholder="Password:"/>
         <div class="login-buttons">
             <button type="submit">
                 <a th:href="@{/project}">Login</a>
             </button>
-            <button type="button">Opret bruger</button>
         </div>
-        <button type="button">Glemt adgangskode</button>
+        <h5>Forgot your Password/Username? </h5>
+        <button type="button">
+            <a href="mailto:AS@ITsupport.com" >Contact IT-support</a>
+        </button>
     </div>
 </form>
 <div th:replace="~{fragments/footer :: footer}"></div>
