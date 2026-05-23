@@ -1,6 +1,6 @@
 package com.example.projectcalculator.controller;
 
-import com.example.projectcalculator.authvalidation.LoginValidation;
+import com.example.projectcalculator.validation.LoginValidation;
 import com.example.projectcalculator.model.SubProject;
 import com.example.projectcalculator.model.Task;
 import com.example.projectcalculator.model.User;

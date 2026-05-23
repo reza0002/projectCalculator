@@ -1,7 +1,7 @@
 package com.example.projectcalculator.controller;
 
 
-import com.example.projectcalculator.authvalidation.LoginValidation;
+import com.example.projectcalculator.validation.LoginValidation;
 import com.example.projectcalculator.model.Project;
 import com.example.projectcalculator.service.ProjectService;
 import jakarta.servlet.http.HttpSession;

@@ -1,4 +1,4 @@
-package com.example.projectcalculator.authvalidation;
+package com.example.projectcalculator.validation;
 
 import com.example.projectcalculator.exception.UnauthorizedAccessException;
 import jakarta.servlet.http.HttpSession;
