@@ -79,16 +79,6 @@ textarea {
     cursor: pointer;
 }
 
-.back-btn{
-    background-color: #FF325A;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
 .create-btn {
     display: block;
     margin: 25px auto 0;

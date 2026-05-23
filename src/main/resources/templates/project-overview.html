@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="/footer.css">
     <link rel="stylesheet" href="/goback.css">
 </head>
-
 <body>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
-
-<div th:replace="~{fragments/goback :: goback}"></div>
-
+<button class="go-back-btn">
+    <a th:href="@{/project}">
+        Go back
+    </a>
+</button>
 <h1 th:text="${project.name + ' - Project overview'}"></h1>
 
 <form th:action="@{/project/{id}/delete(id=${project.id})}" method="post">

@@ -11,8 +11,11 @@
 <body>
 
 <div th:replace="~{fragments/navbar :: navbar}"></div>
-<div th:replace="~{fragments/goback :: goback}"></div>
-
+<button class="go-back-btn">
+    <a th:href="@{/project/{projectId}(projectId = ${subProject.projectId})}">
+        Go back
+    </a>
+</button>
 
 <form th:action="@{/subproject/save}" method="post" th:object="${subProject}">
     <h1 th:text="'Add new sub-project for ' + ${project.name}"></h1>

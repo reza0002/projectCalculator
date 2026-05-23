@@ -10,8 +10,11 @@
 </head>
 <body>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
-<div th:replace="~{fragments/goback :: goback}"></div>
-
+<button class="go-back-btn">
+    <a th:href="@{/project/{projectId}(projectId = ${subProject.projectId})}">
+        Go back
+    </a>
+</button>
 
 <main class="SpalteAdd">
     <div class="sidebar">
