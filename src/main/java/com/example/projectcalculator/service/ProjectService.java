@@ -105,7 +105,7 @@ public class ProjectService {
                     "Price per hour cannot be negative");
         }
 
-        repository.addTask(task);
+        repository.saveTasks(task);
     }
 
     public Task saveTask(Task task) {
@@ -297,7 +297,7 @@ public class ProjectService {
     // Deadline baseret på den medarbejder med FLEST timer (ikke samlet)
     public LocalDate ProjectDeadline(int projectId) {
         int maxEmployeeHours = repository.findMaxEmployeeHours(projectId);
-        int days = (int) Math.ceil(maxEmployeeHours / 8.0);
+        int days = maxEmployeeHours / 8;
         return LocalDate.now().plusDays(days);
     }
 

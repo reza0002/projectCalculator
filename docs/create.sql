@@ -15,8 +15,8 @@ CREATE TABLE project
     name           VARCHAR(250) NOT NULL,
     project_leader INT          NOT NULL,
     description    TEXT,
-    is_done        TINYINT(1) NOT NULL,
-    FOREIGN KEY (project_leader) REFERENCES user (id)
+    is_done        TINYINT(1)   NOT NULL,
+    FOREIGN KEY (project_leader) REFERENCES user (id) ON DELETE CASCADE
 );
 
 CREATE TABLE user_project
@@ -24,8 +24,8 @@ CREATE TABLE user_project
     user_id    INT NOT NULL,
     project_id INT NOT NULL,
     PRIMARY KEY (user_id, project_id),
-    FOREIGN KEY (user_id) REFERENCES user (id),
-    FOREIGN KEY (project_id) REFERENCES project (id)
+    FOREIGN KEY (user_id)    REFERENCES user (id)    ON DELETE CASCADE,
+    FOREIGN KEY (project_id) REFERENCES project (id) ON DELETE CASCADE
 );
 
 CREATE TABLE sub_project
@@ -36,8 +36,8 @@ CREATE TABLE sub_project
     hours          INT          NOT NULL,
     price_per_hour INT          NOT NULL,
     project_id     INT          NOT NULL,
-    is_done        TINYINT(1) NOT NULL,
-    FOREIGN KEY (project_id) REFERENCES project (id)
+    is_done        TINYINT(1)   NOT NULL,
+    FOREIGN KEY (project_id) REFERENCES project (id) ON DELETE CASCADE
 );
 
 CREATE TABLE task
@@ -47,8 +47,8 @@ CREATE TABLE task
     hours          INT          NOT NULL,
     price_per_hour INT          NOT NULL,
     sub_project_id INT          NOT NULL,
-    is_done        TINYINT(1) NOT NULL,
-    assigneeId     INT          NOT NULL,
-    FOREIGN KEY (sub_project_id) REFERENCES sub_project (id),
-    FOREIGN KEY (assigneeId) REFERENCES user (id)
+    is_done        TINYINT(1)   NOT NULL,
+    user_id        INT          NOT NULL,
+    FOREIGN KEY (sub_project_id) REFERENCES sub_project (id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id)        REFERENCES user (id)        ON DELETE CASCADE
 );

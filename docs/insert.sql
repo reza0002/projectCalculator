@@ -41,7 +41,7 @@ VALUES ('Frontend Development', 'Udvikling af frontend', 0, 1200, 1, 0),
        ('Statistics Engine', 'Databehandling', 8, 1200, 5, 0),
        ('Graph Components', 'Grafer og visualisering', 9, 1200, 5, 0);
 
-INSERT INTO task (name, hours, price_per_hour, sub_project_id, is_done, assigneeId)
+INSERT INTO task (name, hours, price_per_hour, sub_project_id, is_done, user_id)
 VALUES ('Landing Page', 0, 1200, 1, 1, 1),
        ('Navigation Menu', 1, 1200, 1, 0, 2),
        ('Footer Design', 2, 1200, 1, 0, 3),

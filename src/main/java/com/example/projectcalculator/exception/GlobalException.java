@@ -52,7 +52,7 @@ public class GlobalException {
     @ExceptionHandler (DataAccessException.class)
     public String handleDatabaseError(Model model,DataAccessException e) {
         model.addAttribute("status", 500);
-        model.addAttribute("message", "Database error occured");
+        model.addAttribute("message", e.getMessage());
 
         return "error";
     }

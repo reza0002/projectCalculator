@@ -240,13 +240,6 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public void addTask(Task task) {
-        String sql =
-                "INSERT INTO task (name, hours, price_per_hour, sub_project_id, is_done) VALUES (?, ?, ?, ?, ?)";
-        template.update(sql, task.getName(), task.getHours(), task.getPricePerHour(), task.getSubProjectId(), false);
-    }
-
-    @Transactional
     public void deleteTask(int id) {
         String sql =
                 "DELETE FROM task WHERE id = ?";
@@ -256,7 +249,7 @@ public class ProjectRepository {
     @Transactional
     public Task saveTasks(Task task) {
         final KeyHolder keyHolder = new GeneratedKeyHolder();
-        final String sql = "INSERT INTO task (name, hours, price_per_hour, sub_project_id, is_done, assigneeId) VALUES (?, ?, ?, ?, ?, ?)";
+        final String sql = "INSERT INTO task (name, hours, price_per_hour, sub_project_id, is_done, user_id) VALUES (?, ?, ?, ?, ?, ?)";
 
         template.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -348,6 +341,6 @@ public class ProjectRepository {
                 LIMIT 1
                 """;
         List<Integer> result = template.query(sql, (rs, rowNum) -> rs.getInt("total"), projectId);
-        return result.isEmpty() ? 0 : result.get(0);
+        return result.isEmpty() ? 0 : result.getFirst();
     }
 }
