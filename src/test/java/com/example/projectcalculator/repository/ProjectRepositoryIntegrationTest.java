@@ -45,7 +45,37 @@ class ProjectRepositoryIntegrationTest {
     }
 
     @Test
-    void findTasksByID()
+    void findEmployeesInProject() {
+        List<User> employees = repository.findEmployeesInProject(1);
+        assertNotNull(employees);
+        assertTrue(employees.size() == 2);
+    }
+    @Test
+    void findAllUsers() {
+        List<User> users = repository.findAllUsers();
+        assertFalse(users.isEmpty());
+    }
+
+    @Test
+    void findEmployeesById() {
+        List<Integer> employeeId = List.of(1);
+        List<User> employees = repository.findEmployeesById(employeeId);
+        assertFalse(employees.isEmpty());
+        assertEquals(1, employees.get(0).getId());
+    }
+
+    @Test
+    void findTasksByID() {
+        Task task = repository.findTaskById(1);
+        assertNotNull(task);
+        assertEquals("Database Setup", task.getName());
+    }
+
+    @Test
+    void findMaxEmployeeHours() {
+        int maxHours = repository.findMaxEmployeeHours(1);
+        assertTrue(maxHours >= 0);
+    }
 
 
     @Test
@@ -140,6 +170,26 @@ class ProjectRepositoryIntegrationTest {
     }
 
     @Test
+    void saveEmployeesInProject_ExistingEmployees() {
+        var project = new Project();
+        project.setName("Project with employee");
+        project.setDescription("test");
+        User leader = new User();
+        leader.setId(1);
+        project.setProjectLeader(leader);
+        Project savedProject = repository.saveProject(project);
+
+        User employee1 = new User();
+        employee1.setId(1);
+        List<User> employees = List.of(employee1);
+
+        repository.saveEmployeesInProject(employees, savedProject.getId());
+
+        assertNotNull(savedProject.getId());
+    }
+
+
+    @Test
     void deleteProject() {
         var project = new Project();
         project.setName("Delete Test Project");
@@ -186,30 +236,20 @@ class ProjectRepositoryIntegrationTest {
 
         assertThrows(Exception.class, () -> repository.findTaskById(taskId));
     }
-    @Test
-    void saveEmployeesInProject()
-    @Test
-    void findAllusers();
-
-    @Test
-    void findEmployeesById()
-
-    @Test
-    void findTasksByID()
-
-
-
-    @Test
-    void findEmployeesInProject()
-
-    @Test
-    void findProjectLead()
-
-    @Test
-    void mapProjectLeader()
-
-    @Test
-    void findMaxEmployeeHours()
 
 }
+//
+//    @Test
+//    void findEmployeesInProject()
+//
+//    @Test
+//    void findProjectLead()
+//
+//    @Test
+//    void mapProjectLeader()
+//
+//    @Test
+//    void findMaxEmployeeHours()
+//
+//}
 

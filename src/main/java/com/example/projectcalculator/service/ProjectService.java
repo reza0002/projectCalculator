@@ -180,16 +180,12 @@ public class ProjectService {
     }
 
     public void deleteProject(int projectId) {
-
         findProject(projectId);
-
         repository.deleteProject(projectId);
     }
 
     public void deleteSubProject(int id) {
-
         findSubProject(id);
-
         repository.deleteSubProject(id);
     }
 
