@@ -3,6 +3,7 @@ package com.example.projectcalculator.controller;
 import com.example.projectcalculator.controller.ProjectController;
 import com.example.projectcalculator.model.Project;
 import com.example.projectcalculator.service.ProjectService;
+import com.example.projectcalculator.validation.LoginValidation;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
@@ -28,6 +29,9 @@ public class ProjectCalculatorControllerTest {
 
     @MockitoBean
     private ProjectService service;
+
+    @MockitoBean
+    private LoginValidation controller;
 
     @Test
     void listProjects() throws Exception {

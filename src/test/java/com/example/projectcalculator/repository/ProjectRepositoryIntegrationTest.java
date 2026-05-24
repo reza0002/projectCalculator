@@ -45,6 +45,10 @@ class ProjectRepositoryIntegrationTest {
     }
 
     @Test
+    void findTasksByID()
+
+
+    @Test
     void updateProject() {
 
         Project project = repository.findProject(1);
@@ -78,14 +82,10 @@ class ProjectRepositoryIntegrationTest {
     void updateTask() {
 
         Task task = repository.findTasksBySubproject(1).get(0);
-
         task.setName("Updated Task");
-
         repository.updateTask(task);
-
         Task updatedTask =
                 repository.findTasksBySubproject(1).get(0);
-
         assertEquals("Updated Task",
                 updatedTask.getName());
     }
@@ -139,7 +139,6 @@ class ProjectRepositoryIntegrationTest {
         assertEquals("Save Test Task", saved.getName());
     }
 
-    // ===== DELETE TESTS =====
     @Test
     void deleteProject() {
         var project = new Project();
@@ -187,5 +186,30 @@ class ProjectRepositoryIntegrationTest {
 
         assertThrows(Exception.class, () -> repository.findTaskById(taskId));
     }
+    @Test
+    void saveEmployeesInProject()
+    @Test
+    void findAllusers();
+
+    @Test
+    void findEmployeesById()
+
+    @Test
+    void findTasksByID()
+
+
+
+    @Test
+    void findEmployeesInProject()
+
+    @Test
+    void findProjectLead()
+
+    @Test
+    void mapProjectLeader()
+
+    @Test
+    void findMaxEmployeeHours()
+
 }
 
