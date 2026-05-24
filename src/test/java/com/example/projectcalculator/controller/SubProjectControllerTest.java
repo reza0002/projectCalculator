@@ -2,6 +2,8 @@ package com.example.projectcalculator.controller;
 
 import com.example.projectcalculator.model.Project;
 import com.example.projectcalculator.model.SubProject;
+import com.example.projectcalculator.model.Task;
+import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.service.ProjectService;
 import com.example.projectcalculator.validation.LoginValidation;
 import org.junit.jupiter.api.Test;
@@ -16,7 +18,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest(SubProjectController.class)
+@WebMvcTest(SubProjectController.class)
 public class SubProjectControllerTest {
 
     @Autowired
@@ -34,31 +36,52 @@ public class SubProjectControllerTest {
         subProject.setId(1);
         subProject.setName("test subProject");
 
-        when(service.findSubProject(1)).thenReturn(subProject);
-        when(service.findTasksBySubproject(1)).thenReturn(List.of());
-        when(service.findAllUsers()).thenReturn(List.of());
+        Task task1 = new Task();
+        Task task2 = new Task();
+        Task task3 = new Task();
+        List<Task> tasks = List.of(task1, task2, task3);
 
-        mockMvc.perform(get("/subproject/{subProjectId}", 1))
+        User testUser1 = new User("Søren Berlev");
+        User testUser2 = new User("Christian Dahl");
+        User testUser3 = new User("Kim Larsen");
+        User testUser4 = new User("Franz Beckerlee");
+        List<User> allUsers = List.of(testUser1, testUser2, testUser3, testUser4);
+
+        when(service.findSubProject(subProject.getId())).thenReturn(subProject);
+        when(service.findTasksBySubproject(subProject.getId())).thenReturn(tasks);
+        when(service.findAllUsers()).thenReturn(allUsers);
+
+        mockMvc.perform(get("/subproject/{subProjectId}", subProject.getId()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("sub-project-tasks"))
                 .andExpect(model().attributeExists("subProject"))
+                .andExpect(model().attribute("subProject", subProject))
                 .andExpect(model().attributeExists("tasks"))
-                .andExpect(model().attributeExists("users"));
+                .andExpect(model().attribute("tasks", tasks))
+                .andExpect(model().attributeExists("users"))
+                .andExpect(model().attribute("users", allUsers));
     }
 
     @Test
     void createSubProjectPage() throws Exception {
         var project = new Project();
         project.setId(1);
-        project.setName("Test Project");
+        project.setName("project");
 
-        when(service.findProject(1)).thenReturn(project);
+        var subProject = new SubProject();
+        subProject.setId(1);
+        subProject.setName("subProject");
 
-        mockMvc.perform(get("/subproject/{projectId}/create", 1))
+        when(service.findProject(project.getId())).thenReturn(project);
+        when(service.findSubProject(subProject.getId())).thenReturn(subProject);
+
+        mockMvc.perform(get("/subproject/{projectId}/create", subProject.getId()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("create-sub-project"))
                 .andExpect(model().attributeExists("subProject"))
-                .andExpect(model().attributeExists("project"));
+                .andExpect(model().attribute("subProject", subProject))
+                .andExpect(model().attributeExists("project"))
+                .andExpect(model().attribute("project",project));
     }
 
     @Test
