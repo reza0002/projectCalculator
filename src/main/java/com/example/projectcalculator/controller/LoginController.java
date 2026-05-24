@@ -13,12 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
 
     private final ProjectService service;
-    private final HttpSession session;
 
-
-    public LoginController(ProjectService service, HttpSession session) {
+    public LoginController(ProjectService service) {
         this.service = service;
-        this.session = session;
     }
 
     @GetMapping()
@@ -30,7 +27,7 @@ public class LoginController {
     }
 
     @PostMapping()
-    public String login(@RequestParam String username, @RequestParam String password) {
+    public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
         if (service.userLogin(username, password)) {
             session.setAttribute("loggedIn", true);
             session.setMaxInactiveInterval(1200);
@@ -40,7 +37,7 @@ public class LoginController {
     }
 
     @GetMapping("/logout")
-    public String logout() {
+    public String logout(HttpSession session) {
         session.removeAttribute("loggedIn");
         session.invalidate();
         return "redirect:/login";
