@@ -66,15 +66,22 @@ public class SubProjectControllerTest {
     void createSubProjectPage() throws Exception {
         var project = new Project();
         project.setId(1);
-        project.setName("Test Project");
+        project.setName("project");
 
-        when(service.findProject(1)).thenReturn(project);
+        var subProject = new SubProject();
+        subProject.setId(1);
+        subProject.setName("subProject");
 
-        mockMvc.perform(get("/subproject/{projectId}/create", 1))
+        when(service.findProject(project.getId())).thenReturn(project);
+        when(service.findSubProject(subProject.getId())).thenReturn(subProject);
+
+        mockMvc.perform(get("/subproject/{projectId}/create", subProject.getId()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("create-sub-project"))
                 .andExpect(model().attributeExists("subProject"))
-                .andExpect(model().attributeExists("project"));
+                .andExpect(model().attribute("subProject", subProject))
+                .andExpect(model().attributeExists("project"))
+                .andExpect(model().attribute("project",project));
     }
 
     @Test
