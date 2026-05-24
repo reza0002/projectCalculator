@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <title></title>
+</head>
+<body>
+
+<nav th:fragment="navbar" th:if="${session.loggedIn != null}">
+    <img src="/images/img_1.png" alt="Alpha Solutions" style="height: 50px;">
+    <a th:href="@{/project}">Home</a>
+    <a th:href="@{/login/logout}">Logout</a>
+</nav>
+
+</body>
+</html>

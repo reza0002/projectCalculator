@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${subProject.name} + ' Add Task'">Add Task</title>
+    <link rel="stylesheet" href="/addTasks.css"/>
+    <link rel="stylesheet" href="/navbar.css"/>
+    <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/goback.css">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<button class="go-back-btn">
+    <a th:href="@{/subproject/{subProjectId}(subProjectId=${task.subProjectId})}">
+        Go back
+    </a>
+</button>
+
+<h1 th:text="'Add new task for ' + ${subProject.name}">Add new task</h1>
+
+<form th:action="@{/task/create}" method="post" th:object="${task}">
+    <input type="hidden" th:field="*{subProjectId}"/>
+
+    <div class="container">
+
+        <section class="form-section">
+            <h2> New task </h2>
+            <label for="name">Task name</label>
+            <input id="name" type="text" th:field="*{name}" placeholder="Enter task name">
+        </section>
+
+        <section class="assignee-section">
+            <h2>Assign member</h2>
+            <label for="assignee"></label>
+            <select id="assignee" th:field="*{assigneeId}">
+                <option th:each="teamMember : ${teamMembers}" th:value="${teamMember.id}" th:text="${teamMember.name}"></option>
+            </select>
+        </section>
+
+        <section class="hours-section">
+            <h3>Add Est. Hours</h3>
+
+            <select th:field="*{hours}">
+                <option value="0">Choose hours</option>
+                <option value="1">1H</option>
+                <option value="2">2H</option>
+                <option value="3">3H</option>
+                <option value="4">4H</option>
+                <option value="5">5H</option>
+                <option value="6">6H</option>
+                <option value="7">7H</option>
+                <option value="8">8H</option>
+                <option value="9">9H</option>
+                <option value="10">10H</option>
+            </select>
+
+            <button class="add-btn" type="submit">Add</button>
+        </section>
+    </div>
+</form>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

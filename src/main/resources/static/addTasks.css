@@ -10,7 +10,7 @@ header {
 header button {
     padding: 6px 14px;
     border: 1px solid #ccc;
-    background: white;
+    background:#FF325A;
     cursor: pointer;
     font-size: 14px;
 }
@@ -79,7 +79,8 @@ h1 {
 .add-btn {
     padding: 6px 14px;
     border: 1px solid #ccc;
-    background: white;
+    background: #FF325A;
+    color:black;
     cursor: pointer;
     font-size: 14px;
 }

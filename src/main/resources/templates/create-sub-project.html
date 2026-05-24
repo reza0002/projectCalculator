@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Task</title>
+    <link rel="stylesheet" href="/addTasks.css"/>
+    <link rel="stylesheet" href="/navbar.css"/>
+    <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/goback.css">
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<button class="go-back-btn">
+    <a th:href="@{/project/{projectId}(projectId = ${subProject.projectId})}">
+        Go back
+    </a>
+</button>
+
+<form th:action="@{/subproject/save}" method="post" th:object="${subProject}">
+    <h1 th:text="'Add new sub-project for ' + ${project.name}"></h1>
+    <input type="hidden" th:field="*{projectId}">
+
+    <div class="container">
+
+        <section class="form-section">
+            <div>
+                <h2> New Sub-Project </h2>
+                <label for="name">Sub-Project name</label>
+                <input id="name" type="text" th:field="*{name}" placeholder="Sub-Project name">
+            </div>
+            <div>
+                <label for="description">Description</label>
+                <textarea id="description" th:field="*{description}" placeholder="Description"></textarea>
+            </div>
+
+        </section>
+
+
+        <button class="add-btn" type="submit">Add</button>
+    </div>
+</form>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

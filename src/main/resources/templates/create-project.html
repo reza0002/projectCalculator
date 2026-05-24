@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Project</title>
+
+    <link rel="stylesheet" href="/projectsPage.css">
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/goback.css">
+</head>
+
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<button class="go-back-btn">
+    <a th:href="@{/project}">
+        Go back
+    </a>
+</button>
+
+<h1>Create New Project</h1>
+
+<div class="container">
+
+    <form th:action="@{/project/save}"
+          method="post"
+          th:object="${project}">
+
+
+        <label for="name">Project name</label>
+
+        <input type="text"
+               th:field="*{name}"
+               id="name"
+               placeholder="Enter project name"
+               required>
+
+
+
+        <label for="projectLeader">Project leader</label>
+
+        <select th:field="*{projectLeader.id}"
+                id="projectLeader">
+
+            <option th:each="employee : ${employees}"
+                    th:value="${employee.id}"
+                    th:text="${employee.name}">
+            </option>
+
+        </select>
+
+
+
+        <label for="description">Description</label>
+
+        <textarea th:field="*{description}"
+                  id="description"
+                  placeholder="Write a short project description...">
+        </textarea>
+
+
+
+        <label>Add colleagues</label>
+
+        <div class="colleague-dropdown">
+
+            <div class="dropdown-list">
+
+                <label th:each="employee : ${employees}"
+                       class="checkbox-item">
+
+                    <input type="checkbox"
+                           name="employeeIds"
+                           th:value="${employee.id}">
+
+                    <span th:text="${employee.name}"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <button class="create-btn" type="submit">
+            Create
+        </button>
+
+    </form>
+
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

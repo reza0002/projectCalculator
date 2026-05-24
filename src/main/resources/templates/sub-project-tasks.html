@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${subProject.name} + ' add task'"></title>
+    <link rel="stylesheet" href="/tasksPage.css"/>
+    <link rel="stylesheet" href="/navbar.css"/>
+    <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/goback.css">
+</head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<button class="go-back-btn">
+    <a th:href="@{/project/{projectId}(projectId = ${subProject.projectId})}">
+        Go back
+    </a>
+</button>
+
+<main class="SpalteAdd">
+    <div class="sidebar">
+        <a th:href="@{/task/{subProjectId}/create(subProjectId=${subProjectId})}" class="add-tasks">
+            Add Tasks +
+        </a>
+    </div>
+
+    <div class="tasks-board">
+
+        <div class="column">
+            <h2>Tasks added</h2>
+            <div class="task-item" th:each="task : ${tasks}" th:unless="${task.isDone}">
+                <form th:action="@{/task/{taskId}/update(taskId=${task.id})}" th:method="post">
+                    <button type="submit" class="done-btn">Done</button>
+                </form>
+                <span th:each="user: ${users}" th:if="${user.id == task.assigneeId}" th:text="${user.name}"></span>
+                <span th:text="${task.name}">Task name</span>
+                <span th:text="${task.hours} + 'h.'">0</span>
+            </div>
+        </div>
+        <div class="column">
+            <h2>Done Tasks</h2>
+            <div class="task-item" th:each="task : ${tasks}" th:if="${task.isDone}">
+                <form th:action="@{/task/{taskId}/delete(taskId=${task.id})}" th:method="post">
+                    <button type="submit" class="delete-btn">X</button>
+                </form>
+                <span th:each="user: ${users}" th:if="${user.id == task.assigneeId}" th:text="${user.name}"></span>
+                <span th:text="${task.name}">Task name</span>
+                <span th:text="${task.hours} + 'h.'">0</span>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/login-page.css">
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="/footer.css">
+</head>
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<form th:action="@{/login}" method="post">
+    <div class="login-title">
+        <h1>Alpha Solutions</h1>
+    </div>
+    <div class="login">
+        <input type="text" name="username" placeholder="Username"/>
+        <input type="password" name="password" placeholder="Password"/>
+        <div class="login-buttons">
+            <button type="submit">Login</button>
+        </div>
+        <h5>Forgot your Password/Username? </h5>
+        <button type="button">
+            <a href="mailto:AS@ITsupport.com" >Contact IT-support</a>
+        </button>
+    </div>
+</form>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
