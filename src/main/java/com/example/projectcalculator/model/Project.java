@@ -1,6 +1,7 @@
 package com.example.projectcalculator.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Project {
     private int id;
@@ -89,5 +90,12 @@ public class Project {
 
     public void setEmployeeIds(List<Integer> employeeIds) {
         this.employeeIds = employeeIds;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Project project = (Project) o;
+        return id == project.id && isDone == project.isDone && Objects.equals(name, project.name) && Objects.equals(projectLeader, project.projectLeader) && Objects.equals(description, project.description) && Objects.equals(employees, project.employees) && Objects.equals(employeeIds, project.employeeIds);
     }
 }
