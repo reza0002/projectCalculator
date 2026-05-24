@@ -50,6 +50,7 @@ class ProjectRepositoryIntegrationTest {
         assertNotNull(employees);
         assertTrue(employees.size() == 2);
     }
+
     @Test
     void findAllUsers() {
         List<User> users = repository.findAllUsers();
@@ -237,5 +238,26 @@ class ProjectRepositoryIntegrationTest {
         assertThrows(Exception.class, () -> repository.findTaskById(taskId));
     }
 
-}
+    @Test
+        // Testen vil fejle grundet H2 har resveret "user" som vi har navngivet data tabellen, ændre navnet til fx users, med et s og så vil den fungere
+    void findEmployeesInProject_ReturnsEmployees() {
+        List<User> employees = repository.findEmployeesInProject(1);
 
+        assertNotNull(employees);
+    }
+
+    @Test
+    void findProjectLead_ChecksForLeaderName() {
+        Project project = repository.findProject(1);
+
+        assertNotNull(project.getProjectLeader().getName());
+    }
+
+    @Test
+    void findMaxEmployeeHours_returnsNonNegative() {
+        int maxHours = repository.findMaxEmployeeHours(1);
+
+        assertTrue(maxHours >= 0);
+    }
+
+}
