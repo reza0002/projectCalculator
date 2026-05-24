@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest(SubProjectController.class)
+@WebMvcTest(SubProjectController.class)
 public class SubProjectControllerTest {
 
     @Autowired
