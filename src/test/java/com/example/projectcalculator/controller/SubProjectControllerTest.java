@@ -69,13 +69,11 @@ public class SubProjectControllerTest {
         project.setName("project");
 
         var subProject = new SubProject();
-        subProject.setId(1);
-        subProject.setName("subProject");
+        subProject.setProjectId(project.getId());
 
         when(service.findProject(project.getId())).thenReturn(project);
-        when(service.findSubProject(subProject.getId())).thenReturn(subProject);
 
-        mockMvc.perform(get("/subproject/{projectId}/create", subProject.getId()))
+        mockMvc.perform(get("/subproject/{projectId}/create", project.getId()))
                 .andExpect(status().isOk())
                 .andExpect(view().name("create-sub-project"))
                 .andExpect(model().attributeExists("subProject"))

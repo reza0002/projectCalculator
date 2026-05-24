@@ -1,5 +1,7 @@
 package com.example.projectcalculator.model;
 
+import java.util.Objects;
+
 public class SubProject {
     private int id;
     private String name;
@@ -78,6 +80,18 @@ public class SubProject {
 
     public void setDone(boolean done) {
         isDone = done;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        SubProject that = (SubProject) o;
+        return id == that.id && pricePerHour == that.pricePerHour && hours == that.hours && projectId == that.projectId && isDone == that.isDone && Objects.equals(name, that.name) && Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, pricePerHour, hours, projectId, isDone);
     }
 }
 
