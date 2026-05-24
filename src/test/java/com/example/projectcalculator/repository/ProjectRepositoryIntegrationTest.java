@@ -238,18 +238,4 @@ class ProjectRepositoryIntegrationTest {
     }
 
 }
-//
-//    @Test
-//    void findEmployeesInProject()
-//
-//    @Test
-//    void findProjectLead()
-//
-//    @Test
-//    void mapProjectLeader()
-//
-//    @Test
-//    void findMaxEmployeeHours()
-//
-//}
 

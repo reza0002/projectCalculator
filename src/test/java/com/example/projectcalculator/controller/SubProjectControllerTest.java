@@ -38,8 +38,7 @@ public class SubProjectControllerTest {
         when(service.findTasksBySubproject(1)).thenReturn(List.of());
         when(service.findAllUsers()).thenReturn(List.of());
 
-        mockMvc.perform(get("/subproject/{subProjectId}", 1)
-                .sessionAttr("user", new Object()))
+        mockMvc.perform(get("/subproject/{subProjectId}", 1))
                 .andExpect(status().isOk())
                 .andExpect(view().name("sub-project-tasks"))
                 .andExpect(model().attributeExists("subProject"))
@@ -55,8 +54,7 @@ public class SubProjectControllerTest {
 
         when(service.findProject(1)).thenReturn(project);
 
-        mockMvc.perform(get("/subproject/{projectId}/create", 1)
-                .sessionAttr("user", new Object()))
+        mockMvc.perform(get("/subproject/{projectId}/create", 1))
                 .andExpect(status().isOk())
                 .andExpect(view().name("create-sub-project"))
                 .andExpect(model().attributeExists("subProject"))
@@ -67,8 +65,7 @@ public class SubProjectControllerTest {
     void saveSubProject() throws Exception {
         mockMvc.perform(post("/subproject/save")
                 .param("name", "new subProject")
-                .param("projectId", "1")
-                .sessionAttr("user", new Object()))
+                .param("projectId", "1"))
                 .andExpect(status().is3xxRedirection());
 
         verify(service).saveSubProject(any(SubProject.class));
@@ -76,8 +73,7 @@ public class SubProjectControllerTest {
 
     @Test
     void deleteSubProject() throws Exception {
-        mockMvc.perform(post("/subproject/{projectId}/{subProjectId}/delete", 1, 1)
-                .sessionAttr("user", new Object()))
+        mockMvc.perform(post("/subproject/{projectId}/{subProjectId}/delete", 1, 1))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/project/1"));
 
