@@ -36,7 +36,7 @@ public class ProjectControllerTest {
     private LoginValidation loginValidation;
 
     @Test
-    void getProject_ShouldReturnHomePageWithProjects_WhenProjectsExist() throws Exception {
+    void getAllProjects_ShouldReturnHomePage_WhenProjectsExist() throws Exception {
         User projectLeader = new User("Kim Larsen");
         Project project = new Project("Controller test", projectLeader, "Beskrivelse");
         List<Project> projects = List.of(project);
@@ -50,7 +50,7 @@ public class ProjectControllerTest {
     }
 
     @Test
-    void getProjectById_ShouldReturnProjectOverviewWithAllAttributes_WhenProjectExists() throws Exception {
+    void getProject_ShouldReturnProjectOverviewWithAllAttributes_WhenProjectExists() throws Exception {
         User projectLeader = new User("Kim Larsen");
         User testUser1 = new User("Laura Madsen");
         User testUser2 = new User("Søren Andersen");
@@ -92,7 +92,7 @@ public class ProjectControllerTest {
     }
 
     @Test
-    void getCreateProject_ShouldReturnCreateProjectPage_WithAvailableEmployees() throws Exception {
+    void getCreateProjectForm_ShouldReturnCreateProjectPage_WithAvailableEmployees() throws Exception {
         Project project = new Project();
 
         User testUser1 = new User("Søren Berlev");
@@ -113,7 +113,7 @@ public class ProjectControllerTest {
     }
 
     @Test
-    void postSaveProject_ShouldRedirectToProjectOverview_WhenProjectIsSaved() throws Exception {
+    void saveProject_ShouldRedirectToProjectOverview_WhenProjectIsSaved() throws Exception {
         User projectLeader = new User("Kim Larsen");
         Project savedProject = new Project("Controller test", projectLeader, "Beskrivelse");
         savedProject.setId(1);
@@ -135,14 +135,14 @@ public class ProjectControllerTest {
     }
 
     @Test
-    void postDeleteProject_ShouldRedirectToProjectList_WhenProjectIsDeleted() throws Exception {
+    void deleteProject_ShouldRedirectToProjectList_WhenProjectIsDeleted() throws Exception {
         mockMvc.perform(post("/project/{projectId}/delete", 1))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/project"));
     }
 
     @Test
-    void postEditProject_ShouldRedirectToProjectList_WhenProjectIsEdited() throws Exception {
+    void editProject_ShouldRedirectToProjectList_WhenProjectIsEdited() throws Exception {
         mockMvc.perform(post("/project/{projectId}/edit", 1))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/project"));

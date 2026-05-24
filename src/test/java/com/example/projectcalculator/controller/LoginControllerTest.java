@@ -65,7 +65,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void logout_shouldInvalidateSession_andRedirectToLogin() throws Exception {
+    void  logout_shouldRedirectToLogin_whenUserLogsOut() throws Exception {
         MockHttpSession session = new MockHttpSession();
         session.setAttribute("loggedIn", true);
 
