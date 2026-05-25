@@ -17,6 +17,7 @@ public class GlobalException {
         return "error";
     }
 
+
     @ExceptionHandler(SubProjectNotFound.class)
     public String handleSubProjectNotFound(Model model, SubProjectNotFound ex) {
         model.addAttribute("status", 404);
