@@ -32,25 +32,6 @@ public class ProjectRepository {
     }
 
     @Transactional
-    public SubProject createSubProject(SubProject subProject) {
-        String sql = """
-                INSERT INTO sub_project
-                (name, description, hours, price_per_hour, project_id, is_done)
-                VALUES (?, ?, ?, ?, ?, ?)
-                """;
-        template.update(
-                sql,
-                subProject.getName(),
-                subProject.getDescription(),
-                subProject.getHours(),
-                subProject.getPricePerHour(),
-                subProject.getProjectId(),
-                subProject.isDone()
-        );
-        return subProject;
-    }
-
-    @Transactional
     public SubProject saveSubProject(SubProject subProject) {
         String sql = """
                 INSERT INTO sub_project
@@ -91,11 +72,6 @@ public class ProjectRepository {
 
     public boolean login(String username, String password) {
         return username.equals(secretUsername) && password.equals(secretPassword);
-    }
-
-    public User findUser(String username) {
-        String sql = "SELECT * FROM user WHERE name = ?";
-        return template.queryForObject(sql, new UserRowMapper(), username);
     }
 
     public List<User> findAllUsers() {
@@ -168,21 +144,6 @@ public class ProjectRepository {
     private User findProjectLead(int projectId) {
         final String sql = "SELECT u.id, u.name, u.email\n" + "FROM `user` u\n" + "INNER JOIN project p ON p.project_leader = u.id\n" + "WHERE p.id = ?";
         return template.queryForObject(sql, new UserRowMapper(), projectId);
-    }
-
-    public Project findProject(String projectName) {
-        final String sql = """
-                SELECT id, name, description, is_done
-                FROM project
-                WHERE name = ?
-                """;
-        final RowMapper<Project> rowMapper = (rs, rowNum) -> new Project(
-                rs.getInt("id"),
-                rs.getString("name"),
-                rs.getString("description"),
-                rs.getBoolean("is_done")
-        );
-        return template.queryForObject(sql, rowMapper, projectName);
     }
 
     public List<Project> findAllProjects() {
