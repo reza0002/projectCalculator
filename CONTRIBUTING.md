@@ -31,16 +31,6 @@ Se [README.md](README.md) for hjælp til denne proces.
 
 ---
 
-## Branching-strategi
-
-| Branch      | Formål                                |
-|-------------|---------------------------------------|
-| `main`      | Stabil, produktionsklar kode          |
-| `prototype` | Aktiv udvikling / ustabil prototype   |
-| `feature/*` | Nye features (f.eks. `feature/login`) |
-
----
-
 ## Kodningsregler
 
 ### Generelt
@@ -67,6 +57,16 @@ jdbcTemplate.update("INSERT INTO projects (name) VALUES (?)",name);
 - Brug JUnit til unit tests
 - Brug MockMvc til controllertests og web slice-tests
 - Brug H2 til integrationstests
+
+---
+
+## Branching-strategi
+
+| Branch      | Formål                                |
+|-------------|---------------------------------------|
+| `main`      | Stabil, produktionsklar kode          |
+| `prototype` | Aktiv udvikling / ustabil prototype   |
+| `feature/*` | Nye features (f.eks. `feature/login`) |
 
 ---
 
