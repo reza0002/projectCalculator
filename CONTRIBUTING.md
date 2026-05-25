@@ -1,4 +1,4 @@
-# Bidrag til projectCalculator
+# Bidrag til ProjectCalculator
 
 Hvis du gerne vil bidrage til projektet, skal du følge de nedenstående retningslinjer
 
