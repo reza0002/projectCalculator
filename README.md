@@ -1,4 +1,4 @@
-# projectCalculator
+# ProjectCalculator
 
 En webapplikation til hurtigt og nemt at oprette projekter og give kunden et estimat på tid og pris.
 
