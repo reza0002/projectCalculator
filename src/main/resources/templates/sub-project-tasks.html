@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/navbar.css"/>
     <link rel="stylesheet" href="/footer.css">
     <link rel="stylesheet" href="/goback.css">
+    <link rel="stylesheet" href="/tasksPage.css?v=2"/>
 </head>
 <body>
 <div th:replace="~{fragments/navbar :: navbar}"></div>
@@ -30,6 +31,9 @@
             <div class="task-item" th:each="task : ${tasks}" th:unless="${task.isDone}">
                 <form th:action="@{/task/{taskId}/update(taskId=${task.id})}" th:method="post">
                     <button type="submit" class="done-btn">Done</button>
+                </form>
+                <form th:action="@{/task/{taskId}/delete(taskId=${task.id})}" th:method="post">
+                    <button type="submit" class="delete-btn">X</button>
                 </form>
                 <span th:each="user: ${users}" th:if="${user.id == task.assigneeId}" th:text="${user.name}"></span>
                 <span th:text="${task.name}">Task name</span>

@@ -65,7 +65,11 @@ button {
 .done-btn, .delete-btn {
     padding: 2px 8px;
     cursor: pointer;
-    border: 1px solid #ccc;
-    background: white;
+    border: none;
+    background-color: #FF325A;
     font-size: 12px;
+}
+
+.done-btn:hover, .delete-btn:hover{
+    opacity: 0.85;
 }
