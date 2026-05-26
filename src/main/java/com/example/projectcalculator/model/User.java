@@ -13,17 +13,17 @@ public class User {
     private Expertise expertiseLevel;
 
 
-    public User (int id, String name, String email){
+    public User(int id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
     }
 
-    public User (String name){
+    public User(String name) {
         this.name = name;
     }
 
-    public User () {
+    public User() {
 
     }
 

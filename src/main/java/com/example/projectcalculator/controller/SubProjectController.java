@@ -21,9 +21,7 @@ public class SubProjectController {
     }
 
     @GetMapping("/{subProjectId}")
-    public String subProjectPage(@PathVariable int subProjectId,
-                                 Model model,
-                                 HttpSession session) {
+    public String subProjectPage(@PathVariable int subProjectId, Model model, HttpSession session) {
         validation.isLoggedIn(session);
 
         model.addAttribute("subProject", service.findSubProject(subProjectId));

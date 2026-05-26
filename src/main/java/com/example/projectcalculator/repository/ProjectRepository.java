@@ -264,15 +264,15 @@ public class ProjectRepository {
     @Transactional
     public void updateSubProject(SubProject subProject) {
         final String sql = """
-            UPDATE sub_project
-            SET
-            name = ?,
-            description = ?,
-            hours = ?,
-            price_per_hour = ?,
-            is_done = ?
-            WHERE id = ?
-            """;
+                UPDATE sub_project
+                SET
+                name = ?,
+                description = ?,
+                hours = ?,
+                price_per_hour = ?,
+                is_done = ?
+                WHERE id = ?
+                """;
         // går ud fra at subprojektet kommer med id'et sat
         template.update(sql,
                 subProject.getName(),
