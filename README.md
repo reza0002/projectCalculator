@@ -40,6 +40,7 @@ Alternativt kan du bruge den medfølgende Maven wrapper:
 
 [Kørende applikation](https://calcuapp-hqfabzafdpc0drg9.spaincentral-01.azurewebsites.net/login)
 
+
 ## Bidrag
 
 Se [CONTRIBUTING.md](CONTRIBUTING.md) for mere information.
