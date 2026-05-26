@@ -38,6 +38,8 @@ Alternativt kan du bruge den medfølgende Maven wrapper:
 1. Åbn en browser
 2. Naviger til `localhost:8080/login`
 
+[Kørende applikation](https://calcuapp-hqfabzafdpc0drg9.spaincentral-01.azurewebsites.net/login)
+
 ## Bidrag
 
 Se [CONTRIBUTING.md](CONTRIBUTING.md) for mere information.
