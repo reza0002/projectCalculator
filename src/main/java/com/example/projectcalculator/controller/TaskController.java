@@ -59,10 +59,7 @@ public class TaskController {
     }
 
     @PostMapping("/{subProjectId}/{taskId}/edit")
-    public String updateTask(@PathVariable int subProjectId,
-                             @PathVariable int taskId,
-                             @ModelAttribute Task task,
-                             HttpSession session) {
+    public String updateTask(@PathVariable int subProjectId, @PathVariable int taskId, @ModelAttribute Task task, HttpSession session) {
         validation.isLoggedIn(session);
 
         task.setId(taskId);
