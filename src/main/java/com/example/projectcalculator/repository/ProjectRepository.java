@@ -1,8 +1,5 @@
 package com.example.projectcalculator.repository;
 
-import com.example.projectcalculator.model.Project;
-import com.example.projectcalculator.model.SubProject;
-import com.example.projectcalculator.model.User;
 import com.example.projectcalculator.model.*;
 import com.example.projectcalculator.rowmapper.SubProjectRowMapper;
 import com.example.projectcalculator.rowmapper.TaskRowMapper;
